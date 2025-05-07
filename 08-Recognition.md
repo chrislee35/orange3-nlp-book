@@ -136,4 +136,7 @@ Use these widgets (assumed available via `orange3-nlp`):
 
 - Save your NER workflows as `ner-news-headlines.ows` and `ner-tweets.ows`  
 - You can use the extracted entity types in downstream tasks such as clustering or relation extraction  
-- In the next chapter, you'll explore **Topic Modeling** to discover hidden themes in large text corpora.
+- In the next chapter, you'll explore **Text Summation** to reduce larger texts to more managable summaries.
+
+---
+

@@ -128,3 +128,5 @@ After preprocessing, you can visualize the cleaned corpus using:
 - You can chain multiple *Preprocess Text* widgets to experiment with different cleaning stages.
 - Save this workflow as `cleaning-headlines.ows` for use in Chapter 4.
 
+---
+

@@ -116,3 +116,5 @@ The *Confusion Matrix* widget shows the breakdown of predicted vs actual labels,
 - Save your workflow as `headline-classifier.ows` for reuse in future chapters.
 - In later chapters, you’ll experiment with cross-validation, parameter tuning, and interpretability.
 
+---
+

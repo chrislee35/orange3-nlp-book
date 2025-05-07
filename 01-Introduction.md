@@ -121,3 +121,5 @@ We’ll revisit this case later in the book with hands-on exercises.
 - All datasets and workflows for this chapter are available in the `/chapter1` folder of the lab book’s companion files.
 - Make sure to install the **Text add-on** via Orange’s Add-ons menu before continuing.
 
+---
+

@@ -138,5 +138,6 @@ You can compare several models at once using:
 ## Notes
 
 - Save your comparison workflow as `classifier-evaluation.ows`.
-- In the next chapter, you will begin working with **custom text widgets** for advanced NLP tasks like named entity recognition and transformer embeddings.
+
+---
 

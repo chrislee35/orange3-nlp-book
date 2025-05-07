@@ -135,4 +135,7 @@ Optional:
 
 - Save your workflows as `summarize-news.ows` and `summarize-abstracts.ows`.  
 - You can chain summarization with topic modeling or classification tasks.  
-- Look ahead to **Chapter 13**, where we will use Large Language Models for advanced summarization tasks.
+- Look ahead to **Chapter 14**, where we will use Large Language Models for advanced summarization tasks.
+
+---
+
