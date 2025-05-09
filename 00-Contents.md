@@ -113,8 +113,8 @@ A. **Installing and Managing Python Packages for Orange**
 B. **Using Custom Python Scripts in Orange**  
 C. **Additional Resources for NLP Learners**  
 D. **Glossary of NLP Terms**  
-E. **Answers and Hints to Comprehension Questions**
-F. **Installing and Running Ollama Models**
+E. **Answers and Hints to Comprehension Questions**  
+F. **Installing and Running Ollama Models**  
 
 ---
 

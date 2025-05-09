@@ -2,9 +2,8 @@
 TITLE="Natural Language Processing with Orange"
 AUTHOR="Course Team"
 OUTDIR=nlp-book
-OUTPUT=$(OUTDIR)/book
+OUTPUT=$(OUTDIR)/orange3-nlp-book
 INPUT=README.md \
-       00-Contents.md \
        01-Introduction.md \
        02-Orange.md \
        03-Text\ Data.md \
@@ -30,25 +29,30 @@ $(OUTDIR):
 	mkdir -p $(OUTDIR)
 
 # Combine all markdown files into a single one
-$(OUTDIR)/book.md: $(INPUT) | $(OUTDIR)
-	cat $(INPUT) > $(OUTDIR)/book.md
+$(OUTPUT).md: $(INPUT) | $(OUTDIR)
+	mkdir -p $(OUTDIR)
+	rm -rf $(OUTPUT).md
+	for file in $(INPUT); do \
+		cat "$$file" >> $(OUTPUT).md; \
+		echo '<div style="page-break-before: always;"></div>' >> $(OUTPUT).md; \
+	done
 
 # Generate HTML
-html: $(OUTDIR)/book.md
-	pandoc $(OUTDIR)/book.md -o $(OUTPUT).html \
+html: $(OUTPUT).md
+	pandoc $(OUTPUT).md -o $(OUTPUT).html \
 		--metadata title=$(TITLE) --toc --standalone
 
 # Generate PDF
-pdf: $(OUTDIR)/book.md
-	pandoc $(OUTDIR)/book.md -o $(OUTPUT).pdf \
-		--pdf-engine=xelatex \
+pdf: $(OUTPUT).md
+	pandoc $(OUTPUT).md -o $(OUTPUT).pdf \
+		--pdf-engine=weasyprint \
 		--metadata title=$(TITLE) \
 		--toc \
 		--standalone
 
 # Generate EPUB
-epub: $(OUTDIR)/book.md
-	pandoc $(OUTDIR)/book.md -o $(OUTPUT).epub \
+epub: $(OUTPUT).md
+	pandoc $(OUTPUT).md -o $(OUTPUT).epub \
 		--metadata title=$(TITLE) \
 		--toc \
 		--standalone

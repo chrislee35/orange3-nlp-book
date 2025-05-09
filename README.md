@@ -5,6 +5,7 @@
 Welcome to **Natural Language Processing (NLP) with Orange: A Lab-Based Approach**. This course is designed to introduce undergraduate students to the fundamentals of NLP using Orange Data Mining, a powerful, open-source tool for data analysis and machine learning. Through this lab book, students will explore key NLP concepts, perform hands-on exercises, and apply both classical and modern techniques to real-world textual data.
 
 ### Topics Covered
+
 - **Text Preprocessing and Feature Extraction**
 - **Classification and Clustering**
 - **Topic Modeling and Unsupervised Learning**
@@ -12,6 +13,7 @@ Welcome to **Natural Language Processing (NLP) with Orange: A Lab-Based Approach
 - **Large Language Models (LLMs) and Reference Augmented Generation (RAG)**
 
 The course emphasizes practical, project-based learning with **real-world datasets**, offering opportunities to:
+
 - Develop intuitive understanding through hands-on exercises
 - Apply cutting-edge tools and techniques to solve NLP problems
 - Gain a foundational understanding of both classical NLP methods and advanced approaches such as LLMs and RAG
@@ -24,6 +26,7 @@ This lab book is divided into chapters, each focusing on different aspects of NL
 
 ### Learning Outcomes
 By the end of this course, students will:
+
 - Be proficient in text preprocessing and feature extraction.
 - Understand and apply common NLP tasks like classification, clustering, and topic modeling.
 - Gain hands-on experience with modern techniques such as RAG and LLMs for real-world problem-solving.
@@ -70,4 +73,5 @@ Under the following terms:
 
 For commercial inquiries or special permissions, please contact the authors.
 
+---
 
