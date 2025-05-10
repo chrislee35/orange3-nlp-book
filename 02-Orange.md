@@ -41,7 +41,7 @@ Orange is a visual programming environment organized around **workflows**. A wor
 - **Right Panel** – settings and options for the currently selected widget.
 - **Top Bar** – save/load workflow, run/pause execution.
 
-> 🧠 **Try This:** Open the *welcome* screen and explore the sample workflows under the *Text Mining* section.
+![Figure 2. Orange Canvas Interface with labels for the different sections of the user interface.](imgs/2-2%20Orange%20Interface.png)
 
 ---
 
@@ -70,18 +70,25 @@ Once the Text add-on is installed, you will see additional widgets under the **T
 
 Let’s load a sample text dataset and build your first workflow.
 
-### Sample Dataset: `book-excerpts.csv`
+### Sample Dataset: `book-excerpts.tab`
 
 This dataset contains short excerpts from books along with genre labels (e.g., Sci-Fi, Romance, Fantasy).
 
 ### Basic Workflow Steps:
 
-1. Drag the *File* widget onto the canvas.
-2. Select `book-excerpts.csv` from the sample datasets.
-3. Add a *Corpus* widget and connect it to *File*.
-4. Add a *Word Cloud* widget and connect it to *Corpus*.
+1. From the Text Mining toolbox section, drag the *Corpus* widget onto the canvas.
+2. Select `book-excerpts.tab` from the sample datasets.
+3. Add a *Word Cloud* widget and connect it to *Corpus*.
 
-> 🔧 Customize the *Corpus* widget to tokenize text, remove stopwords, and lowercase everything.
+> 📝 **Reflection:** Look at the most frequent words. Do they help with understanding the topic of a story?
+
+> ⚠️ If you receive an error about WebviewWidget, install the `pyqtwebengine` Python package.
+
+![Figure 3. Orange canvas using the Corpus and Word Cloud widgets](imgs/2-4%20First%20Dataset.png)
+
+Running this workflow, [2-4 First Dataset](workflows/2-4%20First%20Dataset.ows), will output a Word Cloud akin to the follow figure.
+
+![Figure 4. Wordcloud display of some sample text](imgs/2-4b%20Wordcloud.png)
 
 ---
 
@@ -92,7 +99,6 @@ This dataset contains short excerpts from books along with genre labels (e.g., S
 **Steps**:
 
 1. Set up the following widgets:
-   - *File*
    - *Corpus*
    - *Preprocess Text*
    - *Word Cloud*
@@ -111,9 +117,8 @@ This dataset contains short excerpts from books along with genre labels (e.g., S
 
 1. What is the purpose of the *Corpus* widget in Orange?
 2. How do you install an add-on in Orange?
-3. What’s the difference between *Preprocess Text* and *Select Columns*?
-4. What effect does tokenization have on raw text?
-5. Why might lowercase conversion be helpful in NLP?
+3. What effect does tokenization have on raw text?
+4. Why might lowercase conversion be helpful in NLP?
 
 ---
 

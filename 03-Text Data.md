@@ -15,20 +15,35 @@ By the end of this chapter, you will be able to:
 
 Text data in Orange can be loaded using:
 
-- The *File* widget (for `.csv`, `.xlsx`, or `.tsv` files)
+- The *File* widget
+- The *CSV File Import* widget
 - The *Corpus* widget (specific to Orange Text add-on)
 
 > 📝 **Note:** For text processing, ensure your dataset includes at least one column of free-form text.
 
-### Example Dataset: `news-headlines.csv`
+### Example Dataset: AG News Classification Dataset
 
-- **Text column:** Headline
-- **Label column:** News Category (e.g., Sports, Politics, Tech)
+Download the dataset from [Kaggle: AG News Classification Dataset](https://www.kaggle.com/datasets/amananandrai/ag-news-classification-dataset/data). You will need to use or create a kaggle account.
+
+Both the `train.csv` and `test.csv` files have 3 columns as follows:
+
+- **Class Index:** Consists of 1-4 numbers which represents class of which 1-World, 2-Sports, 3-Business, 4-Sci/Tech 
+- **Title:** Contains Title of the Articles
+- **Description:** Contains Description of the Articles
 
 ### Quick Start
 
-1. Use *File* → `news-headlines.csv`
-2. Connect to *Corpus* to begin text analysis.
+- The *CSV File Import* widget to load `test.csv`
+- The *Edit Domain* widget.
+  - Change the Class Index variable's name to Category, type to Categorical, and values to World, Sports, Business, and Sci/Tech. 
+- The *Corpus* widget (specific to Orange Text add-on)
+- The *Corpus Viewer* widget
+
+![Figure 5. Using Edit Domain to map a numeric class id to a categorical feature with labels](imgs/3-1%20Edit%20Domain.png)
+
+Your current workflow should look something like this:
+
+![Figure 6. Loading workflow for AG News Classification Dataset](imgs/3-1%20News%20Starting%20Pipeline.png)
 
 ---
 
@@ -63,7 +78,7 @@ The *Preprocess Text* widget allows you to apply several preprocessing steps in 
   - Lemmatization (using spaCy)
 - Add POS filtering (optional)
 
-> 🧠 Try preprocessing the `Headline` column using different combinations of these steps and observe the effect on token counts.
+> 🧠 Try preprocessing the `Title` column using different combinations of these steps and observe the effect on token counts.
 
 ---
 
@@ -89,13 +104,15 @@ After preprocessing, you can visualize the cleaned corpus using:
 - *Preprocess Text*
 - *Word Cloud*
 - *Corpus Viewer*
+- *Save Data*
 
 **Steps**:
 
-1. Load `news-headlines.csv` and identify the text and label columns.
+1. Load `test.csv` and identify the text and label columns.
 2. Apply at least 3 preprocessing steps in *Preprocess Text*.
 3. Generate a Word Cloud and analyze which terms are most common by category.
 4. Use *Corpus Viewer* to compare original vs cleaned text.
+5. Use *Save Data* to save the cleaned data as `news-headlines.tab`
 
 > 📝 **Bonus Task**: Try filtering words by minimum length (e.g., > 4 characters) and observe the effect.
 

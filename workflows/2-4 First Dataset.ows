@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="Corpus: book-excerpts" position="(150, 150)" />
+		<node id="1" name="Word Cloud" qualified_name="orangecontrib.text.widgets.owwordcloud.OWWordCloud" project_name="Orange3-Text" version="" title="Word Cloud" position="(300, 150)" />
+		<node id="2" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table" position="(285.0, 308.0)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="corpus" />
+		<link id="1" source_node_id="0" sink_node_id="2" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+	</links>
+	<annotations />
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASViQIAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZQojBFi
+b29rLWV4Y2VycHRzLnRhYpSMDGFuZGVyc2VuLnRhYpSMGGdyaW1tLXRhbGVzLXNlbGVjdGVkLnRh
+YpSMGGVsZWN0aW9uLXR3ZWV0cy0yMDE2LnRhYpSMF2ZyaWVuZHMtdHJhbnNjcmlwdHMudGFilGWM
+E3NhdmVkV2lkZ2V0R2VvbWV0cnmUQ0IB2dDLAAMAAAAAA5wAAAE+AAAFYQAAAsUAAAOfAAABVwAA
+BV4AAALCAAAAAAAAAAAHgAAAA58AAAFXAAAFXgAAAsKUjAtfX3ZlcnNpb25fX5RLAowQY29udGV4
+dF9zZXR0aW5nc5RdlCiMFW9yYW5nZXdpZGdldC5zZXR0aW5nc5SMB0NvbnRleHSUk5QpgZR9lCiM
+BnZhbHVlc5R9lCiMCGxhbmd1YWdllIwCZW6USv7///+GlIwOdGl0bGVfdmFyaWFibGWUTkr+////
+hpSMCnVzZWRfYXR0cnOUXZSMBFRleHSUS2eGlGFK/f///4aUaAtLAnWMCmF0dHJpYnV0ZXOUfZSM
+CENhdGVnb3J5lEsBc4wFbWV0YXOUfZRoHEsDc4wOZG9jdW1lbnRzX2hhc2iUihGsNQcEGbQIS7e6
+5HbarpGXAIwIbGFuZ3VhZ2WUjAJlbpR1YmgQKYGUfZQoaBN9lChoFYwCZW6USv7///+GlGgYjAVU
+aXRsZZRLZ4aUaBpdlIwHQ29udGVudJRLZ4aUYUr9////hpRoC0sCdWgffZRoIn2UKGgsSwNoL0sD
+dWgkihCzBApsjP72t8gDXO5IbD0MaCWMAmVulHViZXUu
+</properties>
+		<properties node_id="1" format="pickle">gASVvwAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSJjBNzYXZlZFdpZGdldEdlb21ldHJ5
+lENCAdnQywADAAAAAApFAAABrgAADNUAAAO9AAAKSAAAAccAAAzSAAADugAAAAEAAAAAB4AAAApI
+AAABxwAADNIAAAO6lIwOc2VsZWN0ZWRfd29yZHOUj5QojAN0aGWUkIwLd29yZHNfY29sb3KUiIwK
+d29yZHNfdGlsdJRLAIwLX192ZXJzaW9uX1+USwF1Lg==
+</properties>
+		<properties node_id="2" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01{\x00\x00\x00\xb8\x00\x00\x06\x05\x00\x00\x03i\x00\x00\x01~\x00\x00\x00\xd1\x00\x00\x06\x02\x00\x00\x03f\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x01~\x00\x00\x00\xd1\x00\x00\x06\x02\x00\x00\x03f', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': True, 'stored_selection': {'rows': [70], 'columns': [0, 1]}, 'stored_sort': [], '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>

@@ -85,13 +85,24 @@ We’ll revisit this case later in the book with hands-on exercises.
 1. Download and install Orange from [https://orange.biolab.si](https://orange.biolab.si).
 2. Open Orange and create a new workflow.
 3. Add the following widgets:
-   - *File* → to load sample data
+   - *Datasets* (from the Data toolbox) → to load sample data
    - *Data Table* → to preview the dataset
-   - *Word Cloud* (from the Text add-on) → to visualize text
-4. Connect the widgets and explore a sample dataset (e.g., "book-excerpts.csv" from the Text add-on).
-5. Take a screenshot of your workflow.
+   - *Scatter Plot* (from the Visualize toolbox) → to visualize samples
+4. Connect the widgets and explore a sample dataset (e.g., "Iris").
+5. Use the Scatter Plot to explore the relationships between the features.
+6. Save the scatter plot (ex1.png) that best separates the different types of Iris.
 
-> 📝 **Reflection:** What kind of insights does a Word Cloud give? What are its limitations?
+![Figure 1. Example Workflow with the Iris dataset and scatter plot](imgs/1-Ex1%20First%20Look.png)
+
+This scatter plot shows the confidence ellipsis.  These confidence ellipsis overlap considerably.  This indicates that the chosen axis, x and y, do not cleanly separate the classes of iris flower breeds from [Edgar Anderson's 1936 Iris data set](https://en.wikipedia.org/wiki/Iris_flower_data_set).
+
+| Iris setosa | Iris versicolor | Iris viginia |
+|--------|------------|-------------|
+| ![Iris setosa](https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg/250px-Kosaciec_szczecinkowaty_Iris_setosa.jpg) | ![Iris versicolor](https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iris_versicolor_3.jpg/250px-Iris_versicolor_3.jpg) | ![Iris viginia](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Iris_virginica.jpg/250px-Iris_virginica.jpg) |
+
+![Figure 2. Example scatter plot](imgs/1-Ex1%20Scatter%20Plot.png)
+
+> 📝 **Reflection:** What kind of insights does a scatter plot give?
 
 ---
 
@@ -100,8 +111,7 @@ We’ll revisit this case later in the book with hands-on exercises.
 1. Define Natural Language Processing in your own words.
 2. How does data mining differ from NLP, and where do they overlap?
 3. List three real-world applications of NLP.
-4. Why might Orange be particularly suitable for learning about NLP?
-5. What are the typical steps in an NLP workflow?
+4. What are the typical steps in an NLP workflow?
 
 ---
 
@@ -116,10 +126,4 @@ We’ll revisit this case later in the book with hands-on exercises.
 
 ---
 
-## Notes
-
-- All datasets and workflows for this chapter are available in the `/chapter1` folder of the lab book’s companion files.
-- Make sure to install the **Text add-on** via Orange’s Add-ons menu before continuing.
-
----
 

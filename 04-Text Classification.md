@@ -47,13 +47,14 @@ Let’s build a workflow that classifies news headlines by topic.
 
 ### Recommended Widgets:
 
-- *File* → Load `news-headlines.csv`
-- *Corpus* → Convert text to Orange format
-- *Preprocess Text* → Clean the text
 - *TF-IDF* or *Bag of Words* → Convert to numeric features
 - *Logistic Regression* or *Naive Bayes* → Train classifier
 - *Test & Score* → Evaluate performance
 - *Confusion Matrix* → Visualize results
+
+In traditional Python scripts, you would train a model and then test it.  With Orange, you provide a learner and the Test & Score widget will perform the training and testing using the validation method configured.
+
+![Figure 7. Orange workflow with a Test & Score widget and a Tree learner](imgs/4-4a%20Test%20and%20Score%20Workflow.png)
 
 ---
 
@@ -68,9 +69,14 @@ Let’s build a workflow that classifies news headlines by topic.
 
 > 📊 Orange’s *Test & Score* widget automatically computes these metrics and more.
 
+![Figure 8. Configuration of a Test & Score widget using 10-fold cross validation and the evaluation results](imgs/4-4b%20Test%20and%20Score%20Settings.png)
+
+
 ### Confusion Matrix
 
 The *Confusion Matrix* widget shows the breakdown of predicted vs actual labels, which is helpful for error analysis.
+
+![Figure 9. A confusion matrix for the Iris dataset](imgs/4-4c%20Confusion%20Matrix.png)
 
 ---
 
@@ -80,11 +86,13 @@ The *Confusion Matrix* widget shows the breakdown of predicted vs actual labels,
 
 **Steps**:
 
-1. Load the `news-headlines.csv` file.
+1. Load the `news-headlines.tab` from the previous chapter and convert to a corpus.
 2. Preprocess the text (e.g., lowercase, remove stopwords).
 3. Convert the cleaned text to TF-IDF vectors.
 4. Train a classifier (try both Naive Bayes and Logistic Regression).
 5. Evaluate the model using *Test & Score* and inspect results using *Confusion Matrix*.
+
+> 💡 Remember to connect the data into Test & Score and not into the classifier directly (see Figure 7).
 
 > 📝 **Optional Challenge**: Try using *Random Forest* and compare its performance to Naive Bayes.
 

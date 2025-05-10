@@ -87,7 +87,7 @@ You can compare several models at once using:
 
 **Steps**:
 
-1. Load and preprocess `news-headlines.csv`.
+1. Load and preprocess `news-headlines.tab`.
 2. Extract TF-IDF features.
 3. Connect Naive Bayes, Logistic Regression, and Random Forest to *Test & Score*.
 4. Evaluate using 10-fold Cross-Validation.

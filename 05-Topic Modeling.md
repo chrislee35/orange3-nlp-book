@@ -36,12 +36,11 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 ### Clustering Workflow
 
-1. *File* → Load dataset (e.g., `book-excerpts.csv`)
-2. *Corpus* → Process the text
-3. *Preprocess Text* → Clean the corpus
-4. *TF-IDF* → Convert text to features
-5. *K-Means* or *Hierarchical Clustering* → Group similar documents
-6. *Distances* + *Scatter Plot* → Visualize clusters
+1. *Corpus* → Load dataset (e.g., `book-excerpts`)
+2. *Preprocess Text* → Clean the corpus
+3. *TF-IDF* → Convert text to features
+4. *K-Means* or *Hierarchical Clustering* → Group similar documents
+5. *Distances* + *Scatter Plot* → Visualize clusters
 
 ---
 
@@ -54,7 +53,7 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 ### Topic Modeling Workflow
 
-1. Load and preprocess your corpus (e.g., `news-headlines.csv`).
+1. Load and preprocess your corpus (e.g., `news-headlines.tab`).
 2. Convert text using *Bag of Words* or *TF-IDF*.
 3. Use the *Topic Modeling* widget (LDA) to extract topics.
 4. Visualize results with *Corpus Viewer*, *Word Cloud*, or *Data Table*.
@@ -83,7 +82,7 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 **Steps**:
 
-1. Load `book-excerpts.csv` via *File* and *Corpus*.
+1. Load `book-excerpts` using the *Corpus* widget.
 2. Preprocess the text and extract features using TF-IDF.
 3. Apply *K-Means* with 3–5 clusters.
 4. Use *Scatter Plot* to view clustering structure.
@@ -100,7 +99,7 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 **Steps**:
 
-1. Load `news-headlines.csv` and preprocess the text.
+1. Load `news-headlines.tab` and preprocess the text.
 2. Convert text to Bag-of-Words vectors.
 3. Use *Topic Modeling* (LDA) to extract 5–10 topics.
 4. Use *Corpus Viewer* to examine top documents per topic.

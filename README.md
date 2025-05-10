@@ -1,5 +1,7 @@
 # Natural Language Processing (NLP) with Orange: A Lab-Based Approach
 
+![](imgs/Title%20Image.png)
+
 ## Course Overview
 
 Welcome to **Natural Language Processing (NLP) with Orange: A Lab-Based Approach**. This course is designed to introduce undergraduate students to the fundamentals of NLP using Orange Data Mining, a powerful, open-source tool for data analysis and machine learning. Through this lab book, students will explore key NLP concepts, perform hands-on exercises, and apply both classical and modern techniques to real-world textual data.
