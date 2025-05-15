@@ -35,11 +35,13 @@ NER is used in:
 
 To use NER in Orange for this lab, you must install the `orange3-nlp` package. This package provides specialized widgets for advanced NLP functionality.
 
-### Installation (in terminal or notebook):
+### Installation:
 
-```bash
-pip install orange3-nlp
-```
+![Installing Add-ons](imgs/Add-on%20menu.png)
+
+![Add-ons Widget](imgs/Text%20Add-on.png)
+
+![Installing NLP Add-on](imgs/NLP%20Add-on.png)
 
 💡 Restart Orange after installation to see the new widgets.
 
@@ -47,19 +49,25 @@ pip install orange3-nlp
 
 ### Example Workflow
 
-1. Load a dataset using **File** (e.g., `news-headlines.csv`, `tweets.csv`)
+1. Load a dataset using **File** (e.g., `news-headlines.tab`, `tweets.csv`)
 2. Preprocess text with **Preprocess Text**
-3. Add the widget: **Named Entity Recognizer**
-4. Connect to a **Data Table** or **Entity Viewer** to inspect results
+3. Add the widget: **Named Entity Recognition**
+4. Connect to a **Data Table** or **Corpus Viewer** to inspect results
 
 ### Options (example)
 
-- **Model selection**: spaCy small/medium/transformer  
+- **Model selection**: spaCy small/NLTK/Flair/Ollama  
 - **Filter by type**: PERSON, ORG, GPE, etc.  
 - **Output columns**:
   - `entities`: list of extracted entities  
   - `entity_types`: parallel list of corresponding types  
   - (optional) `highlighted_text`: for visualization
+
+### Model Selection Options
+- **spaCy** is fast and moderately accurate.  
+- **NLTK** is almost as fast as spaCy, not very accurate, but easiest to install.  
+- **Flair** is almost cutting edge, requires lots of complex dependencies, and is moderately fast.  
+- **Ollama** is very slow and inaccurate, however, it can be used for a lot of different tasks. We will use Ollama in Chapters 14 and 15.  
 
 ---
 

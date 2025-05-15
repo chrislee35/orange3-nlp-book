@@ -52,18 +52,19 @@ Assuming your custom widgets are available in `orange3-nlp`:
 ### Key Widgets
 
 - **POS Tagger**: Annotates each token with its POS tag.
-- **Dependency Parser**: Generates parse tree structures using a model like spaCy.
-- **POS/Parse Viewer**: Visualizes POS tags and tree structures for selected sentences (similar to `spacy.displacy.render`).
+- **POS Viewer**: Visualizes POS tags and tree structures for selected sentences (similar to `spacy.displacy.render`).
 
 ### Typical Workflow
 
 1. *File* + *Corpus* → Load data (e.g., `movie-lines.csv`)
 2. *Preprocess Text* (tokenization and normalization)
 3. Apply *POS Tagger* and *Dependency Parser*
-4. Use *POS/Parse Viewer* to explore sentence structure
+4. Use *Parse Viewer* to explore sentence structure
 5. (Optional) Connect to *Data Table* or *Corpus Viewer* for exploration
 
 > 🧠 Useful for filtering texts by grammatical patterns, or for extracting structured phrases.
+
+![Figure X. Part of Speech Viewer with parsed Slovenian text.](imgs/10-3c%20POS%20Viewer.png)
 
 ---
 

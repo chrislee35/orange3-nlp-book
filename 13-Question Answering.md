@@ -40,14 +40,14 @@ Text generation is the process of creating natural-sounding text, typically usin
 Your custom widgets will enable interaction with pre-trained models for:
 
 - **Contextual QA**: Ask questions based on loaded documents.
-- **Text Generation**: Continue a prompt, generate summaries, or simulate chat responses.
 
 ### Widgets Used
 
-- **File / Corpus**: Load a document or set of paragraphs.
-- **QA Generator**: Accepts a question and retrieves an answer from context.
-- **Text Generator**: Accepts a seed prompt and outputs generated text.
-- **Text Display / Data Table**: View input and output side by side.
+- **Corpus**: Load a document or set of paragraphs.
+- **Question Answering**: Accepts a question and retrieves an answer from context.
+- **Corpus Viewer**: View output corpus.
+
+![Figure X. Question and Answers for "Who Died?" against the Book Excerpts corpus](imgs/13-3%20Question%20Answer.png)
 
 ---
 
