@@ -21,29 +21,24 @@ Text data in Orange can be loaded using:
 
 > 📝 **Note:** For text processing, ensure your dataset includes at least one column of free-form text.
 
-### Example Dataset: AG News Classification Dataset
+### Example Dataset: BBC3 News Classification Dataset
 
-Download the dataset from [Kaggle: AG News Classification Dataset](https://www.kaggle.com/datasets/amananandrai/ag-news-classification-dataset/data). You will need to use or create a kaggle account.
+Use Orange's *Dataset* widget and select BBC3. Connect that to *Corpus* and select only the Title field.
 
-Both the `train.csv` and `test.csv` files have 3 columns as follows:
-
-- **Class Index:** Consists of 1-4 numbers which represents class of which 1-World, 2-Sports, 3-Business, 4-Sci/Tech 
-- **Title:** Contains Title of the Articles
-- **Description:** Contains Description of the Articles
+Use *Feature Statistics* to understand the distribution of the **category** field.  Use the `color:` selection at the bottom to show a legend of the 3 categories.
 
 ### Quick Start
 
-- The *CSV File Import* widget to load `test.csv`
-- The *Edit Domain* widget.
-  - Change the Class Index variable's name to Category, type to Categorical, and values to World, Sports, Business, and Sci/Tech. 
-- The *Corpus* widget (specific to Orange Text add-on)
+- Use the *Dataset* widget and select BBC3.
+- Connect that to *Corpus* and select only the Title field.
+  * If you cannot find the *Corpus* widget, install the **Text** add-on.
+  * ![Selecting the Title field as the text feature](1-Corpus%20Title.png)
 - The *Corpus Viewer* widget
 
-![Figure 5. Using Edit Domain to map a numeric class id to a categorical feature with labels](1%20Edit%20Domain.png)
 
 Your current workflow should look something like this:
 
-![Figure 6. Loading workflow for AG News Classification Dataset](1%20News%20Starting%20Pipeline.png)
+![Loading workflow for BBC3 News Classification Dataset](1-Import%20Workflow.png)
 
 ---
 
@@ -99,7 +94,7 @@ After preprocessing, you can visualize the cleaned corpus using:
 **Goal**: Build a workflow to load, clean, and visualize a set of news headlines.
 
 **Widgets Needed**:
-- *File*
+- *Dataset*
 - *Corpus*
 - *Preprocess Text*
 - *Word Cloud*
@@ -108,11 +103,12 @@ After preprocessing, you can visualize the cleaned corpus using:
 
 **Steps**:
 
-1. Load `test.csv` and identify the text and label columns.
-2. Apply at least 3 preprocessing steps in *Preprocess Text*.
-3. Generate a Word Cloud and analyze which terms are most common by category.
-4. Use *Corpus Viewer* to compare original vs cleaned text.
-5. Use *Save Data* to save the cleaned data as `news-headlines.tab`
+1. Use the *Dataset* widget and select BBC3.
+2. Connect that to *Corpus* and select only the Title field.
+3. Apply at least 3 preprocessing steps in *Preprocess Text*.
+4. Generate a Word Cloud and analyze which terms are most common by category.
+5. Use *Corpus Viewer* to compare original vs cleaned text.
+6. Use *Save Data* to save the cleaned data as `news-headlines.tab`
 
 > 📝 **Bonus Task**: Try filtering words by minimum length (e.g., > 4 characters) and observe the effect.
 

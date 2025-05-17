@@ -16,15 +16,6 @@ While there are obvious todo items such as finishing the writing, exercise desig
   * I'll need someone from the community to help with Mac.
 * Figure out the processor and disk size requirements to do everything in this book.
   * I think I can approximate this quite well, but I'll do it at the end since I'd have to reset everything.
-* Figure out the licensing of the News Headlines dataset used in Chapter 3.
-  * Kaggle says Unknown.  That's not sufficient.
-  * http://groups.di.unipi.it/~gulli/AG_corpus_of_news_articles.html says:
-```
-You are encouraged to download this corpus for any non-commercial use. If you download the dataset, please drop me a mail to describe the academic research you are doing: gulli AT di.unipi.it.
-If you use the corpus, you are requested to cite this web page in your academic publication
-You are not authorized to change the corpus or to re-distribute (part of) it with a different name. 
-```
-  * I will email the author and ask for guidance.
 * Create an interesting corpus for the question and answer exercise and the RAG exercise.
 * Scour Biolab's Introduction to Data Science book (orange-lecture-notes) for additional NLP tasks that I should include in the book.
   * Remember that this book is more on practical application than theory. 
