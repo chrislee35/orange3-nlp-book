@@ -4,23 +4,7 @@ AUTHOR="Course Team"
 OUTDIR=nlp-book
 FILEBASE=orange3-nlp-book
 OUTPUT=$(OUTDIR)/$(FILEBASE)
-INPUT=README.md \
-       chapters/01/Introduction.md \
-       chapters/02/Orange.md \
-       chapters/03/Text\ Data.md \
-       chapters/04/Text\ Classification.md \
-       chapters/05/Topic\ Modeling.md \
-       chapters/06/Evaluation.md \
-       chapters/07/Sentiment.md \
-       chapters/08/Recognition.md \
-       chapters/09/Summarization.md \
-       chapters/10/Parts\ of\ Speech.md \
-       chapters/11/Embeddings.md \
-       chapters/12/Document\ Embeddings.md \
-       chapters/13/Question\ Answering.md \
-       chapters/14/LLMs.md \
-       chapters/15/RAGs.md \
-       chapters/16/Capstone.md
+include chapters.conf
 
 # Default rule
 all: $(OUTDIR) html pdf epub
@@ -31,7 +15,7 @@ $(OUTDIR):
 
 # Combine all markdown files into a single one
 $(OUTPUT).md: $(INPUT) | $(OUTDIR)
-	mkdir -p $(OUTDIR)/imgs
+	mkdir -p $(OUTDIR)/imgs $(OUTDIR)/css
 	rm -rf $(OUTPUT).md
 	for file in $(INPUT); do \
 		cat "$$file" >> $(OUTPUT).md; \
@@ -39,8 +23,14 @@ $(OUTPUT).md: $(INPUT) | $(OUTDIR)
 	done
 	cat $(OUTPUT).md | utils/fix_links.py > $(OUTPUT).md2
 	mv $(OUTPUT).md2 $(OUTPUT).md
-	find chapters/ -name '*.png' -exec cp "{}" $(OUTDIR)/imgs \;
+
+	# copy resources
 	cp imgs/* $(OUTDIR)/imgs
+	cp css/* $(OUTDIR)/css
+	find chapters/ \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' -o -name '*.jpeg' \) -exec cp "{}" $(OUTDIR)/imgs \;
+
+	# custom resources would go here
+	# e.g., cp mychapters/phishing_detection/*.jpeg $(OUTDIR)/imgs
 
 # Generate HTML
 html: $(OUTPUT).md

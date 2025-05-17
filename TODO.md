@@ -30,4 +30,6 @@ You are not authorized to change the corpus or to re-distribute (part of) it wit
   * Remember that this book is more on practical application than theory. 
   * While exercises are great way to reenforce theory taught in class, the scope quickly becomes outside my ability to write.
   * I will probably add a lot more to text classification, chapter 4, as I have found that to be powerful in a lot of the work I've done, especially with cheap techniques like word2vec and multinomial native bayes or random forest for high-speed processing of messages.
+* Make a CSS for the PDF version of the book.  
+  * I tried using nlp-book.css, but it looked quite ugly.  I'd like to tweak the format of the PDF a little, but not as much as the web version of the CSS does.
 
