@@ -92,7 +92,7 @@ We’ll revisit this case later in the book with hands-on exercises.
 5. Use the Scatter Plot to explore the relationships between the features.
 6. Save the scatter plot (ex1.png) that best separates the different types of Iris.
 
-![Figure 1. Example Workflow with the Iris dataset and scatter plot](imgs/1-Ex1%20First%20Look.png)
+![Figure 1. Example Workflow with the Iris dataset and scatter plot](Ex1%20First%20Look.png)
 
 This scatter plot shows the confidence ellipsis.  These confidence ellipsis overlap considerably.  This indicates that the chosen axis, x and y, do not cleanly separate the classes of iris flower breeds from [Edgar Anderson's 1936 Iris data set](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 
@@ -100,7 +100,7 @@ This scatter plot shows the confidence ellipsis.  These confidence ellipsis over
 |--------|------------|-------------|
 | ![Iris setosa](https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg/250px-Kosaciec_szczecinkowaty_Iris_setosa.jpg) | ![Iris versicolor](https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iris_versicolor_3.jpg/250px-Iris_versicolor_3.jpg) | ![Iris viginia](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Iris_virginica.jpg/250px-Iris_virginica.jpg) |
 
-![Figure 2. Example scatter plot](imgs/1-Ex1%20Scatter%20Plot.png)
+![Figure 2. Example scatter plot](Ex1%20Scatter%20Plot.png)
 
 > 📝 **Reflection:** What kind of insights does a scatter plot give?
 

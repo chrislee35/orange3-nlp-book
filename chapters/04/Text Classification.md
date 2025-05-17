@@ -54,7 +54,7 @@ Let’s build a workflow that classifies news headlines by topic.
 
 In traditional Python scripts, you would train a model and then test it.  With Orange, you provide a learner and the Test & Score widget will perform the training and testing using the validation method configured.
 
-![Figure 7. Orange workflow with a Test & Score widget and a Tree learner](imgs/4-4a%20Test%20and%20Score%20Workflow.png)
+![Figure 7. Orange workflow with a Test & Score widget and a Tree learner](4a%20Test%20and%20Score%20Workflow.png)
 
 ---
 
@@ -69,14 +69,14 @@ In traditional Python scripts, you would train a model and then test it.  With O
 
 > 📊 Orange’s *Test & Score* widget automatically computes these metrics and more.
 
-![Figure 8. Configuration of a Test & Score widget using 10-fold cross validation and the evaluation results](imgs/4-4b%20Test%20and%20Score%20Settings.png)
+![Figure 8. Configuration of a Test & Score widget using 10-fold cross validation and the evaluation results](4b%20Test%20and%20Score%20Settings.png)
 
 
 ### Confusion Matrix
 
 The *Confusion Matrix* widget shows the breakdown of predicted vs actual labels, which is helpful for error analysis.
 
-![Figure 9. A confusion matrix for the Iris dataset](imgs/4-4c%20Confusion%20Matrix.png)
+![Figure 9. A confusion matrix for the Iris dataset](4c%20Confusion%20Matrix.png)
 
 ---
 

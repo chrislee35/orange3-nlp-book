@@ -64,7 +64,7 @@ Assuming your custom widgets are available in `orange3-nlp`:
 
 > 🧠 Useful for filtering texts by grammatical patterns, or for extracting structured phrases.
 
-![Figure X. Part of Speech Viewer with parsed Slovenian text.](imgs/10-3c%20POS%20Viewer.png)
+![Figure X. Part of Speech Viewer with parsed Slovenian text.](3c%20POS%20Viewer.png)
 
 ---
 

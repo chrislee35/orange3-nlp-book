@@ -39,11 +39,11 @@ Both the `train.csv` and `test.csv` files have 3 columns as follows:
 - The *Corpus* widget (specific to Orange Text add-on)
 - The *Corpus Viewer* widget
 
-![Figure 5. Using Edit Domain to map a numeric class id to a categorical feature with labels](imgs/3-1%20Edit%20Domain.png)
+![Figure 5. Using Edit Domain to map a numeric class id to a categorical feature with labels](1%20Edit%20Domain.png)
 
 Your current workflow should look something like this:
 
-![Figure 6. Loading workflow for AG News Classification Dataset](imgs/3-1%20News%20Starting%20Pipeline.png)
+![Figure 6. Loading workflow for AG News Classification Dataset](1%20News%20Starting%20Pipeline.png)
 
 ---
 

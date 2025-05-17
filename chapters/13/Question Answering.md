@@ -47,7 +47,7 @@ Your custom widgets will enable interaction with pre-trained models for:
 - **Question Answering**: Accepts a question and retrieves an answer from context.
 - **Corpus Viewer**: View output corpus.
 
-![Figure X. Question and Answers for "Who Died?" against the Book Excerpts corpus](imgs/13-3%20Question%20Answer.png)
+![Figure X. Question and Answers for "Who Died?" against the Book Excerpts corpus](3%20Question%20Answer.png)
 
 ---
 

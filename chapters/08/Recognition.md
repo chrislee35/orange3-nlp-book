@@ -37,11 +37,11 @@ To use NER in Orange for this lab, you must install the `orange3-nlp` package. T
 
 ### Installation:
 
-![Installing Add-ons](imgs/Add-on%20menu.png)
+![Installing Add-ons](Add-on%20menu.png)
 
-![Add-ons Widget](imgs/Text%20Add-on.png)
+![Add-ons Widget](Text%20Add-on.png)
 
-![Installing NLP Add-on](imgs/NLP%20Add-on.png)
+![Installing NLP Add-on](NLP%20Add-on.png)
 
 💡 Restart Orange after installation to see the new widgets.
 

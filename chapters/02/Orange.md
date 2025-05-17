@@ -41,7 +41,7 @@ Orange is a visual programming environment organized around **workflows**. A wor
 - **Right Panel** – settings and options for the currently selected widget.
 - **Top Bar** – save/load workflow, run/pause execution.
 
-![Figure 2. Orange Canvas Interface with labels for the different sections of the user interface.](imgs/2-2%20Orange%20Interface.png)
+![Figure 2. Orange Canvas Interface with labels for the different sections of the user interface.](2%20Orange%20Interface.png)
 
 ---
 
@@ -84,11 +84,11 @@ This dataset contains short excerpts from books along with genre labels (e.g., S
 
 > ⚠️ If you receive an error about WebviewWidget, install the `pyqtwebengine` Python package.
 
-![Figure 3. Orange canvas using the Corpus and Word Cloud widgets](imgs/2-4%20First%20Dataset.png)
+![Figure 3. Orange canvas using the Corpus and Word Cloud widgets](4%20First%20Dataset.png)
 
-Running this workflow, [2-4 First Dataset](workflows/2-4%20First%20Dataset.ows), will output a Word Cloud akin to the follow figure.
+Running this workflow, [2-4 First Dataset](4%20First%20Dataset.ows), will output a Word Cloud akin to the follow figure.
 
-![Figure 4. Wordcloud display of some sample text](imgs/2-4b%20Wordcloud.png)
+![Figure 4. Wordcloud display of some sample text](4b%20Wordcloud.png)
 
 ---
 

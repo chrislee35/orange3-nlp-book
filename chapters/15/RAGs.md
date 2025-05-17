@@ -6,7 +6,7 @@ By the end of this chapter, you will be able to:
 
 - Understand the principles of Reference Augmented Generation (RAG).
 - Explain why RAG improves the quality and reliability of LLM output.
-- Build and query a reference database using Orange and `orange3-ollama` widgets.
+- Build and query a reference database using Orange and `orange3-nlp` widgets.
 - Construct workflows that use retrieved context to guide LLM responses.
 - Design and run a RAG pipeline on a topic corpus of your choice.
 
@@ -44,21 +44,21 @@ A basic RAG pipeline looks like this:
 
 ---
 
-## 15.3 Using RAG in Orange with `orange3-ollama`
+## 15.3 Using RAG in Orange with `orange3-nlp`
 
-The `orange3-ollama` module provides two key widgets to support RAG:
+The `orange3-nlp` module provides two key widgets to support RAG:
 
-### 🧱 `Ollama Reference Database`
+### 🧱 `Reference Library`
 
 - Accepts a set of documents or text rows.
 - Builds an **embedding-based vector index**.
 - Stores documents and metadata locally for retrieval.
+- Returns top matching excerpts from the input documents based on a user query.
 
-### 🔍 `Ollama RAG Query`
+### 🔍 `Ollama RAG`
 
-- Accepts a user query and a reference database.
-- Retrieves top matches and constructs a context-aware prompt.
-- Sends the prompt to the LLM and displays the generated answer.
+- Accepts a user prompt and reference excerpts from the library.
+- Sends the prompt with the input context to the LLM and displays the generated answer.
 
 ---
 
@@ -66,14 +66,60 @@ The `orange3-ollama` module provides two key widgets to support RAG:
 
 ### Example Workflow
 
-File → Text Preprocess → Ollama Reference Database
-↑
-(saves vector index)
-↓
-Text Input (query) → Ollama RAG Query → Text Display
+Corpus → Reference Library → Ollama RAG Query → Corpus Viewer
+
+![RAG Workflow](rag-workflow.png)
+
+Let's take a look at the Reference Library
+
+![Reference Library](rag-reference-library.png)
+
+In this example, I used sentence-transformers to embed the document and return 5 excerpts at around 128 characters each to the query about "farming".
 
 
-> You can also visualize retrieved passages using the **Corpus Viewer** widget connected to the `Ollama RAG Query` output.
+Certainly! Here's the same information presented as an unordered list for each embedder:
+
+---
+
+* **spaCy (`en_core_web_md`)**
+
+  * **Framework:** spaCy
+  * **Vector Size:** 300
+  * **Speed:** ⚡ Fast
+  * **Accuracy / Relevance:** 🔸 Moderate
+  * **Best Use Case:** Lightweight NLP pipelines, fast prototyping
+  * **License:** MIT
+
+* **SentenceTransformers (`all-MiniLM-L6-v2`)**
+
+  * **Framework:** sentence-transformers
+  * **Vector Size:** 384
+  * **Speed:** ⚡⚡ Fast
+  * **Accuracy / Relevance:** ✅ Good
+  * **Best Use Case:** General-purpose semantic search and RAG
+  * **License:** Apache 2.0
+
+* **E5 Small v2 (`intfloat/e5-small-v2`)**
+
+  * **Framework:** HuggingFace Transformers
+  * **Vector Size:** 384
+  * **Speed:** ⚡ Medium
+  * **Accuracy / Relevance:** ✅✅ Very Good
+  * **Best Use Case:** Context-aware RAG and question answering
+  * **License:** Apache 2.0
+
+* **Ollama (`nomic-embed-text`)**
+
+  * **Framework:** Ollama (local LLM)
+  * **Vector Size:** 768
+  * **Speed:** ⚠️ Slower
+  * **Accuracy / Relevance:** ✅✅✅ Excellent (contextual + deep)
+  * **Best Use Case:** High-accuracy local embeddings with long-context support
+  * **License:** MIT
+
+In the Ollama RAG widget, I used the Phi LLM to ask it who the Munchkins were.  The answer heavily focused on farming.  Note the relationship between what was asked of the reference library and what was asked of the LLM.
+
+![Ollama RAG Widget](rag-ollama.png)
 
 ---
 

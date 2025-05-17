@@ -1,58 +1,68 @@
 # Book Metadata
-TITLE="Natural Language Processing with Orange"
+TITLE="Natural Language Processing (NLP) with Orange: A Lab-Based Approach"
 AUTHOR="Course Team"
 OUTDIR=nlp-book
-OUTPUT=$(OUTDIR)/orange3-nlp-book
+FILEBASE=orange3-nlp-book
+OUTPUT=$(OUTDIR)/$(FILEBASE)
 INPUT=README.md \
-       01-Introduction.md \
-       02-Orange.md \
-       03-Text\ Data.md \
-       04-Text\ Classification.md \
-       05-Topic\ Modeling.md \
-       06-Evaluation.md \
-       07-Sentiment.md \
-       08-Recognition.md \
-       09-Summarization.md \
-       10-Parts\ of\ Speech.md \
-       11-Embeddings.md \
-       12-Document\ Embeddings.md \
-       13-Question\ Answering.md \
-       14-LLMs.md \
-       15-RAGs.md \
-       16-Capstone.md
+       chapters/01/Introduction.md \
+       chapters/02/Orange.md \
+       chapters/03/Text\ Data.md \
+       chapters/04/Text\ Classification.md \
+       chapters/05/Topic\ Modeling.md \
+       chapters/06/Evaluation.md \
+       chapters/07/Sentiment.md \
+       chapters/08/Recognition.md \
+       chapters/09/Summarization.md \
+       chapters/10/Parts\ of\ Speech.md \
+       chapters/11/Embeddings.md \
+       chapters/12/Document\ Embeddings.md \
+       chapters/13/Question\ Answering.md \
+       chapters/14/LLMs.md \
+       chapters/15/RAGs.md \
+       chapters/16/Capstone.md
 
 # Default rule
 all: $(OUTDIR) html pdf epub
 
 # Ensure output directory exists
 $(OUTDIR):
-	mkdir -p $(OUTDIR)
+	mkdir $(OUTDIR)
 
 # Combine all markdown files into a single one
 $(OUTPUT).md: $(INPUT) | $(OUTDIR)
-	mkdir -p $(OUTDIR)
+	mkdir -p $(OUTDIR)/imgs
 	rm -rf $(OUTPUT).md
 	for file in $(INPUT); do \
 		cat "$$file" >> $(OUTPUT).md; \
 		echo '<div style="page-break-before: always;"></div>' >> $(OUTPUT).md; \
 	done
+	cat $(OUTPUT).md | utils/fix_links.py > $(OUTPUT).md2
+	mv $(OUTPUT).md2 $(OUTPUT).md
+	find chapters/ -name '*.png' -exec cp "{}" $(OUTDIR)/imgs \;
+	cp imgs/* $(OUTDIR)/imgs
 
 # Generate HTML
 html: $(OUTPUT).md
 	pandoc $(OUTPUT).md -o $(OUTPUT).html \
-		--metadata title=$(TITLE) --toc --standalone
+		--metadata title=$(TITLE) \
+		--css css/nlp-book.css \
+		--toc \
+		--standalone
 
 # Generate PDF
 pdf: $(OUTPUT).md
-	pandoc $(OUTPUT).md -o $(OUTPUT).pdf \
-		--pdf-engine=weasyprint \
+	cd $(OUTDIR) && \
+	pandoc $(FILEBASE).md -o $(FILEBASE).pdf \
 		--metadata title=$(TITLE) \
+		--pdf-engine=weasyprint \
 		--toc \
 		--standalone
 
 # Generate EPUB
 epub: $(OUTPUT).md
-	pandoc $(OUTPUT).md -o $(OUTPUT).epub \
+	cd $(OUTDIR) && \
+	pandoc $(FILEBASE).md -o $(FILEBASE).epub \
 		--metadata title=$(TITLE) \
 		--toc \
 		--standalone
