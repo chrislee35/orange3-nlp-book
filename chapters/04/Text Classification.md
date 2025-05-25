@@ -86,7 +86,7 @@ The *Confusion Matrix* widget shows the breakdown of predicted vs actual labels,
 
 **Steps**:
 
-1. Load the `news-headlines.tab` from the previous chapter and convert to a corpus.
+1. Load the `BBC3` dataset from the previous chapter and convert to a corpus.
 2. Preprocess the text (e.g., lowercase, remove stopwords).
 3. Convert the cleaned text to TF-IDF vectors.
 4. Train a classifier (try both Naive Bayes and Logistic Regression).

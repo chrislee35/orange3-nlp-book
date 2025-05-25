@@ -47,7 +47,7 @@ You can compare several models at once using:
 
 ### Workflow Setup
 
-1. *File* + *Corpus* → Load and preprocess text
+1. *Dataset* + *Corpus* → Load and preprocess text
 2. *TF-IDF* → Convert to numeric features
 3. Add multiple learners (e.g., Naive Bayes, Logistic Regression, Random Forest)
 4. Connect them all to *Test & Score*
@@ -87,7 +87,7 @@ You can compare several models at once using:
 
 **Steps**:
 
-1. Load and preprocess `news-headlines.tab`.
+1. Load and preprocess `BBC3`.
 2. Extract TF-IDF features.
 3. Connect Naive Bayes, Logistic Regression, and Random Forest to *Test & Score*.
 4. Evaluate using 10-fold Cross-Validation.

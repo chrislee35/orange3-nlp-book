@@ -76,9 +76,6 @@ Let's take a look at the Reference Library
 
 In this example, I used sentence-transformers to embed the document and return 5 excerpts at around 128 characters each to the query about "farming".
 
-
-Certainly! Here's the same information presented as an unordered list for each embedder:
-
 ---
 
 * **spaCy (`en_core_web_md`)**

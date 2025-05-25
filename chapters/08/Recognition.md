@@ -49,7 +49,7 @@ To use NER in Orange for this lab, you must install the `orange3-nlp` package. T
 
 ### Example Workflow
 
-1. Load a dataset using **File** (e.g., `news-headlines.tab`, `tweets.csv`)
+1. Load a dataset using **Dataset** (e.g., `BBC3`) or Corpus (e.g., `movie-reviews.tab`)
 2. Preprocess text with **Preprocess Text**
 3. Add the widget: **Named Entity Recognition**
 4. Connect to a **Data Table** or **Corpus Viewer** to inspect results
@@ -89,7 +89,7 @@ Use these widgets (assumed available via `orange3-nlp`):
 
 **Steps**:
 
-1. Load `news-headlines.csv`
+1. Load `BBC3`
 2. Use **Preprocess Text** → **Named Entity Recognizer**
 3. Connect to:
    - **Data Table** to review the extracted entities  
@@ -106,7 +106,7 @@ Use these widgets (assumed available via `orange3-nlp`):
 
 **Steps**:
 
-1. Load `tweets-election.csv`
+1. Load `tweets-election.tab`
 2. Run text through **Named Entity Recognizer**
 3. Use **Entity Type Filter** set to `GPE`
 4. Visualize filtered data with **Word Cloud** or **Data Table**

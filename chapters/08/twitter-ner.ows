@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="Corpus: electrion-tweets-2016" position="(150, 150)" />
+		<node id="1" name="Named Entity Recognition" qualified_name="orangecontrib.nlp.widgets.owner.OWNERWidget" project_name="orange3-nlp" version="" title="Named Entity Recognition: spaCy" position="(296.0, 150.0)" />
+		<node id="2" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table" position="(437.0, 152.0)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Corpus with Entities" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations />
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASV1wMAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZQojBhl
+bGVjdGlvbi10d2VldHMtMjAxNi50YWKUjEMvaG9tZS9jaHJpcy9jb2RlL29yYW5nZS9vcmFuZ2Uz
+LW5scC1ib29rL2RhdGFzZXRzL21vdmllLXJldmlld3MudGFilIwRYm9vay1leGNlcnB0cy50YWKU
+jHcvaG9tZS9jaHJpcy9jb2RlL21pbmljb25kYTMvZW52cy9vcmFuZ2UvbGliL3B5dGhvbjMuMTIv
+c2l0ZS1wYWNrYWdlcy9vcmFuZ2Vjb250cmliL3RleHQvZGF0YXNldHMvc2xvLW9waW5pb24tY29y
+cHVzLnRhYpSMF2ZyaWVuZHMtdHJhbnNjcmlwdHMudGFilIwMYW5kZXJzZW4udGFilIwYZ3JpbW0t
+dGFsZXMtc2VsZWN0ZWQudGFilGWME3NhdmVkV2lkZ2V0R2VvbWV0cnmUQ0IB2dDLAAMAAAAABWQA
+AAH7AAAHKQAAA4IAAAVnAAACFAAAByYAAAN/AAAAAAAAAAAHgAAABWcAAAIUAAAHJgAAA3+UjAtf
+X3ZlcnNpb25fX5RLAowQY29udGV4dF9zZXR0aW5nc5RdlCiMFW9yYW5nZXdpZGdldC5zZXR0aW5n
+c5SMB0NvbnRleHSUk5QpgZR9lCiMBnZhbHVlc5R9lCiMCGxhbmd1YWdllIwCZW6USv7///+GlIwO
+dGl0bGVfdmFyaWFibGWUjAdDb250ZW50lEtnhpSMCnVzZWRfYXR0cnOUXZRoG0tnhpRhSv3///+G
+lGgNSwJ1jAphdHRyaWJ1dGVzlH2UKIwKSXMgcmV0d2VldJRLAYwEVGltZZRLBIwITGFuZ3VhZ2WU
+SwGMDVJldHdlZXQgY291bnSUSwKMDkZhdm9yaXRlIGNvdW50lEsCjAlMb25naXR1ZGWUSwKMCExh
+dGl0dWRllEsCjAZBdXRob3KUSwF1jAVtZXRhc5R9lCiMClNvdXJjZSBVUkyUSwNoG0sDjA9Pcmln
+aW5hbCBhdXRob3KUSwOMBVBsYWNllEsDdYwOZG9jdW1lbnRzX2hhc2iUihCArsbAqOmT0q06Ez/H
+wAV/aBeMAmVulHViaBIpgZR9lChoFX2UKGgXjAJlbpRK/v///4aUaBpOSv7///+GlGgdXZSMBlJl
+dmlld5RLZ4aUYUr9////hpRoDUsCdWghfZSMCVNlbnRpbWVudJRLAXNoK32UaDlLA3NoMIoQ619L
+dPduATV5wwuNXCbkfGgXjAJlbpR1YmV1Lg==
+</properties>
+		<properties node_id="1" format="literal">{'controlAreaVisible': True, 'ollama_host': 'localhost', 'ollama_port': '11434', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x032\x00\x00\x01\t\x00\x00\x04M\x00\x00\x03\x18\x00\x00\x035\x00\x00\x01"\x00\x00\x04J\x00\x00\x03\x15\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x035\x00\x00\x01"\x00\x00\x04J\x00\x00\x03\x15', 'selected_framework': 1, 'selected_model': '', '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01\xc4\x00\x00\x01\x0c\x00\x00\x06N\x00\x00\x03\xbd\x00\x00\x01\xc7\x00\x00\x01%\x00\x00\x06K\x00\x00\x03\xba\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x01\xc7\x00\x00\x01%\x00\x00\x06K\x00\x00\x03\xba', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': True, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>

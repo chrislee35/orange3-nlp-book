@@ -33,15 +33,16 @@ By the end of this chapter, you will be able to:
 
 ### 7.2 Exercise: Analyzing Twitter Data
 
-Goal: Analyze public sentiment in tweets using both rule-based and ML-based methods.
-Dataset
+Goal: Analyze public sentiment in movie reviews using both rule-based and ML-based methods.
 
-Use a sample dataset like tweets-election.csv or any collection of tweets labeled with text and (optionally) sentiment.
+#### Dataset
+
+Use a sample dataset like movie-reviews.csv or any collection of tweets labeled with text and (optionally) sentiment.
 
 #### Workflow Setup
 
-    1. Load `election-tweets-2016.tab` using Corpus.
-    2. Preprocess with Preprocess Text.
+    1. Load `movie-reviews.tab` using *Corpus*.
+    2. Preprocess with *Preprocess Text*.
     3. Apply *Sentiment Analysis*.
     4. Visualize results:
         * Box Plot: sentiment by topic or hashtag
@@ -68,7 +69,7 @@ Use a sample dataset like tweets-election.csv or any collection of tweets labele
 
 ## Notes
 
-    * Save your sentiment workflows as twitter-sentiment.ows.
+    * Save your sentiment workflows as movie-reviews-sentiment.ows.
     * In future chapters, you’ll explore advanced NLP techniques using deep embeddings and transformer models.
 
 ---

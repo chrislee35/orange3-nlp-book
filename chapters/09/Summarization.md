@@ -33,18 +33,22 @@ Use cases include:
 
 Several widgets provided by `orange3-nlp` will help you explore summarization:
 
-- **Text Summarizer** (extractive)
-- **Abstractive Summarizer** (if transformer support is configured)
-- **Summary Viewer**
-- **Summary Quality Estimator** (optional)
+- **Extractive Summary** (extractive)
+- **Abstractive Summary** (if transformer support is configured)
+- **Corpus**
+- **Corpus Viewer** (optional)
 
 ### Workflow Example
 
-1. Use **File** to load `long-articles.csv`.
-2. Preprocess text with **Preprocess Text**.
-3. Add **Text Summarizer** to extract sentence-level summaries.
-4. Optionally compare with **Abstractive Summarizer** if supported.
-5. Output to **Summary Viewer** or save using **Save Data**.
+1. Use **Corpus** to load `andersen.tab`.
+2. Use **Data Sampler** to keep the number of samples to 3 (useful when trying out different inputs)
+2. Add **Extractive Summary** to extract sentence-level summaries.
+4. Optionally compare with **Abstractive Summary** if supported.
+5. Output to **Corpus Viewer**.
+
+![Summary Workflow Example](summary-workflow.png)
+
+![Example Extactive and Abstractive Output](corpus-viewer.png)
 
 ---
 
@@ -58,7 +62,7 @@ Several widgets provided by `orange3-nlp` will help you explore summarization:
 | Speed | Fast | Slower |
 | Accuracy | High for factual precision | More human-like summaries |
 
-Abstractive models typically require transformer-based architectures and more compute. These may be explored more deeply in Chapter 13 using **Large Language Models** with `orange3-ollama`.
+Abstractive models typically require transformer-based architectures and more compute. These may be explored more deeply in Chapter 14 using **Large Language Models** with `orange3-ollama`.
 
 ---
 
@@ -66,12 +70,13 @@ Abstractive models typically require transformer-based architectures and more co
 
 When summarizing large documents or corpora, consider:
 
-- **Chunking**: Break texts into paragraphs or sections before summarization.
-- **Batch Processing**: Use Orange workflows to process in parallel (with multiple **Text Summarizer** widgets if supported).
+- **Chunking**: Break texts into paragraphs or sections before summarization as many of the summarizers have limits on how much text they can process.
 - **Caching and Checkpoints**: Save intermediate results to disk for reusability.
-- **Hybrid Summaries**: Summarize paragraphs first, then summarize those summaries.
+- **Hybrid Summaries**: Summarize paragraphs first, then summarize those summaries. This is a very powerful technique that you may wish to use in your capstone project.  Below, I show an example using [Dracula by Bram Stoker](https://www.gutenberg.org/ebooks/345).
 
-> 💡 In Chapter 13, you will learn how to leverage LLMs via `orange3-ollama` to generate high-quality abstractive summaries even from very large texts.
+![Dracula Summary by Chapter and then Book](Dracula-summary-workflow.png)
+
+> 💡 In Chapter 14, you will learn how to leverage LLMs via `orange3-ollama` to generate high-quality abstractive summaries even from very large texts.
 
 ---
 
@@ -81,15 +86,16 @@ When summarizing large documents or corpora, consider:
 
 **Steps**:
 
-1. Load `news-articles.csv`
-2. Preprocess text → **Text Summarizer**
-3. Output to **Data Table** or **Summary Viewer**
-4. Compare:
+1. Load `BBC3` using *Datasets*
+2. Use *Data Sampler* to select 10 rows.
+3. Convert to Corpus, select only Content as text feature
+4. Preprocess text → **Extractive Summary**
+5. Connect to **Corpus Viewer**
+6. Compare:
    - How informative is the summary?
    - Are key facts preserved?
-
-Optional:
-- Add **Abstractive Summarizer** and compare the results.
+   - How does each summarization framework perform in comprehension and speed?
+     - Sumy, Summa, BART, and Ollama (if you have Ollama installed)
 
 ---
 
@@ -99,9 +105,11 @@ Optional:
 
 **Steps**:
 
-1. Load `abstracts.csv`
-2. Preprocess and pass through both **Text Summarizer** and **Abstractive Summarizer**
-3. Use **Data Table** to view side-by-side results
+1. Load `BBC3` using *Datasets*
+2. Use *Data Sampler* to select 10 rows.
+3. Convert to Corpus, select only Content as text feature
+4. Preprocess and pass through both **Extractive Summary** and **Abstractive Summary**
+3. Use **Corpus Viewer** to view side-by-side results
 4. Rate each summary’s quality using:
    - Coverage of main idea
    - Fluency
@@ -115,7 +123,7 @@ Optional:
 2. When might extractive summarization be preferable?
 3. What challenges arise when summarizing very long documents?
 4. How can chunking improve summarization workflows?
-5. Why might you choose to integrate LLMs for summarization, as we will see in Chapter 13?
+5. Why might you choose to integrate LLMs for summarization, as we will see in Chapter 14?
 
 ---
 
@@ -124,10 +132,6 @@ Optional:
 - Extractive Summarization  
 - Abstractive Summarization  
 - Sentence Ranking  
-- Text Compression  
-- Chunking  
-- `orange3-nlp`  
-- `orange3-ollama`  
 
 ---
 

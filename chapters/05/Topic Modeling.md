@@ -53,7 +53,7 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 ### Topic Modeling Workflow
 
-1. Load and preprocess your corpus (e.g., `news-headlines.tab`).
+1. Load and preprocess your corpus (e.g., `BBC3`).
 2. Convert text using *Bag of Words* or *TF-IDF*.
 3. Use the *Topic Modeling* widget (LDA) to extract topics.
 4. Visualize results with *Corpus Viewer*, *Word Cloud*, or *Data Table*.
@@ -82,7 +82,7 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 **Steps**:
 
-1. Load `book-excerpts` using the *Corpus* widget.
+1. Load `book-excerpts.tab` using the *Corpus* widget.
 2. Preprocess the text and extract features using TF-IDF.
 3. Apply *K-Means* with 3–5 clusters.
 4. Use *Scatter Plot* to view clustering structure.
@@ -99,7 +99,7 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 **Steps**:
 
-1. Load `news-headlines.tab` and preprocess the text.
+1. Load `BBC3` dataset, convert to a *Corpus*, and preprocess the text.
 2. Convert text to Bag-of-Words vectors.
 3. Use *Topic Modeling* (LDA) to extract 5–10 topics.
 4. Use *Corpus Viewer* to examine top documents per topic.
