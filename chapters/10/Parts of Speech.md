@@ -43,6 +43,7 @@ Part-of-speech (POS) tagging assigns grammatical categories to each word in a se
 > - `dog` is the subject of `chased`
 > - `cat` is the object of `chased`
 
+![Example Part of Speech parsing for The dog chased the cat.](example-pos.png)
 ---
 
 ## 10.3 Using Orange for POS and Parsing
@@ -56,15 +57,14 @@ Assuming your custom widgets are available in `orange3-nlp`:
 
 ### Typical Workflow
 
-1. *File* + *Corpus* → Load data (e.g., `movie-lines.csv`)
-2. *Preprocess Text* (tokenization and normalization)
-3. Apply *POS Tagger* and *Dependency Parser*
-4. Use *Parse Viewer* to explore sentence structure
-5. (Optional) Connect to *Data Table* or *Corpus Viewer* for exploration
+1. *Corpus* → Load data (e.g., `huck.tab`)
+2. Apply *POS Tagger* and *Dependency Parser*
+3. Use *POS Viewer* to explore sentence structure
+4. (Optional) Connect to *Data Table* or *Corpus Viewer* for exploration
 
 > 🧠 Useful for filtering texts by grammatical patterns, or for extracting structured phrases.
 
-![Figure X. Part of Speech Viewer with parsed Slovenian text.](3c%20POS%20Viewer.png)
+![Figure X. Part of Speech Viewer with Adventures of Huckleberry Fin.](huck-pos-viewer.png)
 
 ---
 
@@ -82,7 +82,7 @@ Assuming your custom widgets are available in `orange3-nlp`:
 
 **Steps**:
 
-1. Load a conversational or literary dataset (e.g., `movie-lines.csv`).
+1. Load a conversational or literary dataset (e.g., `huck.tab`).
 2. Preprocess and apply *POS Tagger* and *Dependency Parser*.
 3. Use *POS/Parse Viewer* to examine sentences:
    - Select multiple examples to view tree structures.
@@ -91,6 +91,7 @@ Assuming your custom widgets are available in `orange3-nlp`:
 **Reflection**:
 - What is the root of each sentence?
 - Are there passive constructions or complex clauses?
+- How do spaCy, Stanza, and UDPipe vary?  Which do you think does the best job?
 
 ---
 

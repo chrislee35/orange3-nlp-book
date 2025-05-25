@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Create Corpus" qualified_name="orangecontrib.text.widgets.owcreatecorpus.OWCreateCorpus" project_name="Orange3-Text" version="" title="Create Corpus" position="(150, 150)" />
+		<node id="1" name="POS Tagger" qualified_name="orangecontrib.nlp.widgets.owpos_tagger.OWPOSTagger" project_name="orange3-nlp" version="" title="POS Tagger" position="(300, 150)" />
+		<node id="2" name="POS Viewer" qualified_name="orangecontrib.nlp.widgets.owpos_viewer.OWPOSViewer" project_name="orange3-nlp" version="" title="POS Viewer" position="(450, 150)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Tagged Corpus" sink_channel="Tagged Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations />
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="literal">{'auto_commit': True, 'controlAreaVisible': True, 'language': 'en', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x02\x8e\x00\x00\x00\xa5\x00\x00\x04\xeb\x00\x00\x03J\x00\x00\x02\x91\x00\x00\x00\xbe\x00\x00\x04\xe8\x00\x00\x03G\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x02\x91\x00\x00\x00\xbe\x00\x00\x04\xe8\x00\x00\x03G', 'texts': [('Example 1', 'The dog chased the cat.')], '__version__': 2}</properties>
+		<properties node_id="1" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x03L\x00\x00\x01\x99\x00\x00\x043\x00\x00\x02\x89\x00\x00\x03O\x00\x00\x01\xb2\x00\x00\x040\x00\x00\x02\x86\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x03O\x00\x00\x01\xb2\x00\x00\x040\x00\x00\x02\x86', 'selected_framework': 'spaCy', '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01\xf8\x00\x00\x00\xe7\x00\x00\x06\x89\x00\x00\x03\xf7\x00\x00\x01\xfb\x00\x00\x01\x00\x00\x00\x06\x86\x00\x00\x03\xf4\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x01\xfb\x00\x00\x01\x00\x00\x00\x06\x86\x00\x00\x03\xf4', '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>

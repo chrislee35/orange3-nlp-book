@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="Corpus: Adventures of Huckaberry Finn Chapter 1" position="(65.0, 54.0)" />
+		<node id="1" name="POS Tagger" qualified_name="orangecontrib.nlp.widgets.owpos_tagger.OWPOSTagger" project_name="orange3-nlp" version="" title="POS Tagger" position="(215.0, 54.0)" />
+		<node id="2" name="POS Viewer" qualified_name="orangecontrib.nlp.widgets.owpos_viewer.OWPOSViewer" project_name="orange3-nlp" version="" title="POS Viewer" position="(365.0, 54.0)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Tagged Corpus" sink_channel="Tagged Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations />
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVqwQAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZQojD0v
+aG9tZS9jaHJpcy9jb2RlL29yYW5nZS9vcmFuZ2UzLW5scC1ib29rL2NoYXB0ZXJzLzEwL2h1Y2su
+dGFilIwXL2hvbWUvY2hyaXMvZHJhY3VsYS50YWKUjBFib29rLWV4Y2VycHRzLnRhYpSMdy9ob21l
+L2NocmlzL2NvZGUvbWluaWNvbmRhMy9lbnZzL29yYW5nZS9saWIvcHl0aG9uMy4xMi9zaXRlLXBh
+Y2thZ2VzL29yYW5nZWNvbnRyaWIvdGV4dC9kYXRhc2V0cy9zbG8tb3Bpbmlvbi1jb3JwdXMudGFi
+lIwXZnJpZW5kcy10cmFuc2NyaXB0cy50YWKUjAxhbmRlcnNlbi50YWKUjBhlbGVjdGlvbi10d2Vl
+dHMtMjAxNi50YWKUjBhncmltbS10YWxlcy1zZWxlY3RlZC50YWKUZYwTc2F2ZWRXaWRnZXRHZW9t
+ZXRyeZRDQgHZ0MsAAwAAAAAAfAAAAUMAAAJBAAACygAAAH8AAAFcAAACPgAAAscAAAAAAAAAAAeA
+AAAAfwAAAVwAAAI+AAACx5SMC19fdmVyc2lvbl9flEsCjBBjb250ZXh0X3NldHRpbmdzlF2UKIwV
+b3Jhbmdld2lkZ2V0LnNldHRpbmdzlIwHQ29udGV4dJSTlCmBlH2UKIwGdmFsdWVzlH2UKIwIbGFu
+Z3VhZ2WUjAJlbpRK/v///4aUjA50aXRsZV92YXJpYWJsZZROSv7///+GlIwKdXNlZF9hdHRyc5Rd
+lIwIU2VudGVuY2WUS2eGlGFK/f///4aUaA5LAnWMCmF0dHJpYnV0ZXOUfZSMBW1ldGFzlH2UaB9L
+A3OMDmRvY3VtZW50c19oYXNolIoQxmxCuZZlIzwrv4BOUhNxOGgYTnViaBMpgZR9lChoFn2UKGgY
+Tkr+////hpRoG4wHQ2hhcHRlcpRLZ4aUaB1dlIwJUGFyYWdyYXBolEtnhpRhSv3///+GlGgOSwJ1
+aCJ9lGgkfZQoaCtLA4wGQXV0aG9ylEsDjAREYXRllEsDaC5LA3VoJooRA+WWyaEyb6VxfSBxCRg6
+1gBoGE51YmgTKYGUfZQoaBZ9lChoGIwCZnKUSv7///+GlGgbjAdTdW1tYXJ5lEtnhpRoHV2UjAdj
+b250ZW50lEtnhpRhSv3///+GlGgOSwJ1aCJ9lIwIY2F0ZWdvcnmUSwFzaCR9lCiMBG5hbWWUSwNo
+PUsDjAl1dHRlcmFuY2WUSwOMBVRpdGxllEsDjAxTcGVha2VyX25hbWWUSwNoOksDjARGcm9tlEsE
+jAJUb5RLBIwFSG91c2WUSwGMBFRlcm2USwKMCVN1YmNvcnB1c5RLAYwMU3BlYWtlcl9yb2xllEsB
+jAxTcGVha2VyX3R5cGWUSwGMDVNwZWFrZXJfcGFydHmUSwGMElNwZWFrZXJfcGFydHlfbmFtZZRL
+AYwMUGFydHlfc3RhdHVzlEsBjA5TcGVha2VyX2dlbmRlcpRLAXVoJooQUCAHa/155Uv6S1uCIopQ
+WWgYTnViZXUu
+</properties>
+		<properties node_id="1" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x03L\x00\x00\x01\x99\x00\x00\x043\x00\x00\x02\x89\x00\x00\x03O\x00\x00\x01\xb2\x00\x00\x040\x00\x00\x02\x86\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x03O\x00\x00\x01\xb2\x00\x00\x040\x00\x00\x02\x86', 'selected_framework': 'spaCy', '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x89\x00\x00\x06w\x00\x00\x02D\x00\x00\x00\x03\x00\x00\x00\xa2\x00\x00\x06t\x00\x00\x02A\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x00\x03\x00\x00\x00\xa2\x00\x00\x06t\x00\x00\x02A', '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>
