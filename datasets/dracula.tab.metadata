@@ -1,0 +1,6 @@
+language: en
+Name: Dracula
+Description: All chapters of Dracula, separated by sentences, with chapter, speaker, and date columns.
+Author: Bram Stoker
+Year: 1897
+URL: https://www.gutenberg.org/ebooks/345
