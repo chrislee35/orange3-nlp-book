@@ -19,7 +19,15 @@ Traditional models like bag-of-words or one-hot encodings treat each word as a u
 - **No sense of similarity** between words (e.g., "cat" and "kitten" are unrelated in a one-hot encoding).
 - **Sparse and high-dimensional** data that’s inefficient for modeling.
 
+![Orange workflow with 2 sentences that mean the same thing, but with using Bag of Words, have no similarity](hound-and-kitty-workflow-datatable.png)
+
 > Think of embeddings like a map of words: words that mean similar things are near each other on the map.
+
+After applying embedding, and including a third, unrelated example, you can see how the embedding bring similiar sentences together.
+
+![Orange workflow with 3 example documents, embedding, and t-SNE](embedding-workflow.png)  
+
+![Orange t-SNE view of 3 example documents, 2 related, and 1 distinct](embedding-distance.png)
 
 **Word embeddings** solve this by placing words in a continuous vector space where:
 

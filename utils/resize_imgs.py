@@ -28,7 +28,7 @@ def resize_image_in_place(image_path):
         print(f"Resized {os.path.basename(image_path)} to {new_size}")
 
 # Walk through all subdirectories
-for dirpath, _, filenames in os.walk(root_directory):
+for dirpath, _, filenames in os.walk(image_directory):
     for filename in filenames:
         if filename.lower().endswith(".png"):
             file_path = os.path.join(dirpath, filename)
