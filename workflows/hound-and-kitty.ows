@@ -21,7 +21,9 @@
 		<link id="5" source_node_id="7" sink_node_id="8" source_channel="Embedder" sink_channel="Embedder" enabled="true" source_channel_id="embedder" sink_channel_id="embedder" />
 		<link id="6" source_node_id="8" sink_node_id="9" source_channel="Embedded Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
 	</links>
-	<annotations />
+	<annotations>
+		<text id="0" type="text/markdown" rect="(401.0, 389.0, 227.0, 123.0)" font-family="Sans Serif" font-size="16">*This is equivalent to using the Text module's **Document Embedding**, but done locally using the NLP module.*</text>
+	</annotations>
 	<thumbnail />
 	<node_properties>
 		<properties node_id="0" format="literal">{'auto_commit': True, 'controlAreaVisible': True, 'language': 'en', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x04\xc7\x00\x00\x00\xd7\x00\x00\x07$\x00\x00\x03|\x00\x00\x04\xca\x00\x00\x00\xf0\x00\x00\x07!\x00\x00\x03y\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x04\xca\x00\x00\x00\xf0\x00\x00\x07!\x00\x00\x03y', 'texts': [('Example 1', 'The dog chased the cat'), ('Example 2', 'My hound pursued a kitten')], '__version__': 2}</properties>
