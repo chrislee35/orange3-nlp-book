@@ -1,0 +1,6 @@
+Title	Document
+string	string
+meta title=True	meta include=True
+Example 1	The dog chased the cat
+Example 2	My hound pursued a kitten
+Example 3	"A bag of words handles out-of-vocabulary words by constructing a column with the new words.	"

@@ -1,0 +1,11 @@
+Type	Word
+discrete	string
+class	meta include=True title=True
+food	pizza
+food	sushi
+food	taco
+food	hamburger
+country	italy
+country	japan
+country	mexico
+country	usa

@@ -115,40 +115,16 @@ Use when: You're not sure what task you're doing yet, or want a flexible model.
 
 ---
 
-## 11.3 Using Word Embeddings in Orange
+## 11.3 Using Text Embeddings in Orange
 
 With your custom Orange widgets, the following tools will be available:
 
 ### Widgets Used
 
-- **Word Embeddings**: Loads pre-trained embeddings (Word2Vec, GloVe, etc.)
-- **Word Similarity Explorer**: Allows users to type in a word and find similar words by cosine similarity.
-- **Word Embedding Plot**: Visualizes word vectors in 2D or 3D using t-SNE or PCA.
-- **Distance Map / Clustering**: Groups words or documents based on semantic proximity.
-
-### Example Workflow
-
-1. Load a list of selected words or short documents (e.g., news headlines).
-2. Use *Word Embeddings* to represent each word or document vector.
-3. Visualize the embeddings in a *Word Embedding Plot*.
-4. Explore relationships using *Distance Map*, *Clustering*, or *Similarity Explorer*.
-
----
-
-## 11.4 Interpreting Word Relationships
-
-### Examples to Try
-
-- Search for: `"king"`, `"queen"`, `"man"`, `"woman"`
-- What patterns do you notice in the 2D plot?
-
-Try entering more groups like:
-
-- `"apple"`, `"orange"`, `"banana"` (fruits)
-- `"cat"`, `"dog"`, `"puppy"`, `"kitten"` (animals)
-- `"paris"`, `"france"`, `"berlin"`, `"germany"` (cities and countries)
-
-> 💡 Words with similar meanings tend to cluster together. Even word with opposite meanings can appear close because they occur in similar contexts (e.g., "good" and "bad").
+- **Create Corpus**: Create a corpus for exploration.
+- **SBERT Embedder**: Provides an embedder model for sentence-based embedding.
+- **Text Embedder**: Uses an embedder model to perfom embedding on a corpus of text.
+- **t-SNE**: Visualizes embedding vectors in 2D using t-SNE.
 
 ---
 
@@ -158,10 +134,22 @@ Try entering more groups like:
 
 **Steps**:
 
-1. Load a word list (you can use a `File` widget with a `.txt` or `.csv` file).
-2. Connect to the *Word Embeddings* widget to generate vector representations.
-3. Connect to the *Word Embedding Plot* to visualize the space.
-4. Use *Word Similarity Explorer* to find related terms.
+1. Use *Corpus* to load the food-and-country corpus.
+
+| Type | Word |
+|------|------|
+| food | pizza |
+| food | sushi |
+| food | taco |
+| food | hamburger |
+| country | italy |
+| country | japan |
+| country | mexico |
+| country | usa |
+
+2. Connect the new corpus to *Text Embedder*
+3. Connect an *SBERT Embedder* into the *Text Embedder*
+4. Connect the *Text Embedder* into *t-SNE*.
 
 **Questions**:
 
