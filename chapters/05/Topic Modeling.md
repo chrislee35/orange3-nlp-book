@@ -38,9 +38,17 @@ These techniques are especially useful for **exploration**, **summarization**, o
 
 1. *Corpus* → Load dataset (e.g., `book-excerpts`)
 2. *Preprocess Text* → Clean the corpus
-3. *TF-IDF* → Convert text to features
-4. *K-Means* or *Hierarchical Clustering* → Group similar documents
-5. *Distances* + *Scatter Plot* → Visualize clusters
+3. *Bag of Words* → Convert text to features
+4. *Distances* → Create a measurement of how similar the instances are.
+5. *Hierarchical Clustering* → Group similar documents
+
+![Clustering Workflow Example](./Clustering%20Workflow.png)
+
+![Bag of Words using TF-IDF](./Bag%20of%20Words%20TF-IDF.png)
+
+![Hierarchical Clustering Example](./Hierarchical%20Clustering.png)
+
+> Even though the instances are noted by their class, the class was not used to train or fit the clustering.  It is included to show you how well or poorly the clustering grouped like items.
 
 ---
 
@@ -54,11 +62,20 @@ These techniques are especially useful for **exploration**, **summarization**, o
 ### Topic Modeling Workflow
 
 1. Load and preprocess your corpus (e.g., `BBC3`).
-2. Convert text using *Bag of Words* or *TF-IDF*.
-3. Use the *Topic Modeling* widget (LDA) to extract topics.
-4. Visualize results with *Corpus Viewer*, *Word Cloud*, or *Data Table*.
+2. Use the *Topic Modeling* widget (LDA) to extract topics.
+3. Visualize results with *MDS*.
 
 > 📌 Each document receives a topic distribution; the top topic is often used as a soft label.
+
+![Topic Modeling Workflow](./Topic%20Modeling%20Workflow.png)
+
+![Topic Modeling LDA](./Topic%20Modeling-LDA.png)
+
+![Topic Modeling MDS](./Topic%20Modeling%20MDS.png)
+
+![Topic Modeling Workflow with Word Cloud](./Topic%20Modeling%20Workflow%20with%20Word%20Cloud.png)
+
+![Word Cloud for 3rd Topic](./Word%20Cloud.png)
 
 ---
 
