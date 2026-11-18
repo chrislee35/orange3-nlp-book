@@ -251,7 +251,7 @@ A3V1YmF1Lg==
 		<properties node_id="8" format="literal">{'auto_apply': True, 'controlAreaVisible': True, 'include_reference': False, 'limit_neighbors': True, 'metric_id': 0, 'n_neighbors': 5, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\n\xa5\x00\x00\x01}\x00\x00\x0b\xc7\x00\x00\x02J\x00\x00\n\xa5\x00\x00\x01\x9d\x00\x00\x0b\xc7\x00\x00\x02J\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\n\xa5\x00\x00\x01\x9d\x00\x00\x0b\xc7\x00\x00\x02J', '__version__': 2}</properties>
 		<properties node_id="9" format="pickle">gASVMTQAAAAAAAB9lCiMCmF1dG9jb21taXSUiIwSY29udHJvbEFyZWFWaXNpYmxllIiME3NhdmVk
 V2lkZ2V0R2VvbWV0cnmUQ0IB2dDLAAMAAAAAClUAAADbAAAObgAAA6gAAApVAAAA+wAADm4AAAOo
-AAAAAQAAAAAHgAAAClUAAAD7AAAObgAAA6iUjBJzZWxlY3RlZF9kb2N1bWVudHOUj5QoSwCQjAtz
+AAAAAQAAAAAHgAAAClUAAAD7AAAObgAAA6iUjBJzZWxlY3RlZF9kb2N1bWVudHOUj5QoSwGQjAtz
 aG93X3Rva2Vuc5SJjAtfX3ZlcnNpb25fX5RLAowQY29udGV4dF9zZXR0aW5nc5RdlIwVb3Jhbmdl
 d2lkZ2V0LnNldHRpbmdzlIwHQ29udGV4dJSTlCmBlH2UKIwGdmFsdWVzlH2UKIwQZGlzcGxheV9m
 ZWF0dXJlc5RdlCiMCGNhdGVnb3J5lEtlhpSMBVRpdGxllEtnhpSMB0NvbnRlbnSUS2eGlIwIZGlz
@@ -499,7 +499,7 @@ bnSUSwFzaB59lGgpSwNzaCGKEOtfS3T3bgE1ecMLjVwm5HxoEYwCZW6UdWJldS4=
 </properties>
 		<properties node_id="11" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\n\xd2\x00\x00\x00\xfa\x00\x00\x0b\x99\x00\x00\x02\xed\x00\x00\n\xd2\x00\x00\x00\xfa\x00\x00\x0b\x99\x00\x00\x02\xed\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\n\xd2\x00\x00\x00\xfa\x00\x00\x0b\x99\x00\x00\x02\xed', '__version__': 1}</properties>
 		<properties node_id="12" format="pickle">gASVoBQAAAAAAAB9lCiMC2F1dG9fY29tbWl0lIiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjBNzYXZl
-ZFdpZGdldEdlb21ldHJ5lENCAdnQywADAAAAAAkAAAAAkgAADWsAAANVAAAJAAAAAJIAAA1rAAAD
+ZFdpZGdldEdlb21ldHJ5lENCAdnQywADAAAAAAkAAAAAcgAADWsAAANVAAAJAAAAAJIAAA1rAAAD
 VQAAAAEAAAAAB4AAAAkAAAAAkgAADWsAAANVlIwJc2VsZWN0aW9ulE6MD3Zpc3VhbF9zZXR0aW5n
 c5R9lIwFZ3JhcGiUfZQojBdhZ2dyZWdhdGVfZGVuc2VfcmVnaW9uc5SJjAthbHBoYV92YWx1ZZRL
 gIwNY2xhc3NfZGVuc2l0eZSJjAtqaXR0ZXJfc2l6ZZRLAIwTbGFiZWxfb25seV9zZWxlY3RlZJSJ

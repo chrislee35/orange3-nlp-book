@@ -19,7 +19,7 @@ $(OUTPUT).md: $(INPUT) | $(OUTDIR)
 	rm -rf $(OUTPUT).md
 	for file in $(INPUT); do \
 		cat "$$file" >> $(OUTPUT).md; \
-		echo '<div style="page-break-before: always;"></div>' >> $(OUTPUT).md; \
+		printf '\n<div style="page-break-before: always;"></div>\n\n' >> $(OUTPUT).md; \
 	done
 	cat $(OUTPUT).md | utils/fix_links.py > $(OUTPUT).md2
 	mv $(OUTPUT).md2 $(OUTPUT).md
