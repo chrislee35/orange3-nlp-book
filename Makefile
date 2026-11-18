@@ -40,6 +40,20 @@ html: $(OUTPUT).md
 		--toc \
 		--standalone
 
+# Generate the multi-format site for GitLab Pages (output in public/)
+site: $(OUTPUT).md
+	mkdir -p public/imgs public/css
+	cp $(OUTDIR)/imgs/* public/imgs/
+	cp css/site.css public/css/
+	pandoc $(OUTPUT).md -o public/index.html \
+		--metadata title=$(TITLE) \
+		--css css/site.css \
+		--toc --toc-depth=2 \
+		--standalone
+	cd $(OUTDIR) && \
+	pandoc $(FILEBASE).md -o ../public/$(FILEBASE).epub \
+		--metadata title=$(TITLE) --toc --standalone
+
 # Generate PDF
 pdf: $(OUTPUT).md
 	cd $(OUTDIR) && \
@@ -59,4 +73,4 @@ epub: $(OUTPUT).md
 
 # Clean up
 clean:
-	rm -rf $(OUTDIR)
+	rm -rf $(OUTDIR) public

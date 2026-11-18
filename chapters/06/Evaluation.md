@@ -21,7 +21,7 @@ Common goals of evaluation:
 - Detect overfitting or underfitting.
 - Optimize model performance via tuning.
 
-> ⚠️ A model that performs well on training data but poorly on test data is **overfitting**.
+> ⚠️ A model that performs well on training data but poorly on test data is **overfitting**. Another way to describe overfitting is that the algorithm learned details about the examples it trained on that aren't generally true with the whole set of data.
 
 ---
 

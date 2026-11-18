@@ -1,0 +1,17 @@
+# Builds the book with pandoc and publishes it to GitLab Pages.
+# Site: single-page HTML with a sidebar table of contents, plus an EPUB download.
+
+image: debian:stable-slim
+
+pages:
+  stage: deploy
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq --no-install-recommends make pandoc python3 python-is-python3
+  script:
+    - make site
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
