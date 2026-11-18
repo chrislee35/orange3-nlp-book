@@ -27,6 +27,8 @@ WIDGETS = {
     "Data Table": ("Orange.widgets.data.owtable.OWTable", "Orange3"),
     "Neighbors": ("Orange.widgets.data.owneighbors.OWNeighbors", "Orange3"),
     "Corpus Viewer": ("orangecontrib.text.widgets.owcorpusviewer.OWCorpusViewer", "Orange3-Text"),
+    "Question Answering": ("orangecontrib.nlp.widgets.owquestion_answer.OWQuestionAnswer", "orange3-nlp"),
+    "Text Generator": ("orangecontrib.nlp.widgets.owtext_generator.OWTextGenerator", "orange3-nlp"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -38,6 +40,12 @@ LINKS = {
     ("Text Embedder", "Data Table"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Data Table", "Neighbors"): (("Selected Data", "selected_data"), ("Reference", "reference")),
     ("Neighbors", "Corpus Viewer"): (("Neighbors", "data"), ("Corpus", "corpus")),
+    ("Corpus", "Question Answering"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("Corpus", "Text Generator"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("Question Answering", "Corpus Viewer"): (("Corpus", "data"), ("Corpus", "corpus")),
+    ("Text Generator", "Corpus Viewer"): (("Corpus", "data"), ("Corpus", "corpus")),
+    ("Text Generator", "Data Table"): (("Corpus", "data"), ("Data", "data")),
+    ("Question Answering", "Data Table"): (("Corpus", "data"), ("Data", "data")),
     ("Text Embedder", "t-SNE"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Text Embedder", "Distances"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Distances", "Hierarchical Clustering"): (("Distances", "distances"), ("Distances", "distances")),
@@ -158,6 +166,34 @@ def document_embeddings():
     return build(nodes, links, [(note, "(700.0, 300.0, 330.0, 120.0)")])
 
 
+GROUNDED = (
+    "Answer the question using only the passage. If the passage does not contain the answer, say so.\n\n"
+    "Passage: {Passage}\n\nQuestion: Who discovered penicillin?\nAnswer:"
+)
+
+
+def question_answering():
+    """Chapter 13: 13A extractive QA, 13B autocomplete with gpt2, 13C generative QA with phi4-mini."""
+    nodes = [
+        corpus("qa", "qa-passages.tab", "qa-passages (Passage)", 0),
+        ("qa13a", "Question Answering", "Question Answering (13A)", (325, 0), {}),
+        ("dt13a", "Data Table", "Data Table: answers (13A)", (550, 0), {}),
+        ("gpt2", "Text Generator", "Text Generator: gpt2 (13B)", (325, 200),
+         {"backend": "Hugging Face", "hf_model": "gpt2", "prompt": "NASA was established in", "temperature": 0.7,
+          "max_new_tokens": 30, "samples": 3, "use_seed": True, "seed": 42, "controlAreaVisible": True}),
+        ("dt13b", "Data Table", "Data Table: completions (13B)", (550, 200), {}),
+        ("phi", "Text Generator", "Text Generator: phi4-mini (13C)", (325, 400),
+         {"backend": "Ollama", "ollama_model": "phi4-mini:latest", "prompt": GROUNDED, "temperature": 0.0,
+          "max_new_tokens": 60, "samples": 1, "use_seed": False, "controlAreaVisible": True}),
+        ("dt13c", "Data Table", "Data Table: generated answers (13C)", (550, 400), {}),
+    ]
+    links = [("qa", "qa13a"), ("qa13a", "dt13a"), ("gpt2", "dt13b"), ("qa", "phi"), ("phi", "dt13c")]
+    note = ("*Chapter 13. 13A: select a passage in Question Answering and ask a question (tick **All documents** to ask "
+            "every passage). 13B: no input; change the prompt, temperature and samples. 13C: the question is written "
+            "in the prompt template; edit it and press Generate.*")
+    return build(nodes, links, [(note, "(700.0, 180.0, 330.0, 140.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -178,7 +214,8 @@ def check(path):
 
 # name -> (builder, output file under workflows/).  Add new workflows here.
 WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
-             "document-embeddings": (document_embeddings, "document-embeddings.ows")}
+             "document-embeddings": (document_embeddings, "document-embeddings.ows"),
+             "question-answering": (question_answering, "question-answering.ows")}
 
 if __name__ == "__main__":
     import sys

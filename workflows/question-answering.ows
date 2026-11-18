@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="qa-passages (Passage)" position="(100, 0)" />
+		<node id="1" name="Question Answering" qualified_name="orangecontrib.nlp.widgets.owquestion_answer.OWQuestionAnswer" project_name="orange3-nlp" version="" title="Question Answering (13A)" position="(325, 0)" />
+		<node id="2" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: answers (13A)" position="(550, 0)" />
+		<node id="3" name="Text Generator" qualified_name="orangecontrib.nlp.widgets.owtext_generator.OWTextGenerator" project_name="orange3-nlp" version="" title="Text Generator: gpt2 (13B)" position="(325, 200)" />
+		<node id="4" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: completions (13B)" position="(550, 200)" />
+		<node id="5" name="Text Generator" qualified_name="orangecontrib.nlp.widgets.owtext_generator.OWTextGenerator" project_name="orange3-nlp" version="" title="Text Generator: phi4-mini (13C)" position="(325, 400)" />
+		<node id="6" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: generated answers (13C)" position="(550, 400)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="2" source_node_id="3" sink_node_id="4" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="3" source_node_id="0" sink_node_id="5" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="4" source_node_id="5" sink_node_id="6" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/markdown" rect="(700.0, 180.0, 330.0, 140.0)" font-family="Sans Serif" font-size="16">*Chapter 13. 13A: select a passage in Question Answering and ask a question (tick **All documents** to ask every passage). 13B: no input; change the prompt, temperature and samples. 13C: the question is written in the prompt template; edit it and press Generate.*</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASV1AEAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMQS9o
+b21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvcWEtcGFzc2Fn
+ZXMudGFilGGME3NhdmVkV2lkZ2V0R2VvbWV0cnmUQ0IB2dDLAAMAAAAAAtYAAAFJAAAElQAAAp4A
+AALWAAABSQAABJUAAAKeAAAAAAAAAAAHgAAAAtYAAAFJAAAElQAAAp6UjAtfX3ZlcnNpb25fX5RL
+AowQY29udGV4dF9zZXR0aW5nc5RdlIwVb3Jhbmdld2lkZ2V0LnNldHRpbmdzlIwHQ29udGV4dJST
+lCmBlH2UKIwGdmFsdWVzlH2UKIwIbGFuZ3VhZ2WUjAJlbpRK/v///4aUjA50aXRsZV92YXJpYWJs
+ZZSMB1N1YmplY3SUS2eGlIwKdXNlZF9hdHRyc5RdlIwHUGFzc2FnZZRLZ4aUYUr9////hpRoB0sC
+dYwKYXR0cmlidXRlc5R9lIwFbWV0YXOUfZQoaBVLA2gZSwN1jA5kb2N1bWVudHNfaGFzaJSKEEx2
+Q1vIahKIoeofrhUSnlloEWgSdWJhdS4=
+</properties>
+		<properties node_id="1" format="literal">{'all_documents': True, 'controlAreaVisible': True, 'current_row': 2, 'question': 'Who won the Nobel Prize in Literature?', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\r\x00\x00\x01O\x00\x00\x0cH\x00\x00\x03b\x00\x00\t\r\x00\x00\x01o\x00\x00\x0cH\x00\x00\x03b\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\r\x00\x00\x01o\x00\x00\x0cH\x00\x00\x03b', '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\n\xb7\x00\x00\x01"\x00\x00\x0c\xe6\x00\x00\x02#\x00\x00\n\xb7\x00\x00\x01B\x00\x00\x0c\xe6\x00\x00\x02#\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\n\xb7\x00\x00\x01B\x00\x00\x0c\xe6\x00\x00\x02#', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'backend': 'Hugging Face', 'controlAreaVisible': True, 'hf_model': 'gpt2', 'max_new_tokens': 30, 'ollama_host': 'localhost', 'ollama_model': 'phi4-mini:latest', 'ollama_port': 11434, 'prompt': 'NASA was established in', 'samples': 3, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb', 'seed': 42, 'temperature': 0.7, 'top_p': 0.9, 'use_seed': True, '__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\n \x00\x00\x01[\x00\x00\x0cb\x00\x00\x02\x1e\x00\x00\n \x00\x00\x01{\x00\x00\x0cb\x00\x00\x02\x1e\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\n \x00\x00\x01{\x00\x00\x0cb\x00\x00\x02\x1e', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="5" format="literal">{'backend': 'Ollama', 'controlAreaVisible': True, 'hf_model': 'gpt2', 'max_new_tokens': 60, 'ollama_host': 'localhost', 'ollama_model': 'phi4-mini:latest', 'ollama_port': 11434, 'prompt': 'Answer the question using only the passage. If the passage does not contain the answer, say so.\n\nPassage: {Passage}\n\nQuestion: Who discovered penicillin?\nAnswer:', 'samples': 1, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb', 'seed': 42, 'temperature': 0.0, 'top_p': 0.9, 'use_seed': False, '__version__': 1}</properties>
+		<properties node_id="6" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\x0c\x00\x00\x01(\x00\x00\x0c\xe5\x00\x00\x02.\x00\x00\t\x0c\x00\x00\x01H\x00\x00\x0c\xe5\x00\x00\x02.\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\x0c\x00\x00\x01H\x00\x00\x0c\xe5\x00\x00\x02.', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>
