@@ -48,7 +48,7 @@ Office Hours: [Day and Time]
 
 - **Prerequisites**: Basic understanding of data science concepts, generally in tandem with classroom instruction.
 - **Tools**: Orange Data Mining (Version 3.x), Python, and additional NLP packages as needed.
-- **Software**: All exercises are designed to be run in Orange, with custom widgets provided for advanced NLP tasks. For the LLM portions, a system or server capable of running Ollama with the phi model is required.
+- **Software**: All exercises are designed to be run in Orange, with custom widgets provided for advanced NLP tasks. For the LLM portions, a system or server capable of running Ollama with the phi4-mini model is required.
 
 ---
 

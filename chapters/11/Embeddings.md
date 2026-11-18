@@ -1,145 +1,120 @@
-# Chapter 11: Word Embeddings and Vector Representations
+# Chapter 11: Embeddings: Meaning as Position
 
 ## Learning Objectives
 
 By the end of this chapter, you will be able to:
 
-- Understand why word embeddings are used instead of one-hot or count-based vectors.
-- Explore how word embeddings group similar words together in space.
-- Use Orange to visualize pre-trained word vectors.
-- Apply embeddings to cluster or compare words and documents based on meaning.
-- Interpret vector relationships through interactive plots and similarity tools.
+- Explain why counting words cannot capture what words mean.
+- Describe an embedding as a point in space, where nearby points have similar meanings.
+- Embed a small set of words or short sentences in Orange and read the resulting map of clusters and outliers.
+- Measure how close two embeddings are using distance.
+- Recognize the limits of embeddings: they depend on the model, they can place opposites close together, and they struggle with words that have more than one meaning.
 
 ---
 
-## 11.1 Why Word Embeddings?
+## 11.1 Why Counting Words Is Not Enough
 
-Traditional models like bag-of-words or one-hot encodings treat each word as a unique, unrelated symbol. This has several drawbacks:
+In earlier chapters we turned text into numbers by counting words (Bag of Words and TF-IDF). Counting works surprisingly well for sorting news into categories, but it has a blind spot: to a counting model, every word is an unrelated symbol.
 
-- **No sense of similarity** between words (e.g., "cat" and "kitten" are unrelated in a one-hot encoding).
-- **Sparse and high-dimensional** data that’s inefficient for modeling.
+Consider two sentences that mean the same thing:
+
+> The dog chased the cat.
+> My hound pursued a kitten.
+
+They share no content words, so a bag of words sees them as having nothing in common. The model has no way to know that *dog* and *hound* are nearly the same thing.
 
 ![Orange workflow with 2 sentences that mean the same thing, but with using Bag of Words, have no similarity](hound-and-kitty-workflow-datatable.png)
 
-> Think of embeddings like a map of words: words that mean similar things are near each other on the map.
+Counting also creates very wide, mostly empty tables: one column for every word in the vocabulary, almost all zeros.
 
-After applying embedding, and including a third, unrelated example, you can see how the embedding bring similiar sentences together.
+> 🧠 **Think of it this way:** a bag of words is like a filing cabinet with one drawer per word. Nothing tells you that the "dog" drawer and the "hound" drawer belong near each other.
 
-![Orange workflow with 3 example documents, embedding, and t-SNE](embedding-workflow.png)  
+---
+
+## 11.2 What Is an Embedding?
+
+An **embedding** replaces each piece of text with a short list of numbers, called a **vector**. You can think of those numbers as coordinates that place the text on a map. The key property is:
+
+> **Texts with similar meanings get nearby positions on the map.**
+
+A real map needs two numbers (latitude and longitude). The embedding model we use, SBERT (`all-MiniLM-L6-v2`), uses 384 numbers per text. In Orange these appear as columns named `emb_0`, `emb_1`, ... `emb_383`. We cannot draw 384 dimensions, so we will squeeze them down to two later in the chapter.
+
+### Where do the numbers come from?
+
+Embedding models are trained on enormous amounts of text. They learn from a simple idea: *words that appear in similar contexts have similar meanings.* "Dog" and "hound" show up near words like *barked*, *leash*, and *tail*, so the model gives them similar vectors. Nobody tells the model what a dog is.
+
+### Words, sentences, and documents
+
+- **Word embeddings** (such as Word2Vec and GloVe) give each word one fixed position, no matter how it is used.
+- **Sentence embeddings** (such as SBERT) read a whole sentence and produce a position that depends on the context of every word.
+
+This chapter focuses on small pieces of text: single words and short sentences. Chapter 12 scales up to paragraphs and whole documents.
+
+After embedding a third, unrelated sentence, the two related sentences land close together and the unrelated one lands far away:
+
+![Orange workflow with 3 example documents, embedding, and t-SNE](embedding-workflow.png)
 
 ![Orange t-SNE view of 3 example documents, 2 related, and 1 distinct](embedding-distance.png)
 
-**Word embeddings** solve this by placing words in a continuous vector space where:
+---
 
-- Similar words are **closer together**.
-- Directions in space encode **semantic relationships**.
+## 11.3 Reading the Map
 
-**Sentence embeddings** go a step further and capture the context of how the words are combined into a sentence. This works well for finding paraphrasing of the same concept.
+### Squeezing 384 dimensions into 2
 
-**Document embeddings** try to capture the overall context of a document, often loosing specific sentence-level detail.  This is powerful for finding related documents that have some similarity in topic or purpose.
+To look at embeddings, we use **t-SNE**, a method that projects the high-dimensional vectors onto a flat plot while trying to keep neighbors together. Keep three cautions in mind:
 
-> While the technologies underpinning these models are facinating, it is easiest to organize the algorithms by purpose.
+- **Nearby points are meaningful; far-apart points are less so.** t-SNE preserves local neighborhoods well but can distort the distances between distant groups.
+- **The axes mean nothing.** "Left" and "up" are not meanings.
+- **Results can change between runs.** Rerunning t-SNE can rotate or rearrange the picture. Look for which items stay together, not for exact positions.
+
+### Measuring "close"
+
+To measure closeness without a picture, we compare the vectors directly. **Cosine distance** compares the *direction* the two vectors point:
+
+- distance **0** means the vectors point the same way (very similar meaning)
+- distance near **1** means they are unrelated
+- cosine distance = 1 − cosine similarity
+
+Orange's *Distances* widget calculates this for every pair of items when you choose **Cosine**.
 
 ---
 
-## 11.2 Common Embedding Models and Their Uses
+## 11.4 Embedding Text in Orange
 
-Text embedding models turn words, sentences, or documents into numerical vectors. These vectors are used in many NLP tasks. Below are common use cases and which models are good fits for each.
+These widgets work together:
 
-### 🔍 1. Keyword & Semantic Search
+| Widget | What it does |
+|--------|--------------|
+| **Corpus** | Loads a dataset and lets you choose which column is the text to embed. |
+| **SBERT Embedder** | Provides the SBERT model. It does not embed anything by itself; it hands the model to *Text Embedder*. The model downloads the first time you use it. |
+| **Text Embedder** | Applies the connected model to every row and adds the `emb_*` columns. |
+| **t-SNE** | Squeezes the vectors down to two dimensions for plotting. |
+| **Distances** | Calculates distances between rows (choose Cosine). |
+| **Hierarchical Clustering** | Groups rows by distance and draws a tree (dendrogram). |
 
-Use when: You want to match a user query to the most relevant document or passage.
+The wiring is always the same: *Corpus* → *Text Embedder* ← *SBERT Embedder*, then *Text Embedder* → *t-SNE*.
 
-**Recommended Models:**
-
-- **E5 (e.g., `e5-small-v2`)** – Trained specifically for search tasks using "query:" and "passage:" prompts.  
-- **OpenAI's `text-embedding-ada-002`** – High-quality embeddings (requires API).  
-- **SBERT models (e.g., `all-MiniLM-L6-v2`)** – Fast, effective for short queries and passages.  
-- **nomic-embed-text** – Open-source alternative to commercial APIs with strong semantic search performance.
-
-**Why**: These models capture *meaning* well, not just keywords, so they can match synonyms or related ideas.
-
-
-### 📚 2. Document Clustering & Topic Modeling
-
-Use when: You want to group similar texts together automatically (e.g., news articles, support tickets).
-
-**Recommended Models:**
-
-- **SBERT models** – Offer dense embeddings ideal for clustering.  
-- **E5** – Produces well-separated embeddings useful for grouping.  
-- **nomic-embed-text** – High-dimensional embeddings good for unsupervised clustering.  
-- **Doc2Vec** – Simpler model, can still be used for clustering longer texts.  
-
-**Why**: You need embeddings that place related documents close together in vector space.
-
-### 🧠 3. Text Classification (e.g., spam detection, sentiment analysis)
-
-Use when: You want to label documents with categories based on their content.
-
-**Recommended Models:**
-
-- **SBERT models** – Good for short to medium text inputs.  
-- **E5** – Strong zero-shot classification with prompt tuning.  
-- **Universal Sentence Encoder (USE)** – Easy to use for general tasks.  
-
-**Why**: These embeddings can be used directly as features for machine learning classifiers.
-
-### 🧾 4. Semantic Similarity (e.g., duplicate detection, paraphrase identification)
-
-Use when: You want to know if two texts mean the same thing.
-
-**Recommended Models:**
-
-- **SBERT models** – Trained specifically for this task.  
-- **InferSent** – Earlier model, simple and interpretable.  
-- **E5** – Also works well when texts are framed appropriately.  
-
-**Why**: These models are trained to measure *meaning overlap* rather than exact word matching.
-
-### 🧰 5. General-Purpose Embeddings (All-rounder models)
-
-Use when: You're not sure what task you're doing yet, or want a flexible model.
-
-**Recommended Models:**
-
-- **SBERT (`all-MiniLM-L6-v2`)** – Balanced performance and speed.  
-- **nomic-embed-text** – Open and versatile, suitable for search, clustering, and more.  
-- **USE** – Google’s general-purpose model with multilingual support.  
-- **OpenAI embeddings** – Strong across most tasks but proprietary.  
-
-### Summary Table
-
-| Task                      | Best Model Types                            |
-|---------------------------|---------------------------------------------|
-| Keyword / Semantic Search | E5, OpenAI, SBERT, nomic-embed-text         |
-| Document Clustering       | SBERT, E5, nomic-embed-text, Doc2Vec        |
-| Text Classification       | SBERT, E5, USE                              |
-| Semantic Similarity       | SBERT, InferSent, E5                        |
-| General Use               | SBERT, nomic-embed-text, USE, OpenAI        |
+> 💡 The datasets in this chapter are small on purpose, so you can look at every point and explain why it landed where it did.
 
 ---
 
-## 11.3 Using Text Embeddings in Orange
+## 11.5 The Limits of Embeddings
 
-With your custom Orange widgets, the following tools will be available:
+Embeddings feel like magic, so it is important to know where they fail.
 
-### Widgets Used
-
-- **Create Corpus**: Create a corpus for exploration.
-- **SBERT Embedder**: Provides an embedder model for sentence-based embedding.
-- **Text Embedder**: Uses an embedder model to perfom embedding on a corpus of text.
-- **t-SNE**: Visualizes embedding vectors in 2D using t-SNE.
+1. **They depend on the model and its training data.** A different model gives a different map, and even the size of the "close" numbers changes from model to model. Compare *rankings* (which items are nearest), not absolute numbers.
+2. **Opposites can land close together.** *Good* and *bad* are opposites, yet they appear in the same kinds of sentences ("The food was ___"), so the model places them near each other. Embeddings capture *relatedness* and *topic*, not necessarily *agreement*.
+3. **Words with several meanings are ambiguous.** The word *bank* can mean a place for money or the side of a river. A single word on its own has only one position, so it cannot choose. Sentence models help by using context: "I deposited money at the bank" and "We picnicked on the river bank" land in different places. The separation is real but not perfect.
+4. **They reflect the text they were trained on,** including its gaps and biases.
 
 ---
 
-## Lab Exercise 11A: Explore Embedding Space
+## Lab Exercise 11A: A First Map
 
-**Goal**: Visualize word clusters and similarities.
+**Goal**: See whether embeddings place related words together.
 
-**Steps**:
-
-1. Use *Corpus* to load the food-and-country corpus.
+**Dataset**: `food-and-country.tab` (4 foods and 4 countries).
 
 | Type | Word |
 |------|------|
@@ -152,58 +127,121 @@ With your custom Orange widgets, the following tools will be available:
 | country | mexico |
 | country | usa |
 
-2. Connect the new corpus to *Text Embedder*
-3. Connect an *SBERT Embedder* into the *Text Embedder*
-4. Connect the *Text Embedder* into *t-SNE*.
+**Steps**:
+
+1. Use *Corpus* to load `food-and-country.tab`. Make sure `Word` is the text feature.
+2. Add *Text Embedder* and connect the corpus to it.
+3. Add an *SBERT Embedder* and connect it to the *Embedder* input of *Text Embedder*.
+4. Connect *Text Embedder* to *t-SNE*. Color the points by `Type` and show the `Word` as labels.
+
+![t-SNE map of 4 foods and 4 countries, colored by type](11A-tsne.png)
 
 **Questions**:
 
-- Do semantically related words form tight clusters?
-- Are there words that appear far from where you expect? Why?
+- Do foods and countries form separate groups?
+- Pizza and Italy go together in your mind. Are they close on the map? What does that tell you about what the model means by "similar"?
+- Rerun t-SNE. What stayed the same? What changed?
 
 ---
 
 ## Lab Exercise 11B: Group Words by Category
 
-**Goal**: Use embeddings to group words into categories without labeling them.
+**Goal**: Use embeddings to find groups in a bigger set of words, and notice the words that do not fit.
+
+**Dataset**: `word-categories.tab` (56 words: animals, professions, emotions, foods, and countries, plus six words in a group called `ambiguous`: *apple, turkey, jaguar, python, orange, mercury*).
 
 **Steps**:
 
-1. Load a word list with mixed categories (e.g., animals, professions, emotions).
-2. Pass it through *Word Embeddings* and then to a *Hierarchical Clustering* widget.
-3. Visualize the dendrogram and interpret which clusters were formed.
+1. Build the same *Corpus* → *Text Embedder* ← *SBERT Embedder* → *t-SNE* workflow, with `Word` as the text. Color by `Category`.
+2. Add *Distances* after *Text Embedder* (set the metric to **Cosine**, compare **rows**).
+3. Connect *Distances* to *Hierarchical Clustering*. Show `Word` as the label and color by `Category`.
 
-**Optional**: Use *Distance Map* or *Silhouette Score* to evaluate cluster tightness.
+![t-SNE map of 56 words colored by category](11B-tsne.png)
+
+![Dendrogram of the 56 words colored by category](11B-dendrogram.png)
+
+**Questions**:
+
+- Which categories form the tightest groups? Which are loosest?
+- Where did the six `ambiguous` words go? Explain each one. Why did *turkey* end up near the countries?
+- Do the t-SNE picture and the dendrogram agree about which words belong together?
+
+> 📝 **Optional**: Cut the dendrogram into 5 clusters. How well do they match the 5 real categories?
+
+---
+
+## Lab Exercise 11C: How Close Is "Close"?
+
+**Goal**: Measure distances and compare synonyms, opposites, related words, and unrelated words.
+
+**Dataset**: `similar-and-opposite.tab` (16 word pairs, two rows per pair). The `Relation` column tells you whether a pair is a `synonym`, `antonym`, `related`, or `unrelated`.
+
+**Steps**:
+
+1. Embed the `Word` column as before and send the result to *Distances* (**Cosine**, rows).
+2. Open the result in a *Distance Matrix* widget.
+3. Look up the distance for at least two pairs from each `Relation` (for example *good/great*, *good/bad*, *doctor/hospital*, *cat/car*). Record them in a table.
+
+![Distance Matrix of word pairs using cosine distance](11C-distance-matrix.png)
+
+**Questions**:
+
+- Which type of pair is closest on average? Which is farthest?
+- Are opposites (*good/bad*) closer or farther than words that are merely related (*doctor/hospital*)?
+- Why might a model treat opposites as similar? (Hint: think about where each word appears in sentences.)
+
+---
+
+## Lab Exercise 11D: One Word, Two Meanings
+
+**Goal**: See how context helps, and where it does not.
+
+**Dataset**: `bank-senses.tab` (12 sentences using *bank*, *bat*, and *spring*, with two meanings each). The `Sense` column gives the meaning, such as `bank-money` or `bank-river`.
+
+**Steps**:
+
+1. Embed the `Sentence` column with *SBERT Embedder* and *Text Embedder*.
+2. Send the result to *t-SNE*. Color by `Sense` and label points with the sentence.
+
+![t-SNE map of sentences colored by word sense](11D-tsne.png)
+
+**Questions**:
+
+- Do the two meanings of *bank* separate? What about *spring*?
+- Is *bat* as clearly separated as *bank*? What could make it harder?
+- Write one more pair of sentences with an ambiguous word of your own. Predict where they will land, then test it.
+
+> 📝 **Reflection:** If a single word has only one position, but a sentence gets a position that depends on context, why is that an advantage? What would you lose if you embedded only single words?
 
 ---
 
 ## Comprehension Questions
 
-1. What does it mean when two words are "close" in embedding space?
-2. How is a word embedding different from a one-hot vector?
-3. Why might "good" and "bad" appear near each other in a plot?
-4. What are some practical tasks where embeddings are helpful?
-5. In what ways can visualizing word vectors help guide your analysis?
+1. What does it mean when two texts are "close" in embedding space?
+2. How is an embedding different from a bag-of-words count vector?
+3. Why might *good* and *bad* appear near each other on a map?
+4. Why should you not trust the exact distances between far-apart groups on a t-SNE plot?
+5. Why is the word *bank* a problem for word-level embeddings, and how do sentence-level embeddings help?
+6. Name one practical task where embeddings help, and one where you would still use bag of words.
 
 ---
 
 ## Key Terms
 
-- Word Embedding
-- Semantic Similarity
-- Vector Representation
-- Word2Vec
-- GloVe
-- Embedding Space
-- t-SNE / PCA
-- Clustering
+- Embedding
+- Vector
+- Embedding space
+- Semantic similarity
+- Cosine distance
+- t-SNE
+- Static vs. contextual embeddings
+- Ambiguity (polysemy)
 
 ---
 
 ## Notes
 
+![The complete word-embeddings workflow for exercises 11A–11D](11-workflow-overview.png)
+
 - Save your workflow as `word-embeddings.ows`.
-- The next chapter will introduce document embeddings and sentence-level semantic search.
-
----
-
+- Chapter 12 scales up from words and short sentences to paragraphs and whole documents, and compares embedding models.

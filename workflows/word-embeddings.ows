@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="SBERT Embedder" qualified_name="orangecontrib.nlp.widgets.owmodel_sbert.OWSBERTEmbedder" project_name="orange3-nlp" version="" title="SBERT Embedder" position="(100, 300)" />
+		<node id="1" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="11A food-and-country" position="(100, 0)" />
+		<node id="2" name="Text Embedder" qualified_name="orangecontrib.nlp.widgets.owtext_embedder.OWTextEmbedder" project_name="orange3-nlp" version="" title="Text Embedder A" position="(325, 0)" />
+		<node id="3" name="t-SNE" qualified_name="Orange.widgets.unsupervised.owtsne.OWtSNE" project_name="Orange3" version="" title="t-SNE A" position="(550, 0)" />
+		<node id="4" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="11B word-categories" position="(100, 150)" />
+		<node id="5" name="Text Embedder" qualified_name="orangecontrib.nlp.widgets.owtext_embedder.OWTextEmbedder" project_name="orange3-nlp" version="" title="Text Embedder B" position="(325, 150)" />
+		<node id="6" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="11C similar-and-opposite" position="(100, 450)" />
+		<node id="7" name="Text Embedder" qualified_name="orangecontrib.nlp.widgets.owtext_embedder.OWTextEmbedder" project_name="orange3-nlp" version="" title="Text Embedder C" position="(325, 450)" />
+		<node id="8" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="11D bank-senses" position="(100, 600)" />
+		<node id="9" name="Text Embedder" qualified_name="orangecontrib.nlp.widgets.owtext_embedder.OWTextEmbedder" project_name="orange3-nlp" version="" title="Text Embedder D" position="(325, 600)" />
+		<node id="10" name="t-SNE" qualified_name="Orange.widgets.unsupervised.owtsne.OWtSNE" project_name="Orange3" version="" title="t-SNE D" position="(550, 600)" />
+		<node id="11" name="t-SNE" qualified_name="Orange.widgets.unsupervised.owtsne.OWtSNE" project_name="Orange3" version="" title="t-SNE B" position="(550, 100)" />
+		<node id="12" name="Distances" qualified_name="Orange.widgets.unsupervised.owdistances.OWDistances" project_name="Orange3" version="" title="Distances B (cosine)" position="(550, 200)" />
+		<node id="13" name="Hierarchical Clustering" qualified_name="Orange.widgets.unsupervised.owhierarchicalclustering.OWHierarchicalClustering" project_name="Orange3" version="" title="Hierarchical Clustering B" position="(775, 200)" />
+		<node id="14" name="Distances" qualified_name="Orange.widgets.unsupervised.owdistances.OWDistances" project_name="Orange3" version="" title="Distances C (cosine)" position="(550, 450)" />
+		<node id="15" name="Distance Matrix" qualified_name="Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix" project_name="Orange3" version="" title="Distance Matrix C" position="(775, 450)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="1" sink_node_id="2" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="1" source_node_id="0" sink_node_id="2" source_channel="Embedder" sink_channel="Embedder" enabled="true" source_channel_id="embedder" sink_channel_id="embedder" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Embedded Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="3" source_node_id="4" sink_node_id="5" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="4" source_node_id="0" sink_node_id="5" source_channel="Embedder" sink_channel="Embedder" enabled="true" source_channel_id="embedder" sink_channel_id="embedder" />
+		<link id="5" source_node_id="6" sink_node_id="7" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="6" source_node_id="0" sink_node_id="7" source_channel="Embedder" sink_channel="Embedder" enabled="true" source_channel_id="embedder" sink_channel_id="embedder" />
+		<link id="7" source_node_id="8" sink_node_id="9" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="8" source_node_id="0" sink_node_id="9" source_channel="Embedder" sink_channel="Embedder" enabled="true" source_channel_id="embedder" sink_channel_id="embedder" />
+		<link id="9" source_node_id="9" sink_node_id="10" source_channel="Embedded Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="10" source_node_id="5" sink_node_id="11" source_channel="Embedded Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="11" source_node_id="5" sink_node_id="12" source_channel="Embedded Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="12" source_node_id="12" sink_node_id="13" source_channel="Distances" sink_channel="Distances" enabled="true" source_channel_id="distances" sink_channel_id="distances" />
+		<link id="13" source_node_id="7" sink_node_id="14" source_channel="Embedded Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="14" source_node_id="14" sink_node_id="15" source_channel="Distances" sink_channel="Distances" enabled="true" source_channel_id="distances" sink_channel_id="distances" />
+	</links>
+	<annotations>
+		<text id="0" type="text/markdown" rect="(700.0, -10.0, 300.0, 110.0)" font-family="Sans Serif" font-size="16">*Chapter 11. One shared **SBERT Embedder** feeds all four exercises. In each Corpus, check that the text feature is `Word` (11D: `Sentence`).*</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="1" format="pickle">gASVhgAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMRi9ob21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvZm9vZC1hbmQtY291bnRyeS50YWKUYYwLX192ZXJzaW9uX1+USwJ1Lg==</properties>
+		<properties node_id="4" format="pickle">gASVhQAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMRS9ob21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvd29yZC1jYXRlZ29yaWVzLnRhYpRhjAtfX3ZlcnNpb25fX5RLAnUu</properties>
+		<properties node_id="6" format="pickle">gASVigAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMSi9ob21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvc2ltaWxhci1hbmQtb3Bwb3NpdGUudGFilGGMC19fdmVyc2lvbl9flEsCdS4=</properties>
+		<properties node_id="8" format="pickle">gASVgQAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMQS9ob21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvYmFuay1zZW5zZXMudGFilGGMC19fdmVyc2lvbl9flEsCdS4=</properties>
+		<properties node_id="12" format="pickle">gASVUAAAAAAAAAB9lCiMBGF4aXOUSwCMCW1ldHJpY19pZJRLBIwKYXV0b2NvbW1pdJSIjBJjb250cm9sQXJlYVZpc2libGWUiIwLX192ZXJzaW9uX1+USwR1Lg==</properties>
+		<properties node_id="14" format="pickle">gASVUAAAAAAAAAB9lCiMBGF4aXOUSwCMCW1ldHJpY19pZJRLBIwKYXV0b2NvbW1pdJSIjBJjb250cm9sQXJlYVZpc2libGWUiIwLX192ZXJzaW9uX1+USwR1Lg==</properties>
+	</node_properties>
+</scheme>

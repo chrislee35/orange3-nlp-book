@@ -1,0 +1,15 @@
+Sense	Word	Sentence
+discrete	string	string
+class	meta	meta include=True title=True
+bank-money	bank	I deposited my paycheck at the bank.
+bank-money	bank	The bank approved her loan application.
+bank-river	bank	We had a picnic on the grassy bank of the river.
+bank-river	bank	Fish were hiding under the muddy bank.
+bat-animal	bat	A bat flew out of the cave at dusk.
+bat-animal	bat	The bat hangs upside down and sleeps all day.
+bat-sports	bat	She swung the bat and hit a home run.
+bat-sports	bat	He gripped the wooden bat and waited for the pitch.
+spring-season	spring	The flowers bloom every spring.
+spring-season	spring	Birds return north when spring arrives.
+spring-coil	spring	The mattress spring squeaked when I sat down.
+spring-coil	spring	A coiled spring pushed the lid open.
