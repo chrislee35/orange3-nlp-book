@@ -23,12 +23,21 @@ WIDGETS = {
     "t-SNE": ("Orange.widgets.unsupervised.owtsne.OWtSNE", "Orange3"),
     "Distances": ("Orange.widgets.unsupervised.owdistances.OWDistances", "Orange3"),
     "Hierarchical Clustering": ("Orange.widgets.unsupervised.owhierarchicalclustering.OWHierarchicalClustering", "Orange3"),
+    "Datasets": ("Orange.widgets.data.owdatasets.OWDataSets", "Orange3"),
+    "Data Table": ("Orange.widgets.data.owtable.OWTable", "Orange3"),
+    "Neighbors": ("Orange.widgets.data.owneighbors.OWNeighbors", "Orange3"),
+    "Corpus Viewer": ("orangecontrib.text.widgets.owcorpusviewer.OWCorpusViewer", "Orange3-Text"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
 LINKS = {
     ("Corpus", "Text Embedder"): (("Corpus", "corpus"), ("Corpus", "data")),
     ("SBERT Embedder", "Text Embedder"): (("Embedder", "embedder"), ("Embedder", "embedder")),
+    ("Datasets", "Corpus"): (("Data", "data"), ("Data", "data")),
+    ("Text Embedder", "Neighbors"): (("Embedded Corpus", "data"), ("Data", "data")),
+    ("Text Embedder", "Data Table"): (("Embedded Corpus", "data"), ("Data", "data")),
+    ("Data Table", "Neighbors"): (("Selected Data", "selected_data"), ("Reference", "reference")),
+    ("Neighbors", "Corpus Viewer"): (("Neighbors", "data"), ("Corpus", "corpus")),
     ("Text Embedder", "t-SNE"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Text Embedder", "Distances"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Distances", "Hierarchical Clustering"): (("Distances", "distances"), ("Distances", "distances")),
@@ -108,6 +117,47 @@ def word_embeddings():
     return build(nodes, links, [(note, "(700.0, -10.0, 300.0, 110.0)")])
 
 
+def document_embeddings():
+    """Chapter 12: 12A/12B/12C on BBC3, 12D on movie reviews."""
+    D = {"axis": ROWS, "metric_id": COSINE, "autocommit": True, "__version__": 4}
+    nodes = [
+        ("ds", "Datasets", "Datasets: BBC3", (100, 150),
+         {"selected_id": "core/BBC3.tab", "controlAreaVisible": True}),
+        ("sbert", "SBERT Embedder", "SBERT Embedder", (250, 300), {}),
+        # 12A / 12C: Content
+        ("corpus", "Corpus", "BBC3 Corpus (Content)", (250, 0), {}),
+        ("emb", "Text Embedder", "Text Embedder (Content)", (400, 0), {}),
+        ("tsne", "t-SNE", "t-SNE Content", (575, -75), {}),
+        ("dist", "Distances", "Distances (cosine)", (575, 0), D),
+        ("hc", "Hierarchical Clustering", "Hierarchical Clustering", (750, 0), {}),
+        ("table", "Data Table", "Data Table (pick reference)", (575, 75), {}),
+        ("nb", "Neighbors", "Neighbors (cosine, 5)", (750, 75),
+         {"n_neighbors": 5, "limit_neighbors": True, "metric_id": COSINE,
+          "include_reference": False, "auto_apply": True, "controlAreaVisible": True}),
+        ("cv", "Corpus Viewer", "Corpus Viewer", (925, 75), {}),
+        # 12B: Title
+        ("corpust", "Corpus", "BBC3 Corpus (Title)", (250, 225), {}),
+        ("embt", "Text Embedder", "Text Embedder (Title)", (400, 225), {}),
+        ("tsnet", "t-SNE", "t-SNE Title", (575, 225), {}),
+        # 12D: movie reviews
+        corpus("mr", "movie-reviews.tab", "movie-reviews (Review)", 450),
+        ("embm", "Text Embedder", "Text Embedder (Reviews)", (400, 450), {}),
+        ("tsnem", "t-SNE", "t-SNE Reviews", (575, 450), {}),
+        ("distm", "Distances", "Distances Reviews (cosine)", (575, 525), D),
+        ("hcm", "Hierarchical Clustering", "Hierarchical Clustering Reviews", (750, 525), {}),
+    ]
+    links = [("ds", "corpus"), ("ds", "corpust"),
+             ("corpus", "emb"), ("sbert", "emb"), ("emb", "tsne"),
+             ("emb", "dist"), ("dist", "hc"),
+             ("emb", "table"), ("emb", "nb"), ("table", "nb"), ("nb", "cv"),
+             ("corpust", "embt"), ("sbert", "embt"), ("embt", "tsnet"),
+             ("mr", "embm"), ("sbert", "embm"), ("embm", "tsnem"),
+             ("embm", "distm"), ("distm", "hcm")]
+    note = ("*Chapter 12. In each Corpus, set the text feature: `Content` (12A, 12C), `Title` (12B), "
+            "`Review` (12D). Color t-SNE by `category` or `Sentiment`. 12C: select a row in the Data Table.*")
+    return build(nodes, links, [(note, "(700.0, 300.0, 330.0, 120.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -127,7 +177,8 @@ def check(path):
 
 
 # name -> (builder, output file under workflows/).  Add new workflows here.
-WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows")}
+WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
+             "document-embeddings": (document_embeddings, "document-embeddings.ows")}
 
 if __name__ == "__main__":
     import sys

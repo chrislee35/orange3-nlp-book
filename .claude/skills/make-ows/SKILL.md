@@ -29,3 +29,8 @@ Output goes to `workflows/`. The user opens the file in Orange and reports what'
 - Put annotations in an empty corner (e.g. top right), never in the middle: links and nodes are drawn over/under them.
 - Give every node a distinct title (e.g. "Distances B (cosine)").
 - Corpus paths are absolute; mention that they need re-pointing on another machine.
+
+## Widget gotchas
+- *Data Table* sends **all rows** when nothing is selected. Wired into *Neighbors* as Reference, this shows "Every data instance is same as some reference" until a row is selected. Expected, and mentioned in ch12 12C.
+- Titles are not settings. A node titled "(cosine, 5)" still runs at widget defaults unless the settings dict sets them (Neighbors: `n_neighbors`, `metric_id` 4=Cosine in its own metric table). Check each titled option actually appears in the settings.
+- *Corpus* uses **all** string columns as text by default (BBC3: Title + Content joined), and *Text Embedder* embeds that joined text. Two branches meant to embed different columns give identical results unless each Corpus's "Used text features" is set. The choice is a context setting the script cannot preset, so state it in the chapter steps and the workflow note.
