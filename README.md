@@ -12,7 +12,7 @@ Welcome to **Natural Language Processing (NLP) with Orange: A Lab-Based Approach
 - **Classification and Clustering**
 - **Topic Modeling and Unsupervised Learning**
 - **Sentiment Analysis, Text Generation, and Question Answering**
-- **Large Language Models (LLMs) and Reference Augmented Generation (RAG)**
+- **Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG)**
 
 The course emphasizes practical, project-based learning with **real-world datasets**, offering opportunities to:
 

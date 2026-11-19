@@ -13,7 +13,7 @@ By the end of this chapter, you will be able to:
 
 ## 16.1 Capstone Project Overview
 
-The capstone project will involve working with a real-world, messy textual dataset to solve a meaningful NLP problem. You'll be required to apply both **classical methods** (e.g., text cleaning, feature extraction, and model training) and **modern techniques** like **Reference Augmented Generation (RAG)** and **Large Language Models (LLMs)**.
+The capstone project will involve working with a real-world, messy textual dataset to solve a meaningful NLP problem. You'll be required to apply both **classical methods** (e.g., text cleaning, feature extraction, and model training) and **modern techniques** like **Retrieval-Augmented Generation (RAG)** and **Large Language Models (LLMs)**.
 
 ### Key Components:
 - **Dataset Selection**
@@ -70,7 +70,7 @@ You will apply **two approaches** to solving your problem:
    - **Traditional Models**: Apply classical models like Naive Bayes, Logistic Regression, or SVMs for classification or clustering tasks.
 
 ### 2. **Modern Approaches (RAG and LLMs)**
-   - **Reference Augmented Generation (RAG)**: Build a reference database using `orange3-ollama`, perform queries with relevant context, and generate responses or summaries.
+   - **Retrieval-Augmented Generation (RAG)**: Build a reference database using `orange3-ollama`, perform queries with relevant context, and generate responses or summaries.
    - **LLM Application**: Use pre-trained models for tasks like sentiment analysis, summarization, and question answering. You can use both RAG and direct LLM methods.
 
 > **Tip**: Compare how classical methods (based on statistical learning) perform against LLMs that work by leveraging massive language knowledge.

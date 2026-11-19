@@ -26,10 +26,26 @@
 	</annotations>
 	<thumbnail />
 	<node_properties>
-		<properties node_id="0" format="pickle">gASVhwAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMRy9ob21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvY3VzdG9tZXItbWVzc2FnZXMudGFilGGMC19fdmVyc2lvbl9flEsCdS4=</properties>
-		<properties node_id="1" format="pickle">gASVbwAAAAAAAAB9lCiMDnNlbGVjdGVkX21vZGVslIwQcGhpNC1taW5pOmxhdGVzdJSMD3NlbGVjdGVkX2NvbHVtbpSMB01lc3NhZ2WUjA5wcm9tcHRfY29udGV4dJSMAJSMEmNvbnRyb2xBcmVhVmlzaWJsZZSIdS4=</properties>
-		<properties node_id="2" format="pickle">gASVtAAAAAAAAAB9lCiMDnNlbGVjdGVkX21vZGVslIwQcGhpNC1taW5pOmxhdGVzdJSMD3NlbGVjdGVkX2NvbHVtbpSMB01lc3NhZ2WUjA5wcm9tcHRfY29udGV4dJSMAJSMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjBVjbGFzc2lmaWNhdGlvbl9sYWJlbHOUXZQojAhzaGlwcGluZ5SMB2JpbGxpbmeUjAdwcm9kdWN0lIwHYWNjb3VudJRldS4=</properties>
-		<properties node_id="3" format="pickle">gASVbwAAAAAAAAB9lCiMDnNlbGVjdGVkX21vZGVslIwQcGhpNC1taW5pOmxhdGVzdJSMD3NlbGVjdGVkX2NvbHVtbpSMB01lc3NhZ2WUjA5wcm9tcHRfY29udGV4dJSMAJSMEmNvbnRyb2xBcmVhVmlzaWJsZZSIdS4=</properties>
-		<properties node_id="5" format="pickle">gASV+gAAAAAAAAB9lCiMB2JhY2tlbmSUjAZPbGxhbWGUjAxvbGxhbWFfbW9kZWyUjBBwaGk0LW1pbmk6bGF0ZXN0lIwGcHJvbXB0lIxTV3JpdGUgYSBwb2xpdGUgdHdvLXNlbnRlbmNlIHJlcGx5IGZyb20gY3VzdG9tZXIgc3VwcG9ydCB0byB0aGlzIG1lc3NhZ2U6Cgp7TWVzc2FnZX2UjAt0ZW1wZXJhdHVyZZRHP+ZmZmZmZmaMDm1heF9uZXdfdG9rZW5zlEtQjAdzYW1wbGVzlEsDjAh1c2Vfc2VlZJSIjARzZWVklEsqjBJjb250cm9sQXJlYVZpc2libGWUiHUu</properties>
+		<properties node_id="0" format="pickle">gASV4wEAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMRy9o
+b21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvY3VzdG9tZXIt
+bWVzc2FnZXMudGFilGGME3NhdmVkV2lkZ2V0R2VvbWV0cnmUQ0IB2dDLAAMAAAAAAtYAAAFJAAAE
+lQAAAp4AAALWAAABSQAABJUAAAKeAAAAAAAAAAAHgAAAAtYAAAFJAAAElQAAAp6UjAtfX3ZlcnNp
+b25fX5RLAowQY29udGV4dF9zZXR0aW5nc5RdlIwVb3Jhbmdld2lkZ2V0LnNldHRpbmdzlIwHQ29u
+dGV4dJSTlCmBlH2UKIwGdmFsdWVzlH2UKIwIbGFuZ3VhZ2WUjAJlbpRK/v///4aUjA50aXRsZV92
+YXJpYWJsZZSMB01lc3NhZ2WUS2eGlIwKdXNlZF9hdHRyc5RdlGgVS2eGlGFK/f///4aUaAdLAnWM
+CmF0dHJpYnV0ZXOUfZSMBVRvcGljlEsBc4wFbWV0YXOUfZQoaBVLA4wEVG9uZZRLAXWMDmRvY3Vt
+ZW50c19oYXNolIoRl1n5kH9mL+vUSmy+OryroABoEWgSdWJhdS4=
+</properties>
+		<properties node_id="1" format="literal">{'controlAreaVisible': True, 'ollama_host': 'localhost', 'ollama_port': '11434', 'prompt_context': '', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t~\x00\x00\x00\xfa\x00\x00\x0c\xed\x00\x00\x02\xed\x00\x00\t~\x00\x00\x00\xfa\x00\x00\x0c\xed\x00\x00\x02\xed\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t~\x00\x00\x00\xfa\x00\x00\x0c\xed\x00\x00\x02\xed', 'selected_column': 'Message', 'selected_model': 'phi4-mini:latest', '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'classification_labels': ['shipping', 'billing', 'product', 'account'], 'controlAreaVisible': True, 'ollama_host': 'localhost', 'ollama_port': '11434', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\x8f\x00\x00\x00\xfa\x00\x00\x0c\xdc\x00\x00\x02\xed\x00\x00\t\x8f\x00\x00\x00\xfa\x00\x00\x0c\xdc\x00\x00\x02\xed\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\x8f\x00\x00\x00\xfa\x00\x00\x0c\xdc\x00\x00\x02\xed', 'selected_column': 'Message', 'selected_model': 'phi4-mini:latest', '__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'controlAreaVisible': True, 'ollama_host': 'localhost', 'ollama_port': '11434', 'prompt_context': '', 'savedWidgetGeometry': None, 'selected_column': 'Message', 'selected_model': 'phi4-mini:latest', '__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xfc\x00\x00\x01(\x00\x00\ri\x00\x00\x02\x83\x00\x00\t\xfc\x00\x00\x01H\x00\x00\ri\x00\x00\x02\x83\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xfc\x00\x00\x01H\x00\x00\ri\x00\x00\x02\x83', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="5" format="literal">{'backend': 'Ollama', 'controlAreaVisible': True, 'hf_model': 'gpt2', 'max_new_tokens': 80, 'ollama_host': 'localhost', 'ollama_model': 'phi4-mini:latest', 'ollama_port': 11434, 'prompt': 'Write a polite two-sentence reply from customer support to this message:\n\n{Message}', 'samples': 3, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb', 'seed': 42, 'temperature': 0.7, 'top_p': 0.9, 'use_seed': True, '__version__': 1}</properties>
+		<properties node_id="6" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xfc\x00\x00\x01(\x00\x00\x0ed\x00\x00\x02.\x00\x00\t\xfc\x00\x00\x01H\x00\x00\x0ed\x00\x00\x02.\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xfc\x00\x00\x01H\x00\x00\x0ed\x00\x00\x02.', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="7" format="literal">{'autocommit': True, 'controlAreaVisible': True, 'lilah_language': 'sl', 'liu_language': 'en', 'method_idx': 1, 'multi_language': 'en', 'savedWidgetGeometry': None, 'senti_language': 'en', '__version__': 2}</properties>
+		<properties node_id="8" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xfc\x00\x00\x01(\x00\x00\r\xf5\x00\x00\x02.\x00\x00\t\xfc\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xfc\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
 	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
 </scheme>

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="harbor-policies (Text)" position="(100, 150)" />
+		<node id="1" name="Text Chunker" qualified_name="orangecontrib.nlp.widgets.owtext_chunker.OWTextChunker" project_name="orange3-nlp" version="" title="Text Chunker (256, recursive)" position="(325, 150)" />
+		<node id="2" name="SBERT Embedder" qualified_name="orangecontrib.nlp.widgets.owmodel_sbert.OWSBERTEmbedder" project_name="orange3-nlp" version="" title="SBERT Embedder" position="(550, 300)" />
+		<node id="3" name="Text Embedder" qualified_name="orangecontrib.nlp.widgets.owtext_embedder.OWTextEmbedder" project_name="orange3-nlp" version="" title="Text Embedder (chunks)" position="(550, 150)" />
+		<node id="4" name="Reference Library" qualified_name="orangecontrib.nlp.widgets.owreference_library.OWReferenceLibrary" project_name="orange3-nlp" version="" title="Reference Library (top 3)" position="(775, 150)" />
+		<node id="5" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: retrieved excerpts (15C)" position="(1000, 50)" />
+		<node id="6" name="Ollama RAG" qualified_name="orangecontrib.nlp.widgets.owollama_rag.OWOllamaRAG" project_name="orange3-nlp" version="" title="Ollama RAG: phi4-mini (15A)" position="(1000, 250)" />
+		<node id="7" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: RAG answer (15A)" position="(1225, 250)" />
+		<node id="8" name="Text Generator" qualified_name="orangecontrib.nlp.widgets.owtext_generator.OWTextGenerator" project_name="orange3-nlp" version="" title="Text Generator: no references (15B)" position="(775, 450)" />
+		<node id="9" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: closed-book answer (15B)" position="(1000, 450)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="3" source_channel="Chunked Corpus" sink_channel="Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Embedder" sink_channel="Embedder" enabled="true" source_channel_id="embedder" sink_channel_id="embedder" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="Embedded Corpus" sink_channel="Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="4" source_node_id="2" sink_node_id="4" source_channel="Embedder" sink_channel="Embedder" enabled="true" source_channel_id="embedder" sink_channel_id="embedder" />
+		<link id="5" source_node_id="4" sink_node_id="5" source_channel="Excerpts" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="6" source_node_id="4" sink_node_id="6" source_channel="Excerpts" sink_channel="Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="7" source_node_id="6" sink_node_id="7" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="8" source_node_id="8" sink_node_id="9" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/markdown" rect="(100.0, 330.0, 380.0, 130.0)" font-family="Sans Serif" font-size="16">*Chapter 15. In Corpus, make sure only `Text` is the text feature. The Reference Library has its own query box and the Ollama RAG has its own prompt: keep them about the same question. The same SBERT Embedder must feed both Text Embedder and Reference Library.*</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASV1AEAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMRS9o
+b21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvaGFyYm9yLXBv
+bGljaWVzLnRhYpRhjBNzYXZlZFdpZGdldEdlb21ldHJ5lENCAdnQywADAAAAAALWAAABSQAABJUA
+AAKeAAAC1gAAAUkAAASVAAACngAAAAAAAAAAB4AAAALWAAABSQAABJUAAAKelIwLX192ZXJzaW9u
+X1+USwKMEGNvbnRleHRfc2V0dGluZ3OUXZSMFW9yYW5nZXdpZGdldC5zZXR0aW5nc5SMB0NvbnRl
+eHSUk5QpgZR9lCiMBnZhbHVlc5R9lCiMCGxhbmd1YWdllIwCZW6USv7///+GlIwOdGl0bGVfdmFy
+aWFibGWUjAZQb2xpY3mUS2eGlIwKdXNlZF9hdHRyc5RdlIwEVGV4dJRLZ4aUYUr9////hpRoB0sC
+dYwKYXR0cmlidXRlc5R9lIwFbWV0YXOUfZQoaBVLA2gZSwN1jA5kb2N1bWVudHNfaGFzaJSKEEgf
+i3wLLBRQWUyvg9yyoDFoEWgSdWJhdS4=
+</properties>
+		<properties node_id="1" format="literal">{'chunk_size': 256, 'chunk_strategy': 'recursive', 'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'controlAreaVisible': True, 'max_excerpts': 3, 'query': 'How long do I have to return an item?', 'savedWidgetGeometry': None, 'threshold': 0.0, '__version__': 1}</properties>
+		<properties node_id="5" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\n\xec\x00\x00\x01(\x00\x00\r\xf5\x00\x00\x02.\x00\x00\n\xec\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\n\xec\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="6" format="literal">{'controlAreaVisible': True, 'host': 'localhost', 'model': 'phi4-mini:latest', 'port': 11434, 'prompt': 'Using only the references, answer the question: How long do I have to return an item?', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\x96\x00\x00\x00\xfa\x00\x00\x0c\xd5\x00\x00\x02\xed\x00\x00\t\x96\x00\x00\x00\xfa\x00\x00\x0c\xd5\x00\x00\x02\xed\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\x96\x00\x00\x00\xfa\x00\x00\x0c\xd5\x00\x00\x02\xed', '__version__': 1}</properties>
+		<properties node_id="7" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': False, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xc5\x00\x00\x01(\x00\x00\r\xf5\x00\x00\x02.\x00\x00\t\xc5\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xc5\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="8" format="literal">{'backend': 'Ollama', 'controlAreaVisible': True, 'hf_model': 'gpt2', 'max_new_tokens': 100, 'ollama_host': 'localhost', 'ollama_model': 'phi4-mini:latest', 'ollama_port': 11434, 'prompt': 'How long do I have to return an item?', 'samples': 1, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xaa\x00\x00\x00\xec\x00\x00\x0c\xc2\x00\x00\x02\xfb', 'seed': 42, 'temperature': 0.0, 'top_p': 0.9, 'use_seed': False, '__version__': 1}</properties>
+		<properties node_id="9" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xfc\x00\x00\x01(\x00\x00\r\xf5\x00\x00\x02.\x00\x00\t\xfc\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xfc\x00\x00\x01H\x00\x00\r\xf5\x00\x00\x02.', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>

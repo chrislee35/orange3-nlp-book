@@ -33,6 +33,9 @@ WIDGETS = {
     "Ollama Text Classification": ("orangecontrib.ollama.widgets.owollama_text_classifier.OWOllamaTextClassifier", "orange3-ollama"),
     "Ollama Summarizer": ("orangecontrib.ollama.widgets.owollama_summarizer.OWOllamaSummarizer", "orange3-ollama"),
     "Sentiment Analysis": ("orangecontrib.text.widgets.owsentimentanalysis.OWSentimentAnalysis", "Orange3-Text"),
+    "Text Chunker": ("orangecontrib.nlp.widgets.owtext_chunker.OWTextChunker", "orange3-nlp"),
+    "Reference Library": ("orangecontrib.nlp.widgets.owreference_library.OWReferenceLibrary", "orange3-nlp"),
+    "Ollama RAG": ("orangecontrib.nlp.widgets.owollama_rag.OWOllamaRAG", "orange3-nlp"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -56,6 +59,13 @@ LINKS = {
     ("Ollama Summarizer", "Data Table"): (("Summarized Corpus", "out_table"), ("Data", "data")),
     ("Corpus", "Sentiment Analysis"): (("Corpus", "corpus"), ("Corpus", "corpus")),
     ("Sentiment Analysis", "Data Table"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Corpus", "Text Chunker"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("Text Chunker", "Text Embedder"): (("Chunked Corpus", "data"), ("Corpus", "data")),
+    ("Text Embedder", "Reference Library"): (("Embedded Corpus", "data"), ("Corpus", "data")),
+    ("SBERT Embedder", "Reference Library"): (("Embedder", "embedder"), ("Embedder", "embedder")),
+    ("Reference Library", "Ollama RAG"): (("Excerpts", "data"), ("Corpus", "data")),
+    ("Reference Library", "Data Table"): (("Excerpts", "data"), ("Data", "data")),
+    ("Ollama RAG", "Data Table"): (("Corpus", "data"), ("Data", "data")),
     ("Text Embedder", "t-SNE"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Text Embedder", "Distances"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Distances", "Hierarchical Clustering"): (("Distances", "distances"), ("Distances", "distances")),
@@ -232,6 +242,38 @@ def llm_tasks():
     return build(nodes, links, [(note, "(700.0, 300.0, 380.0, 150.0)")])
 
 
+RAG_QUESTION = "How long do I have to return an item?"
+RAG_PROMPT = "Using only the references, answer the question: " + RAG_QUESTION
+
+
+def rag():
+    """Chapter 15: 15A retrieval-augmented pipeline, 15B closed-book comparison, 15C inspect retrieval."""
+    nodes = [
+        corpus("kb", "harbor-policies.tab", "harbor-policies (Text)", 150),
+        ("chunk", "Text Chunker", "Text Chunker (256, recursive)", (325, 150),
+         {"chunk_size": 256, "chunk_strategy": "recursive", "controlAreaVisible": True}),
+        ("sbert", "SBERT Embedder", "SBERT Embedder", (550, 300), {}),
+        ("emb", "Text Embedder", "Text Embedder (chunks)", (550, 150), {}),
+        ("lib", "Reference Library", "Reference Library (top 3)", (775, 150),
+         {"max_excerpts": 3, "threshold": 0.0, "query": RAG_QUESTION, "controlAreaVisible": True}),
+        ("dtx", "Data Table", "Data Table: retrieved excerpts (15C)", (1000, 50), {}),
+        ("rag", "Ollama RAG", "Ollama RAG: phi4-mini (15A)", (1000, 250),
+         {"host": "localhost", "port": 11434, "model": "phi4-mini:latest", "prompt": RAG_PROMPT,
+          "controlAreaVisible": True}),
+        ("dta", "Data Table", "Data Table: RAG answer (15A)", (1225, 250), {}),
+        ("closed", "Text Generator", "Text Generator: no references (15B)", (775, 450),
+         {"backend": "Ollama", "ollama_model": "phi4-mini:latest", "prompt": RAG_QUESTION, "temperature": 0.0,
+          "max_new_tokens": 100, "samples": 1, "use_seed": False, "controlAreaVisible": True}),
+        ("dtb", "Data Table", "Data Table: closed-book answer (15B)", (1000, 450), {}),
+    ]
+    links = [("kb", "chunk"), ("chunk", "emb"), ("sbert", "emb"), ("emb", "lib"), ("sbert", "lib"),
+             ("lib", "dtx"), ("lib", "rag"), ("rag", "dta"), ("closed", "dtb")]
+    note = ("*Chapter 15. In Corpus, make sure only `Text` is the text feature. The Reference Library has its own "
+            "query box and the Ollama RAG has its own prompt: keep them about the same question. The same SBERT "
+            "Embedder must feed both Text Embedder and Reference Library.*")
+    return build(nodes, links, [(note, "(100.0, 330.0, 380.0, 130.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -254,7 +296,8 @@ def check(path):
 WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "document-embeddings": (document_embeddings, "document-embeddings.ows"),
              "question-answering": (question_answering, "question-answering.ows"),
-             "llm-tasks": (llm_tasks, "llm-tasks.ows")}
+             "llm-tasks": (llm_tasks, "llm-tasks.ows"),
+             "rag": (rag, "rag.ows")}
 
 if __name__ == "__main__":
     import sys
