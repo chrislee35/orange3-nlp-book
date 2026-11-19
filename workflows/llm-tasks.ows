@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="customer-messages (Message)" position="(100, 200)" />
+		<node id="1" name="Ollama Sentiment Analyzer" qualified_name="orangecontrib.ollama.widgets.owollama_sentiment_analyzer.OWOllamaSentimentAnalyzer" project_name="orange3-ollama" version="" title="Ollama Sentiment Analyzer (14A)" position="(325, 0)" />
+		<node id="2" name="Ollama Text Classification" qualified_name="orangecontrib.ollama.widgets.owollama_text_classifier.OWOllamaTextClassifier" project_name="orange3-ollama" version="" title="Ollama Text Classification (14A)" position="(550, 0)" />
+		<node id="3" name="Ollama Summarizer" qualified_name="orangecontrib.ollama.widgets.owollama_summarizer.OWOllamaSummarizer" project_name="orange3-ollama" version="" title="Ollama Summarizer (14A)" position="(775, 0)" />
+		<node id="4" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: LLM tasks (14A)" position="(1000, 0)" />
+		<node id="5" name="Text Generator" qualified_name="orangecontrib.nlp.widgets.owtext_generator.OWTextGenerator" project_name="orange3-nlp" version="" title="Text Generator: reply drafts (14B)" position="(325, 200)" />
+		<node id="6" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: replies (14B)" position="(550, 200)" />
+		<node id="7" name="Sentiment Analysis" qualified_name="orangecontrib.text.widgets.owsentimentanalysis.OWSentimentAnalysis" project_name="Orange3-Text" version="" title="Sentiment Analysis: VADER (14C)" position="(325, 400)" />
+		<node id="8" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: VADER scores (14C)" position="(550, 400)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="in_corpus" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Sentiment Corpus" sink_channel="Corpus" enabled="true" source_channel_id="out_table" sink_channel_id="in_corpus" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Labeled Corpus" sink_channel="Corpus" enabled="true" source_channel_id="out_table" sink_channel_id="in_corpus" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="Summarized Corpus" sink_channel="Data" enabled="true" source_channel_id="out_table" sink_channel_id="data" />
+		<link id="4" source_node_id="0" sink_node_id="5" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="5" source_node_id="5" sink_node_id="6" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="6" source_node_id="0" sink_node_id="7" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="corpus" />
+		<link id="7" source_node_id="7" sink_node_id="8" source_channel="Corpus" sink_channel="Data" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/markdown" rect="(700.0, 300.0, 380.0, 150.0)" font-family="Sans Serif" font-size="16">*Chapter 14. Ollama must be running with phi4-mini pulled. 14A: the three Ollama widgets are chained, so each adds a column (Sentiment, Prediction, Summary); press Analyze Sentiment, then Classify Text, then Summarize Documents, waiting for each to finish. 14B: edit the prompt template and press Generate. 14C: choose the VADER method and compare with the true Tone column.*</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVhwAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMRy9ob21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvY3VzdG9tZXItbWVzc2FnZXMudGFilGGMC19fdmVyc2lvbl9flEsCdS4=</properties>
+		<properties node_id="1" format="pickle">gASVbwAAAAAAAAB9lCiMDnNlbGVjdGVkX21vZGVslIwQcGhpNC1taW5pOmxhdGVzdJSMD3NlbGVjdGVkX2NvbHVtbpSMB01lc3NhZ2WUjA5wcm9tcHRfY29udGV4dJSMAJSMEmNvbnRyb2xBcmVhVmlzaWJsZZSIdS4=</properties>
+		<properties node_id="2" format="pickle">gASVtAAAAAAAAAB9lCiMDnNlbGVjdGVkX21vZGVslIwQcGhpNC1taW5pOmxhdGVzdJSMD3NlbGVjdGVkX2NvbHVtbpSMB01lc3NhZ2WUjA5wcm9tcHRfY29udGV4dJSMAJSMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjBVjbGFzc2lmaWNhdGlvbl9sYWJlbHOUXZQojAhzaGlwcGluZ5SMB2JpbGxpbmeUjAdwcm9kdWN0lIwHYWNjb3VudJRldS4=</properties>
+		<properties node_id="3" format="pickle">gASVbwAAAAAAAAB9lCiMDnNlbGVjdGVkX21vZGVslIwQcGhpNC1taW5pOmxhdGVzdJSMD3NlbGVjdGVkX2NvbHVtbpSMB01lc3NhZ2WUjA5wcm9tcHRfY29udGV4dJSMAJSMEmNvbnRyb2xBcmVhVmlzaWJsZZSIdS4=</properties>
+		<properties node_id="5" format="pickle">gASV+gAAAAAAAAB9lCiMB2JhY2tlbmSUjAZPbGxhbWGUjAxvbGxhbWFfbW9kZWyUjBBwaGk0LW1pbmk6bGF0ZXN0lIwGcHJvbXB0lIxTV3JpdGUgYSBwb2xpdGUgdHdvLXNlbnRlbmNlIHJlcGx5IGZyb20gY3VzdG9tZXIgc3VwcG9ydCB0byB0aGlzIG1lc3NhZ2U6Cgp7TWVzc2FnZX2UjAt0ZW1wZXJhdHVyZZRHP+ZmZmZmZmaMDm1heF9uZXdfdG9rZW5zlEtQjAdzYW1wbGVzlEsDjAh1c2Vfc2VlZJSIjARzZWVklEsqjBJjb250cm9sQXJlYVZpc2libGWUiHUu</properties>
+	</node_properties>
+</scheme>

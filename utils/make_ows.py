@@ -29,6 +29,10 @@ WIDGETS = {
     "Corpus Viewer": ("orangecontrib.text.widgets.owcorpusviewer.OWCorpusViewer", "Orange3-Text"),
     "Question Answering": ("orangecontrib.nlp.widgets.owquestion_answer.OWQuestionAnswer", "orange3-nlp"),
     "Text Generator": ("orangecontrib.nlp.widgets.owtext_generator.OWTextGenerator", "orange3-nlp"),
+    "Ollama Sentiment Analyzer": ("orangecontrib.ollama.widgets.owollama_sentiment_analyzer.OWOllamaSentimentAnalyzer", "orange3-ollama"),
+    "Ollama Text Classification": ("orangecontrib.ollama.widgets.owollama_text_classifier.OWOllamaTextClassifier", "orange3-ollama"),
+    "Ollama Summarizer": ("orangecontrib.ollama.widgets.owollama_summarizer.OWOllamaSummarizer", "orange3-ollama"),
+    "Sentiment Analysis": ("orangecontrib.text.widgets.owsentimentanalysis.OWSentimentAnalysis", "Orange3-Text"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -46,6 +50,12 @@ LINKS = {
     ("Text Generator", "Corpus Viewer"): (("Corpus", "data"), ("Corpus", "corpus")),
     ("Text Generator", "Data Table"): (("Corpus", "data"), ("Data", "data")),
     ("Question Answering", "Data Table"): (("Corpus", "data"), ("Data", "data")),
+    ("Corpus", "Ollama Sentiment Analyzer"): (("Corpus", "corpus"), ("Corpus", "in_corpus")),
+    ("Ollama Sentiment Analyzer", "Ollama Text Classification"): (("Sentiment Corpus", "out_table"), ("Corpus", "in_corpus")),
+    ("Ollama Text Classification", "Ollama Summarizer"): (("Labeled Corpus", "out_table"), ("Corpus", "in_corpus")),
+    ("Ollama Summarizer", "Data Table"): (("Summarized Corpus", "out_table"), ("Data", "data")),
+    ("Corpus", "Sentiment Analysis"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Sentiment Analysis", "Data Table"): (("Corpus", "corpus"), ("Data", "data")),
     ("Text Embedder", "t-SNE"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Text Embedder", "Distances"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Distances", "Hierarchical Clustering"): (("Distances", "distances"), ("Distances", "distances")),
@@ -194,6 +204,34 @@ def question_answering():
     return build(nodes, links, [(note, "(700.0, 180.0, 330.0, 140.0)")])
 
 
+REPLY = "Write a polite two-sentence reply from customer support to this message:\n\n{Message}"
+
+
+def llm_tasks():
+    """Chapter 14: 14A orange3-ollama widgets in series, 14B Text Generator, 14C classical sentiment for comparison."""
+    ollama = {"selected_model": "phi4-mini:latest", "selected_column": "Message", "prompt_context": "", "controlAreaVisible": True}
+    nodes = [
+        corpus("msgs", "customer-messages.tab", "customer-messages (Message)", 200),
+        ("sent", "Ollama Sentiment Analyzer", "Ollama Sentiment Analyzer (14A)", (325, 0), dict(ollama)),
+        ("cls", "Ollama Text Classification", "Ollama Text Classification (14A)", (550, 0),
+         {**ollama, "classification_labels": ["shipping", "billing", "product", "account"]}),
+        ("summ", "Ollama Summarizer", "Ollama Summarizer (14A)", (775, 0), dict(ollama)),
+        ("dta", "Data Table", "Data Table: LLM tasks (14A)", (1000, 0), {}),
+        ("gen", "Text Generator", "Text Generator: reply drafts (14B)", (325, 200),
+         {"backend": "Ollama", "ollama_model": "phi4-mini:latest", "prompt": REPLY, "temperature": 0.7, "max_new_tokens": 80,
+          "samples": 3, "use_seed": True, "seed": 42, "controlAreaVisible": True}),
+        ("dtb", "Data Table", "Data Table: replies (14B)", (550, 200), {}),
+        ("vader", "Sentiment Analysis", "Sentiment Analysis: VADER (14C)", (325, 400), {}),
+        ("dtc", "Data Table", "Data Table: VADER scores (14C)", (550, 400), {}),
+    ]
+    links = [("msgs", "sent"), ("sent", "cls"), ("cls", "summ"), ("summ", "dta"),
+             ("msgs", "gen"), ("gen", "dtb"), ("msgs", "vader"), ("vader", "dtc")]
+    note = ("*Chapter 14. Ollama must be running with phi4-mini pulled. 14A: the three Ollama widgets are chained, so "
+            "each adds a column (Sentiment, Prediction, Summary); press Analyze Sentiment, then Classify Text, then Summarize Documents, waiting for each to finish. 14B: edit the "
+            "prompt template and press Generate. 14C: choose the VADER method and compare with the true Tone column.*")
+    return build(nodes, links, [(note, "(700.0, 300.0, 380.0, 150.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -215,7 +253,8 @@ def check(path):
 # name -> (builder, output file under workflows/).  Add new workflows here.
 WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "document-embeddings": (document_embeddings, "document-embeddings.ows"),
-             "question-answering": (question_answering, "question-answering.ows")}
+             "question-answering": (question_answering, "question-answering.ows"),
+             "llm-tasks": (llm_tasks, "llm-tasks.ows")}
 
 if __name__ == "__main__":
     import sys

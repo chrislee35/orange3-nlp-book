@@ -1,0 +1,15 @@
+Message	Topic	Tone
+string	shipping billing product account	Positive Negative Neutral
+meta include=True title=True	class	meta
+My order arrived two days early and the packaging was perfect. Thank you!	shipping	Positive
+I was charged twice for the same subscription this month. Please refund the extra payment.	billing	Negative
+The blender works fine, but it is much louder than I expected. I would still buy it again.	product	Neutral
+I cannot log in to my account since the update. The reset email never arrives.	account	Negative
+Great, another delayed delivery. That makes three weeks of waiting for a package that was promised in five days.	shipping	Negative
+Can you tell me which payment methods you accept? I could not find the information on your website.	billing	Neutral
+The jacket fits perfectly and the material feels much better than the photos suggested. I already ordered a second one.	product	Positive
+Your support agent solved my password problem in five minutes. Very helpful and friendly.	account	Positive
+The package was left at the wrong address and nobody has replied to my emails for a week.	shipping	Negative
+I received the invoice for March. The amount matches my order.	billing	Neutral
+The headphones stopped working after two weeks, and the warranty process is confusing.	product	Negative
+I would like to change the email address on my account to a new one. How do I do that?	account	Neutral
