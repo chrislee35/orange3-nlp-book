@@ -53,6 +53,8 @@ Before a computer can count words, the text must be cleaned and split into piece
 
 Two more options exist (**N-grams** for pairs and triples of words, and **POS Tagger** for parts of speech). You will meet them later.
 
+> ⚠️ **The POS tags filter can empty your corpus.** The filter keeps only tokens whose part-of-speech tag is in its list, and the list starts as `NOUN,VERB`. Those are *universal* tags, but the taggers in *Preprocess Text* (Averaged Perceptron and MaxEnt) produce *Penn Treebank* tags such as `NN`, `NNS`, `VB`, and `VBZ`. With the default list, no token matches, so *Preprocess Text* outputs documents with **no tokens at all**. If you use the filter, type Penn tags, for example `NN,NNS,NNP,VB,VBD,VBG,VBN,VBP,VBZ`. Leave it unticked for this chapter.
+
 ### What each stage does to a real headline
 
 Take the BBC headline **`High fuel prices hit BA's profits`**.

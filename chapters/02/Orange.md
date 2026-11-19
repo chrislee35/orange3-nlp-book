@@ -63,7 +63,7 @@ The widgets for this book fall into three groups:
 
 - **Loading and viewing:** *Corpus*, *Data Table*, *Corpus Viewer*
 - **Transforming and visualizing:** *Preprocess Text*, *Select Rows*, *Word Cloud*, *Distributions*
-- **Modeling and evaluating:** *Logistic Regression*, *Naive Bayes*, *Test & Score* (Chapters 4 to 6)
+- **Modeling and evaluating:** *Logistic Regression*, *Naive Bayes*, *Test and Score* (Chapters 4 to 6)
 
 When you change a widget, every widget downstream recalculates. That is how you will experiment: change one setting and watch what follows.
 

@@ -72,7 +72,7 @@ Decide these five things first and write them down:
 
 | Task | Classical | Modern |
 |------|-----------|--------|
-| Classification | Preprocess, Bag of Words or TF-IDF, Logistic Regression or Naive Bayes, scored with *Test & Score* | Embed documents (*Document Embedding*) and train a simple model on the vectors; or ask an LLM (*Ollama Text Classification*, or *Text Generator* with your own prompt) |
+| Classification | Preprocess, Bag of Words or TF-IDF, Logistic Regression or Naive Bayes, scored with *Test and Score* | Embed documents (*Document Embedding*) and train a simple model on the vectors; or ask an LLM (*Ollama Text Classification*, or *Text Generator* with your own prompt) |
 | Clustering and topics | TF-IDF, distances, *Hierarchical Clustering* or *Topic Modelling* (LDA) | Embeddings with *t-SNE* or clustering on the vectors |
 | Sentiment | VADER (*Sentiment Analysis*) | *Ollama Sentiment Analyzer* |
 | Summarization | Extractive (*Summarization*) | *Abstractive Summary* or *Ollama Summarizer* |

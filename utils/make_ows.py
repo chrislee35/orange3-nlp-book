@@ -51,6 +51,9 @@ WIDGETS = {
     "MDS": ("Orange.widgets.unsupervised.owmds.OWMDS", "Orange3"),
     "Topic Modelling": ("orangecontrib.text.widgets.owtopicmodeling.OWTopicModeling", "Orange3-Text"),
     "Box Plot": ("Orange.widgets.visualize.owboxplot.OWBoxPlot", "Orange3"),
+    "Data Sampler": ("Orange.widgets.data.owdatasampler.OWDataSampler", "Orange3"),
+    "ROC Analysis": ("Orange.widgets.evaluate.owrocanalysis.OWROCAnalysis", "Orange3"),
+    "Parameter Fitter": ("Orange.widgets.evaluate.owparameterfitter.OWParameterFitter", "Orange3"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -117,6 +120,14 @@ LINKS.update({
     ("Topic Modelling", "Box Plot"): (("Corpus", "corpus"), ("Data", "data")),
     ("Topic Modelling", "Word Cloud"): (("Selected Topic", "selected_topic"), ("Topic", "topic")),
     ("Topic Modelling", "Data Table"): (("Corpus", "corpus"), ("Data", "data")),
+})
+LINKS.update({
+    ("Test and Score", "ROC Analysis"): (("Evaluation Results", "evaluation_results"),
+                                         ("Evaluation Results", "evaluation_results")),
+    ("Bag of Words", "Parameter Fitter"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Random Forest", "Parameter Fitter"): (("Learner", "learner"), ("Learner", "learner")),
+    ("Bag of Words", "Data Sampler"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Data Sampler", "Test and Score"): (("Data Sample", "data_sample"), ("Data", "train_data")),
 })
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
 
@@ -410,6 +421,34 @@ def topics_news():
     return build(nodes, links, [(note, "(80.0, 330.0, 460.0, 110.0)")])
 
 
+def classifier_evaluation():
+    """Chapter 6: 6A compare fairly, 6B tune (Parameter Fitter), 6C held-out test (Data Sampler)."""
+    nodes = [
+        ("ds", "Datasets", "Datasets: BBC3", (80, 240), {"selected_id": "BBC3.tab"}),
+        ("c", "Corpus", "Corpus: Title only", (240, 240), {"controlAreaVisible": True}),
+        ("pp", "Preprocess Text", "Preprocess Text", (400, 240), {}),
+        ("bow", "Bag of Words", "Bag of Words", (560, 240), {}),
+        ("ts", "Test and Score", "Test and Score (6A)", (860, 120), {}),
+        ("const", "Constant", "Constant (baseline)", (700, 360), {}),
+        ("nb", "Naive Bayes", "Naive Bayes", (700, 440), {}),
+        ("lr", "Logistic Regression", "Logistic Regression (6B: C)", (700, 520), {}),
+        ("rf", "Random Forest", "Random Forest (6B: trees, depth)", (700, 600), {}),
+        ("roc", "ROC Analysis", "ROC Analysis (6A)", (1060, 60), {}),
+        ("cm", "Confusion Matrix", "Confusion Matrix", (1060, 180), {}),
+        ("pf", "Parameter Fitter", "Parameter Fitter: trees (6B)", (1000, 600), {}),
+        ("sam", "Data Sampler", "Data Sampler: 80/20 (6C)", (700, 60), {}),
+        ("ts2", "Test and Score", "Test and Score: held-out test (6C)", (1000, 340), {}),
+    ]
+    links = [("ds", "c"), ("c", "pp"), ("pp", "bow"), ("bow", "ts"), ("const", "ts"), ("nb", "ts"), ("lr", "ts"),
+             ("rf", "ts"), ("ts", "roc"), ("ts", "cm"), ("bow", "pf"), ("rf", "pf"), ("bow", "sam"),
+             ("sam", "ts2"), ("const", "ts2"), ("nb", "ts2"), ("lr", "ts2"), ("rf", "ts2")]
+    note = ("*Chapter 6. Same headlines and Bag of Words as Chapter 4. 6A: change the method in Test and Score. "
+            "6B: Parameter Fitter (number of trees); learner settings in Random Forest and Logistic Regression. "
+            "6C: Data Sampler 80/20 (tick stratify). In the second Test and Score, Data Sampler's Data Sample is the "
+            "training data; connect its Remaining Data to the Test Data input yourself, then choose Test on test data.*")
+    return build(nodes, links, [(note, "(80.0, 330.0, 540.0, 190.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -437,7 +476,8 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "cleaning-headlines": (cleaning_headlines, "cleaning-headlines.ows"),
              "headline-classifier": (headline_classifier, "headline-classifier.ows"),
              "clustering-books": (clustering_books, "clustering-books.ows"),
-             "topics-news": (topics_news, "topics-news.ows")}
+             "topics-news": (topics_news, "topics-news.ows"),
+             "classifier-evaluation": (classifier_evaluation, "classifier-evaluation.ows")}
 
 if __name__ == "__main__":
     import sys
