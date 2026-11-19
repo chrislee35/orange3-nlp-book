@@ -47,6 +47,10 @@ WIDGETS = {
     "Random Forest": ("Orange.widgets.model.owrandomforest.OWRandomForest", "Orange3"),
     "Test and Score": ("Orange.widgets.evaluate.owtestandscore.OWTestAndScore", "Orange3"),
     "Confusion Matrix": ("Orange.widgets.evaluate.owconfusionmatrix.OWConfusionMatrix", "Orange3"),
+    "k-Means": ("Orange.widgets.unsupervised.owkmeans.OWKMeans", "Orange3"),
+    "MDS": ("Orange.widgets.unsupervised.owmds.OWMDS", "Orange3"),
+    "Topic Modelling": ("orangecontrib.text.widgets.owtopicmodeling.OWTopicModeling", "Orange3-Text"),
+    "Box Plot": ("Orange.widgets.visualize.owboxplot.OWBoxPlot", "Orange3"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -103,6 +107,16 @@ LINKS.update({
     ("Test and Score", "Confusion Matrix"): (("Evaluation Results", "evaluation_results"),
                                              ("Evaluation Results", "evaluation_results")),
     ("Confusion Matrix", "Corpus Viewer"): (("Selected Data", "selected_data"), ("Corpus", "corpus")),
+})
+LINKS.update({
+    ("Bag of Words", "Distances"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Bag of Words", "k-Means"): (("Corpus", "corpus"), ("Data", "data")),
+    ("k-Means", "MDS"): (("Data", "annotated_data"), ("Data", "data")),
+    ("k-Means", "Data Table"): (("Data", "annotated_data"), ("Data", "data")),
+    ("Preprocess Text", "Topic Modelling"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Topic Modelling", "Box Plot"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Topic Modelling", "Word Cloud"): (("Selected Topic", "selected_topic"), ("Topic", "topic")),
+    ("Topic Modelling", "Data Table"): (("Corpus", "corpus"), ("Data", "data")),
 })
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
 
@@ -357,6 +371,45 @@ def headline_classifier():
     return build(nodes, links, [(note, "(80.0, 330.0, 440.0, 190.0)")])
 
 
+def clustering_books():
+    """Chapter 5, 5A: cluster the book excerpts (hierarchical and k-Means)."""
+    nodes = [
+        ("c", "Corpus", "Corpus: book-excerpts", (80, 200),
+         {"controlAreaVisible": True, "recent_files": ["book-excerpts.tab"], "__version__": 2}),
+        ("pp", "Preprocess Text", "Preprocess Text", (250, 200), {}),
+        ("bow", "Bag of Words", "Bag of Words (TF-IDF)", (420, 200),
+         {"wlocal": "Count", "wglobal": "IDF", "normalization": "L2 (Euclidean)", "autocommit": True}),
+        ("dist", "Distances", "Distances (cosine)", (620, 100),
+         {"axis": ROWS, "metric_id": COSINE, "autocommit": True, "controlAreaVisible": True, "__version__": 4}),
+        ("hc", "Hierarchical Clustering", "Hierarchical Clustering", (820, 100), {}),
+        ("km", "k-Means", "k-Means", (620, 300), {}),
+        ("mds", "MDS", "MDS", (820, 300), {}),
+        ("dt", "Data Table", "Data Table: clusters", (820, 430), {}),
+    ]
+    links = [("c", "pp"), ("pp", "bow"), ("bow", "dist"), ("dist", "hc"), ("bow", "km"), ("km", "mds"), ("km", "dt")]
+    note = ("*Chapter 5, 5A. Bag of Words: Count / IDF / L2 (TF-IDF). Hierarchical Clustering: set Color by to "
+            "Category and drag the cut line. k-Means: try k = 2..5; color MDS by Cluster, then by Category.*")
+    return build(nodes, links, [(note, "(80.0, 330.0, 460.0, 110.0)")])
+
+
+def topics_news():
+    """Chapter 5, 5B: LDA topics on BBC3 article content."""
+    nodes = [
+        ("ds", "Datasets", "Datasets: BBC3", (80, 200), {"selected_id": "BBC3.tab"}),
+        ("c", "Corpus", "Corpus: Content only", (250, 200), {"controlAreaVisible": True}),
+        ("pp", "Preprocess Text", "Preprocess Text", (420, 200), {}),
+        ("lda", "Topic Modelling", "Topic Modelling (LDA)", (620, 200), {}),
+        ("wc", "Word Cloud", "Word Cloud: selected topic", (840, 100), {}),
+        ("bp", "Box Plot", "Box Plot: topic weight by category", (840, 200), {}),
+        ("dt", "Data Table", "Data Table: topic weights", (840, 300), {}),
+    ]
+    links = [("ds", "c"), ("c", "pp"), ("pp", "lda"), ("lda", "wc"), ("lda", "bp"), ("lda", "dt")]
+    note = ("*Chapter 5, 5B. Corpus: move Title to Ignored so only Content is used. Preprocess Text: Lowercase, "
+            "Regexp, English stopwords, then add Numbers and Document frequency (relative 0.01 to 0.3). Topic "
+            "Modelling: choose Latent Dirichlet Allocation and 3 topics.*")
+    return build(nodes, links, [(note, "(80.0, 330.0, 460.0, 110.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -382,7 +435,9 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "llm-tasks": (llm_tasks, "llm-tasks.ows"),
              "rag": (rag, "rag.ows"),
              "cleaning-headlines": (cleaning_headlines, "cleaning-headlines.ows"),
-             "headline-classifier": (headline_classifier, "headline-classifier.ows")}
+             "headline-classifier": (headline_classifier, "headline-classifier.ows"),
+             "clustering-books": (clustering_books, "clustering-books.ows"),
+             "topics-news": (topics_news, "topics-news.ows")}
 
 if __name__ == "__main__":
     import sys
