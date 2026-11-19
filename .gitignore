@@ -1,2 +1,4 @@
 nlp-book
 public/
+__pycache__/
+*.pyc

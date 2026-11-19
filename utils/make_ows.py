@@ -36,6 +36,10 @@ WIDGETS = {
     "Text Chunker": ("orangecontrib.nlp.widgets.owtext_chunker.OWTextChunker", "orange3-nlp"),
     "Reference Library": ("orangecontrib.nlp.widgets.owreference_library.OWReferenceLibrary", "orange3-nlp"),
     "Ollama RAG": ("orangecontrib.nlp.widgets.owollama_rag.OWOllamaRAG", "orange3-nlp"),
+    "Preprocess Text": ("orangecontrib.text.widgets.owpreprocess.OWPreprocess", "Orange3-Text"),
+    "Word Cloud": ("orangecontrib.text.widgets.owwordcloud.OWWordCloud", "Orange3-Text"),
+    "Select Rows": ("Orange.widgets.data.owselectrows.OWSelectRows", "Orange3"),
+    "Feature Statistics": ("Orange.widgets.data.owfeaturestatistics.OWFeatureStatistics", "Orange3"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -70,6 +74,16 @@ LINKS = {
     ("Text Embedder", "Distances"): (("Embedded Corpus", "data"), ("Data", "data")),
     ("Distances", "Hierarchical Clustering"): (("Distances", "distances"), ("Distances", "distances")),
     ("Distances", "Distance Matrix"): (("Distances", "distances"), ("Distances", "distances")),
+    ("Corpus", "Corpus Viewer"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Corpus", "Word Cloud"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Corpus", "Data Table"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Corpus", "Preprocess Text"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Corpus", "Feature Statistics"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Preprocess Text", "Word Cloud"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Preprocess Text", "Corpus Viewer"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Preprocess Text", "Select Rows"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Select Rows", "Word Cloud"): (("Matching Data", "matching_data"), ("Corpus", "corpus")),
+    ("Word Cloud", "Data Table"): (("Word Counts", "word_counts"), ("Data", "data")),
 }
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
 
@@ -274,6 +288,32 @@ def rag():
     return build(nodes, links, [(note, "(100.0, 330.0, 380.0, 130.0)")])
 
 
+def cleaning_headlines():
+    """Chapter 3: 3A load and inspect BBC3, 3B preprocess one stage at a time, 3C compare categories."""
+    nodes = [
+        ("ds", "Datasets", "Datasets: BBC3", (80, 200), {"selected_id": "BBC3.tab"}),
+        ("c", "Corpus", "Corpus: Title only (3A)", (250, 200), {"controlAreaVisible": True}),
+        ("cv", "Corpus Viewer", "Corpus Viewer (3A)", (450, 80), {}),
+        ("fs", "Feature Statistics", "Feature Statistics (3A)", (450, 330), {}),
+        ("pp", "Preprocess Text", "Preprocess Text (3B)", (450, 200), {}),
+        ("cvt", "Corpus Viewer", "Corpus Viewer: tokens (3B)", (680, 80), {}),
+        ("wc", "Word Cloud", "Word Cloud (3B)", (680, 200), {}),
+        ("dt", "Data Table", "Data Table: word counts (3B)", (900, 200), {}),
+        ("sb", "Select Rows", "Select Rows: business (3C)", (680, 340), {}),
+        ("se", "Select Rows", "Select Rows: entertainment (3C)", (680, 440), {}),
+        ("ss", "Select Rows", "Select Rows: sport (3C)", (680, 540), {}),
+        ("wb", "Word Cloud", "Word Cloud: business (3C)", (900, 340), {}),
+        ("we", "Word Cloud", "Word Cloud: entertainment (3C)", (900, 440), {}),
+        ("wsp", "Word Cloud", "Word Cloud: sport (3C)", (900, 540), {}),
+    ]
+    links = [("ds", "c"), ("c", "cv"), ("c", "fs"), ("c", "pp"), ("pp", "cvt"), ("pp", "wc"), ("wc", "dt"),
+             ("pp", "sb"), ("pp", "se"), ("pp", "ss"), ("sb", "wb"), ("se", "we"), ("ss", "wsp")]
+    note = ("*Chapter 3. Corpus: move Content to Ignored so only Title is used. Preprocess Text starts with Lowercase "
+            "and Stopwords on; change one stage at a time. Select Rows: set category to business, entertainment, "
+            "sport. Datasets needs an internet connection.*")
+    return build(nodes, links, [(note, "(80.0, 620.0, 760.0, 80.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -297,7 +337,8 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "document-embeddings": (document_embeddings, "document-embeddings.ows"),
              "question-answering": (question_answering, "question-answering.ows"),
              "llm-tasks": (llm_tasks, "llm-tasks.ows"),
-             "rag": (rag, "rag.ows")}
+             "rag": (rag, "rag.ows"),
+             "cleaning-headlines": (cleaning_headlines, "cleaning-headlines.ows")}
 
 if __name__ == "__main__":
     import sys
