@@ -40,6 +40,13 @@ WIDGETS = {
     "Word Cloud": ("orangecontrib.text.widgets.owwordcloud.OWWordCloud", "Orange3-Text"),
     "Select Rows": ("Orange.widgets.data.owselectrows.OWSelectRows", "Orange3"),
     "Feature Statistics": ("Orange.widgets.data.owfeaturestatistics.OWFeatureStatistics", "Orange3"),
+    "Bag of Words": ("orangecontrib.text.widgets.owbagofwords.OWTBagOfWords", "Orange3-Text"),
+    "Constant": ("Orange.widgets.model.owconstant.OWConstant", "Orange3"),
+    "Naive Bayes": ("Orange.widgets.model.ownaivebayes.OWNaiveBayes", "Orange3"),
+    "Logistic Regression": ("Orange.widgets.model.owlogisticregression.OWLogisticRegression", "Orange3"),
+    "Random Forest": ("Orange.widgets.model.owrandomforest.OWRandomForest", "Orange3"),
+    "Test and Score": ("Orange.widgets.evaluate.owtestandscore.OWTestAndScore", "Orange3"),
+    "Confusion Matrix": ("Orange.widgets.evaluate.owconfusionmatrix.OWConfusionMatrix", "Orange3"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -85,6 +92,18 @@ LINKS = {
     ("Select Rows", "Word Cloud"): (("Matching Data", "matching_data"), ("Corpus", "corpus")),
     ("Word Cloud", "Data Table"): (("Word Counts", "word_counts"), ("Data", "data")),
 }
+LEARNER = (("Learner", "learner"), ("Learner", "learner"))
+LINKS.update({
+    ("Preprocess Text", "Bag of Words"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Bag of Words", "Test and Score"): (("Corpus", "corpus"), ("Data", "train_data")),
+    ("Constant", "Test and Score"): LEARNER,
+    ("Naive Bayes", "Test and Score"): LEARNER,
+    ("Logistic Regression", "Test and Score"): LEARNER,
+    ("Random Forest", "Test and Score"): LEARNER,
+    ("Test and Score", "Confusion Matrix"): (("Evaluation Results", "evaluation_results"),
+                                             ("Evaluation Results", "evaluation_results")),
+    ("Confusion Matrix", "Corpus Viewer"): (("Selected Data", "selected_data"), ("Corpus", "corpus")),
+})
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
 
 
@@ -314,6 +333,30 @@ def cleaning_headlines():
     return build(nodes, links, [(note, "(80.0, 620.0, 760.0, 80.0)")])
 
 
+def headline_classifier():
+    """Chapter 4: classify BBC3 headlines; 4A compare learners, 4B change Bag of Words, 4C confusion matrix."""
+    nodes = [
+        ("ds", "Datasets", "Datasets: BBC3", (80, 220), {"selected_id": "BBC3.tab"}),
+        ("c", "Corpus", "Corpus: Title only", (240, 220), {"controlAreaVisible": True}),
+        ("pp", "Preprocess Text", "Preprocess Text", (400, 220), {}),
+        ("bow", "Bag of Words", "Bag of Words (4B)", (560, 220), {}),
+        ("ts", "Test and Score", "Test and Score (4A)", (780, 220), {}),
+        ("const", "Constant", "Constant (baseline)", (560, 360), {}),
+        ("nb", "Naive Bayes", "Naive Bayes", (560, 440), {}),
+        ("lr", "Logistic Regression", "Logistic Regression", (560, 520), {}),
+        ("rf", "Random Forest", "Random Forest", (560, 600), {}),
+        ("cm", "Confusion Matrix", "Confusion Matrix (4C)", (960, 220), {}),
+        ("cv", "Corpus Viewer", "Corpus Viewer: wrong headlines (4C)", (1150, 220), {}),
+    ]
+    links = [("ds", "c"), ("c", "pp"), ("pp", "bow"), ("bow", "ts"), ("const", "ts"), ("nb", "ts"),
+             ("lr", "ts"), ("rf", "ts"), ("ts", "cm"), ("cm", "cv")]
+    note = ("*Chapter 4. Corpus: move Content to Ignored so only Title is used. Test and Score: the data goes in "
+            "the Data input, each learner in the Learner input; target class = category. Bag of Words starts with "
+            "Count / (None) / (None); change it for 4B. Naive Bayes and Logistic Regression take about half a "
+            "minute each. Confusion Matrix: select the Naive Bayes learner, then click a cell.*")
+    return build(nodes, links, [(note, "(80.0, 330.0, 440.0, 190.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -338,7 +381,8 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "question-answering": (question_answering, "question-answering.ows"),
              "llm-tasks": (llm_tasks, "llm-tasks.ows"),
              "rag": (rag, "rag.ows"),
-             "cleaning-headlines": (cleaning_headlines, "cleaning-headlines.ows")}
+             "cleaning-headlines": (cleaning_headlines, "cleaning-headlines.ows"),
+             "headline-classifier": (headline_classifier, "headline-classifier.ows")}
 
 if __name__ == "__main__":
     import sys
