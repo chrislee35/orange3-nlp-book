@@ -1,0 +1,19 @@
+Sentence	Label	Trick
+string	positive negative	string
+meta include=True title=True	class	meta
+The film was wonderful and the acting was superb.	positive	plain
+The film was awful and the acting was terrible.	negative	plain
+The film was good.	positive	intensity
+The film was GOOD!!!	positive	intensity
+The film was not good.	negative	negation
+The film was not bad at all.	positive	negation
+I did not enjoy a single minute of it.	negative	negation
+The ending was terrible, but I loved everything else.	positive	contrast
+The acting was brilliant, but the story was a mess and I was bored.	negative	contrast
+Oh great, another two hours of my life wasted.	negative	sarcasm
+Yeah, because what this genre really needed was a fifth sequel.	negative	sarcasm
+The special effects were sick!	positive	slang
+I laughed, I cried, I want to see it again.	positive	no sentiment words
+I walked out after twenty minutes and asked for my money back.	negative	no sentiment words
+The cast is full of talented actors who deserve a better script.	negative	mixed
+It is not a masterpiece, but it is a lot of fun.	positive	mixed

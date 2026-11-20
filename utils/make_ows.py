@@ -127,6 +127,8 @@ LINKS.update({
     ("Bag of Words", "Parameter Fitter"): (("Corpus", "corpus"), ("Data", "data")),
     ("Random Forest", "Parameter Fitter"): (("Learner", "learner"), ("Learner", "learner")),
     ("Bag of Words", "Data Sampler"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Sentiment Analysis", "Box Plot"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Sentiment Analysis", "Test and Score"): (("Corpus", "corpus"), ("Data", "train_data")),
     ("Data Sampler", "Test and Score"): (("Data Sample", "data_sample"), ("Data", "train_data")),
 })
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
@@ -449,6 +451,37 @@ def classifier_evaluation():
     return build(nodes, links, [(note, "(80.0, 330.0, 540.0, 190.0)")])
 
 
+def sentiment_reviews():
+    """Chapter 7: 7A lexicon scores on short sentences, 7B on movie reviews, 7C a trained model."""
+    nodes = [
+        corpus("sen", "sentiment-sentences.tab", "Corpus: sentiment-sentences (7A)", 80),
+        ("va", "Sentiment Analysis", "Sentiment Analysis: VADER (7A)", (330, 20), {"method_idx": 1}),
+        ("lha", "Sentiment Analysis", "Sentiment Analysis: Liu Hu (7A)", (330, 140), {"method_idx": 0}),
+        ("dta", "Data Table", "Data Table: VADER (7A)", (560, 20), {}),
+        ("dtl", "Data Table", "Data Table: Liu Hu (7A)", (560, 140), {}),
+        corpus("rev", "movie-reviews.tab", "Corpus: movie-reviews (7B)", 400),
+        ("vb", "Sentiment Analysis", "Sentiment Analysis: VADER (7B)", (330, 300), {"method_idx": 1}),
+        ("lhb", "Sentiment Analysis", "Sentiment Analysis: Liu Hu (7B)", (330, 420), {"method_idx": 0}),
+        ("bpv", "Box Plot", "Box Plot: compound by Sentiment (7B)", (560, 300), {}),
+        ("bpl", "Box Plot", "Box Plot: Liu Hu score by Sentiment (7B)", (560, 420), {}),
+        ("pp", "Preprocess Text", "Preprocess Text (7C)", (330, 560), {}),
+        ("bow", "Bag of Words", "Bag of Words (7C)", (520, 560), {}),
+        ("tsb", "Test and Score", "Test and Score: words (7C)", (760, 560), {}),
+        ("tsv", "Test and Score", "Test and Score: VADER scores (7C)", (760, 360), {}),
+        ("lr", "Logistic Regression", "Logistic Regression", (560, 660), {}),
+        ("nb", "Naive Bayes", "Naive Bayes", (560, 740), {}),
+    ]
+    links = [("sen", "va"), ("sen", "lha"), ("va", "dta"), ("lha", "dtl"), ("rev", "vb"), ("rev", "lhb"),
+             ("vb", "bpv"), ("lhb", "bpl"), ("rev", "pp"), ("pp", "bow"), ("bow", "tsb"), ("vb", "tsv"),
+             ("lr", "tsb"), ("nb", "tsb"), ("lr", "tsv"), ("nb", "tsv")]
+    note = ("*Chapter 7. 7A: compare the two Sentiment Analysis methods with the Label column. 7B: Box Plot, "
+            "choose compound (or sentiment) as the variable and Sentiment for Group by. 7C: Preprocess Text with "
+            "Lowercase, Regexp, English stopwords and a Document frequency filter (relative 0.01 to 1.0); Bag of "
+            "Words with Count. Test and Score: Naive Bayes on the words takes a couple of minutes. Corpus: the text feature is Review (7B) "
+            "and Sentence (7A). Sentiment Analysis does not use Preprocess Text: VADER reads the raw text.*")
+    return build(nodes, links, [(note, "(820.0, 20.0, 400.0, 230.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -477,7 +510,8 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "headline-classifier": (headline_classifier, "headline-classifier.ows"),
              "clustering-books": (clustering_books, "clustering-books.ows"),
              "topics-news": (topics_news, "topics-news.ows"),
-             "classifier-evaluation": (classifier_evaluation, "classifier-evaluation.ows")}
+             "classifier-evaluation": (classifier_evaluation, "classifier-evaluation.ows"),
+             "sentiment-reviews": (sentiment_reviews, "sentiment-reviews.ows")}
 
 if __name__ == "__main__":
     import sys

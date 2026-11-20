@@ -35,7 +35,7 @@
 		<link id="15" source_node_id="6" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
 		<link id="16" source_node_id="7" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
 		<link id="17" source_node_id="8" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
-		<link id="18" source_node_id="12" sink_node_id="13" source_channel="Data Sample" sink_channel="Test Data" enabled="true" source_channel_id="data_sample" sink_channel_id="test_data" />
+		<link id="18" source_node_id="12" sink_node_id="13" source_channel="Remaining Data" sink_channel="Test Data" enabled="true" source_channel_id="remaining_data" sink_channel_id="test_data" />
 	</links>
 	<annotations>
 		<text id="0" type="text/markdown" rect="(80.0, 330.0, 540.0, 190.0)" font-family="Sans Serif" font-size="16">*Chapter 6. Same headlines and Bag of Words as Chapter 4. 6A: change the method in Test and Score. 6B: Parameter Fitter (number of trees); learner settings in Random Forest and Logistic Regression. 6C: Data Sampler 80/20 (tick stratify). In the second Test and Score, Data Sampler's Data Sample is the training data; connect its Remaining Data to the Test Data input yourself, then choose Test on test data.*</text>
@@ -79,7 +79,7 @@ NWgIaDZoCGg3TnViZYwHc3dfcGF0aJROdYaUZXWMC19fdmVyc2lvbl9flEsEdS4=
 		<properties node_id="3" format="literal">{'autocommit': True, 'controlAreaVisible': True, 'hidden_cb': True, 'normalization': '(None)', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x03!\x00\x00\x01x\x00\x00\x04Y\x00\x00\x02x\x00\x00\x03$\x00\x00\x01\x91\x00\x00\x04V\x00\x00\x02u\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x03$\x00\x00\x01\x91\x00\x00\x04V\x00\x00\x02u', 'wglobal': '(None)', 'wlocal': 'Count', '__version__': 1}</properties>
 		<properties node_id="4" format="pickle">gASVCgABAAAAAAB9lCiMFGNvbXBhcmlzb25fY3JpdGVyaW9ulEsAjBJjb250cm9sQXJlYVZpc2li
 bGWUiIwNY3Zfc3RyYXRpZmllZJSIjAduX2ZvbGRzlEsCjAluX3JlcGVhdHOUSwOMCnJlc2FtcGxp
-bmeUSwSMBHJvcGWURz+5mZmZmZmajAtzYW1wbGVfc2l6ZZRLCYwTc2F2ZWRXaWRnZXRHZW9tZXRy
+bmeUSwCMBHJvcGWURz+5mZmZmZmajAtzYW1wbGVfc2l6ZZRLCYwTc2F2ZWRXaWRnZXRHZW9tZXRy
 eZRDQgHZ0MsAAwAAAAAJQQAAATgAAAxMAAADSwAACUEAAAFYAAAMTAAAA0sAAAABAAAAAAeAAAAJ
 QQAAAVgAAAxMAAADS5SMEnNodWZmbGVfc3RyYXRpZmllZJSIjAh1c2Vfcm9wZZSJjAtzY29yZV90
 YWJsZZR9lIwQc2hvd19zY29yZV9oaW50c5R9lCiMBk1vZGVsX5SIjAZUcmFpbl+UiYwFVGVzdF+U
@@ -1888,13 +1888,13 @@ dGluZ3OUjAdDb250ZXh0lJOUKYGUfZQojAZ2YWx1ZXOUfZQojAlzZWxlY3Rpb26Uj5QoSwBLAYaU
 SwBLAoaUSwFLAoaUSwJLAYaUSwFLAIaUSwJLAIaUkGgRSwF1jAdjbGFzc2VzlIwIYnVzaW5lc3OU
 jA1lbnRlcnRhaW5tZW50lIwFc3BvcnSUh5R1YmF1Lg==
 </properties>
-		<properties node_id="11" format="literal">{'auto_commit': True, 'controlAreaVisible': True, 'manual_steps': '', 'maximum': 10, 'minimum': 1, 'parameter_index': 0, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xb3\x00\x00\x00\xda\x00\x00\x0c\xb9\x00\x00\x02\xed\x00\x00\t\xb3\x00\x00\x00\xfa\x00\x00\x0c\xb9\x00\x00\x02\xed\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xb3\x00\x00\x00\xfa\x00\x00\x0c\xb9\x00\x00\x02\xed', 'type': 0, 'visual_settings': {}, '__version__': 1}</properties>
+		<properties node_id="11" format="literal">{'auto_commit': True, 'controlAreaVisible': True, 'manual_steps': '1, 5, 10, 25, 50, 100', 'maximum': 10, 'minimum': 1, 'parameter_index': 0, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xb3\x00\x00\x00\xda\x00\x00\x0c\xb9\x00\x00\x02\xed\x00\x00\t\xb3\x00\x00\x00\xfa\x00\x00\x0c\xb9\x00\x00\x02\xed\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xb3\x00\x00\x00\xfa\x00\x00\x0c\xb9\x00\x00\x02\xed', 'type': 1, 'visual_settings': {}, '__version__': 1}</properties>
 		<properties node_id="12" format="literal">{'compatibility_mode': False, 'controlAreaVisible': True, 'number_of_folds': 10, 'replacement': False, 'sampleSizeNumber': 1, 'sampleSizePercentage': 80, 'sampleSizeSqlPercentage': 0.1, 'sampleSizeSqlTime': 1, 'sampling_type': 0, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\n\xba\x00\x00\x00\xef\x00\x00\x0b\xb1\x00\x00\x02\xd8\x00\x00\n\xba\x00\x00\x01\x0f\x00\x00\x0b\xb1\x00\x00\x02\xd8\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\n\xba\x00\x00\x01\x0f\x00\x00\x0b\xb1\x00\x00\x02\xd8', 'selectedFold': 1, 'sql_dl': False, 'stratify': True, 'use_seed': True, '__version__': 2}</properties>
 		<properties node_id="13" format="pickle">gASVgd0AAAAAAAB9lCiMFGNvbXBhcmlzb25fY3JpdGVyaW9ulEsAjBJjb250cm9sQXJlYVZpc2li
 bGWUiIwNY3Zfc3RyYXRpZmllZJSIjAduX2ZvbGRzlEsCjAluX3JlcGVhdHOUSwOMCnJlc2FtcGxp
 bmeUSwWMBHJvcGWURz+5mZmZmZmajAtzYW1wbGVfc2l6ZZRLCYwTc2F2ZWRXaWRnZXRHZW9tZXRy
-eZRDQgHZ0MsAAwAAAAAI0AAAAQIAAAvbAAADFQAACNAAAAEiAAAL2wAAAxUAAAABAAAAAAeAAAAI
-0AAAASIAAAvbAAADFZSMEnNodWZmbGVfc3RyYXRpZmllZJSIjAh1c2Vfcm9wZZSJjAtzY29yZV90
+eZRDQgHZ0MsAAwAAAAAILQAAAYUAAAs4AAADmAAACC0AAAGlAAALOAAAA5gAAAABAAAAAAeAAAAI
+LQAAAaUAAAs4AAADmJSMEnNodWZmbGVfc3RyYXRpZmllZJSIjAh1c2Vfcm9wZZSJjAtzY29yZV90
 YWJsZZR9lIwQc2hvd19zY29yZV9oaW50c5R9lCiMBk1vZGVsX5SIjAZUcmFpbl+UiYwFVGVzdF+U
 iYwCQ0GUiIwXUHJlY2lzaW9uUmVjYWxsRlN1cHBvcnSUiIwLVGFyZ2V0U2NvcmWUiIwJUHJlY2lz
 aW9ulIiMBlJlY2FsbJSIjAJGMZSIjANBVUOUiIwHTG9nTG9zc5SJjAtTcGVjaWZpY2l0eZSJjBdN
