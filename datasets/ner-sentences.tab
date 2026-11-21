@@ -1,0 +1,15 @@
+Sentence	Entities (gold)	Trick
+string	string	string
+meta include=True title=True	meta	meta
+Tim Cook said Apple will open a new store in Paris on 12 March.	Tim Cook (PERSON), Apple (ORG), Paris (GPE), 12 March (DATE)	plain
+Amazon shares rose 4% after Jeff Bezos sold $2 billion of stock.	Amazon (ORG), 4% (PERCENT), Jeff Bezos (PERSON), $2 billion (MONEY)	numbers
+George Washington crossed the Delaware, and Washington State is named after him.	George Washington (PERSON), Delaware (GPE), Washington State (GPE)	ambiguous name
+I ate an apple and then visited Apple's headquarters in Cupertino.	Apple (ORG), Cupertino (GPE)	ambiguous name
+The European Central Bank raised rates, said Christine Lagarde in Frankfurt.	European Central Bank (ORG), Christine Lagarde (PERSON), Frankfurt (GPE)	multi-word
+Nadia Okonkwo-Eze won the Booker Prize in 2023.	Nadia Okonkwo-Eze (PERSON), Booker Prize (EVENT), 2023 (DATE)	unfamiliar name
+Manchester United beat Chelsea 2-1 at Old Trafford on Saturday.	Manchester United (ORG), Chelsea (ORG), Old Trafford (FAC), Saturday (DATE)	sports
+Dr. Smith of Johns Hopkins University told the BBC that Pfizer's vaccine costs £15 per dose.	Smith (PERSON), Johns Hopkins University (ORG), BBC (ORG), Pfizer (ORG), £15 (MONEY)	plain
+BA PROFITS FALL AS FUEL PRICES RISE	BA (ORG)	capitals
+tim cook said apple will open a new store in paris on monday	tim cook (PERSON), apple (ORG), paris (GPE), monday (DATE)	lowercase
+The film was long, slow and far too sentimental.		no entities
+Jordan scored thirty points for Chicago last night.	Jordan (PERSON), Chicago (ORG), last night (TIME)	ambiguous name

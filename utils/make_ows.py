@@ -54,6 +54,7 @@ WIDGETS = {
     "Data Sampler": ("Orange.widgets.data.owdatasampler.OWDataSampler", "Orange3"),
     "ROC Analysis": ("Orange.widgets.evaluate.owrocanalysis.OWROCAnalysis", "Orange3"),
     "Parameter Fitter": ("Orange.widgets.evaluate.owparameterfitter.OWParameterFitter", "Orange3"),
+    "Named Entity Recognition": ("orangecontrib.nlp.widgets.owner.OWNERWidget", "orange3-nlp"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -130,6 +131,14 @@ LINKS.update({
     ("Sentiment Analysis", "Box Plot"): (("Corpus", "corpus"), ("Data", "data")),
     ("Sentiment Analysis", "Test and Score"): (("Corpus", "corpus"), ("Data", "train_data")),
     ("Data Sampler", "Test and Score"): (("Data Sample", "data_sample"), ("Data", "train_data")),
+})
+LINKS.update({
+    ("Corpus", "Named Entity Recognition"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("Preprocess Text", "Named Entity Recognition"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("Named Entity Recognition", "Data Table"): (("Corpus with Entities", "data"), ("Data", "data")),
+    ("Named Entity Recognition", "Select Rows"): (("Corpus with Entities", "data"), ("Data", "data")),
+    ("Named Entity Recognition", "Corpus"): (("Corpus with Entities", "data"), ("Data", "data")),
+    ("Select Rows", "Data Table"): (("Matching Data", "matching_data"), ("Data", "data")),
 })
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
 
@@ -482,6 +491,45 @@ def sentiment_reviews():
     return build(nodes, links, [(note, "(820.0, 20.0, 400.0, 230.0)")])
 
 
+def named_entities():
+    """Chapter 8: 8A entities in BBC3 headlines, 8B compare backends, 8C effect of Preprocess Text."""
+    ner = lambda fw: {"selected_framework": fw, "controlAreaVisible": True}
+    nodes = [
+        ("ds", "Datasets", "Datasets: BBC3", (80, 100), {"selected_id": "BBC3.tab"}),
+        ("c", "Corpus", "Corpus: Title only", (240, 100), {"controlAreaVisible": True}),
+        ("n1", "Named Entity Recognition", "Named Entity Recognition: spaCy (8A)", (440, 100), ner("spaCy")),
+        ("d1", "Data Table", "Data Table: entities (8A)", (680, 20), {}),
+        ("sel1", "Select Rows", "Select Rows: contains (GPE) (8A)", (680, 100), {}),
+        ("d1s", "Data Table", "Data Table: headlines with a place (8A)", (900, 100), {}),
+        ("c2", "Corpus", "Corpus: Named Entities (8A)", (680, 200), {"controlAreaVisible": True}),
+        ("pp2", "Preprocess Text", "Preprocess Text: entities (8A)", (880, 200), {}),
+        ("wc", "Word Cloud", "Word Cloud: most frequent entities (8A)", (1080, 200), {}),
+        ("pp3", "Preprocess Text", "Preprocess Text: Lowercase (8C)", (440, 330), {}),
+        ("n3", "Named Entity Recognition", "Named Entity Recognition: spaCy (8C)", (680, 330), ner("spaCy")),
+        ("sel3", "Select Rows", "Select Rows: contains (GPE) (8C)", (900, 330), {}),
+        ("d3", "Data Table", "Data Table: places after Lowercase (8C)", (1100, 330), {}),
+        corpus("cs", "ner-sentences.tab", "Corpus: ner-sentences (8B)", 520),
+        ("nsp", "Named Entity Recognition", "Named Entity Recognition: spaCy (8B)", (440, 450), ner("spaCy")),
+        ("nnl", "Named Entity Recognition", "Named Entity Recognition: NLTK (8B)", (440, 540), ner("NLTK")),
+        ("nfl", "Named Entity Recognition", "Named Entity Recognition: Flair (8B)", (440, 630), ner("Flair")),
+        ("nol", "Named Entity Recognition", "Named Entity Recognition: Ollama (8B, not connected)", (440, 720),
+         {**ner("Ollama"), "selected_model": "llama3.1:8b"}),
+        ("dsp", "Data Table", "Data Table: spaCy (8B)", (680, 450), {}),
+        ("dnl", "Data Table", "Data Table: NLTK (8B)", (680, 540), {}),
+        ("dfl", "Data Table", "Data Table: Flair (8B)", (680, 630), {}),
+        ("dol", "Data Table", "Data Table: Ollama (8B)", (680, 720), {}),
+    ]
+    links = [("ds", "c"), ("c", "n1"), ("n1", "d1"), ("n1", "sel1"), ("sel1", "d1s"), ("n1", "c2"), ("c2", "pp2"), ("pp2", "wc"),
+             ("c", "pp3"), ("pp3", "n3"), ("n3", "sel3"), ("sel3", "d3"),
+             ("cs", "nsp"), ("cs", "nnl"), ("cs", "nfl"), ("nsp", "dsp"), ("nnl", "dnl"), ("nfl", "dfl"), ("nol", "dol")]
+    note = ("*Chapter 8. 8A: Corpus: move Content to Ignored so only Title is used. Select Rows: Named Entities contains "
+            "(GPE). In the second Corpus, make Named Entities the only text feature; in Preprocess Text use only the Regexp "
+            "tokenizer with the pattern [^,\\s][^,]\\* and untick Lowercase and Stopwords. 8B: Ollama needs a running server "
+            "with llama3.1:8b pulled; connect ner-sentences to its NER widget yourself (it takes minutes). 8C: Preprocess Text "
+            "with Lowercase ticked, compare with 8A, then untick Lowercase.*")
+    return build(nodes, links, [(note, "(820.0, 450.0, 380.0, 260.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -511,7 +559,8 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "clustering-books": (clustering_books, "clustering-books.ows"),
              "topics-news": (topics_news, "topics-news.ows"),
              "classifier-evaluation": (classifier_evaluation, "classifier-evaluation.ows"),
-             "sentiment-reviews": (sentiment_reviews, "sentiment-reviews.ows")}
+             "sentiment-reviews": (sentiment_reviews, "sentiment-reviews.ows"),
+             "named-entities": (named_entities, "named-entities.ows")}
 
 if __name__ == "__main__":
     import sys
