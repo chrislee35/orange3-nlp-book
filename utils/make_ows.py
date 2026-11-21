@@ -55,6 +55,9 @@ WIDGETS = {
     "ROC Analysis": ("Orange.widgets.evaluate.owrocanalysis.OWROCAnalysis", "Orange3"),
     "Parameter Fitter": ("Orange.widgets.evaluate.owparameterfitter.OWParameterFitter", "Orange3"),
     "Named Entity Recognition": ("orangecontrib.nlp.widgets.owner.OWNERWidget", "orange3-nlp"),
+    "Extractive Summary": ("orangecontrib.nlp.widgets.owextractive_summary.OWExtractiveSummary", "orange3-nlp"),
+    "Abstractive Summary": ("orangecontrib.nlp.widgets.owabstractive_summary.OWAbstractiveSummary", "orange3-nlp"),
+    "Group by": ("Orange.widgets.data.owgroupby.OWGroupBy", "Orange3"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -139,6 +142,22 @@ LINKS.update({
     ("Named Entity Recognition", "Select Rows"): (("Corpus with Entities", "data"), ("Data", "data")),
     ("Named Entity Recognition", "Corpus"): (("Corpus with Entities", "data"), ("Data", "data")),
     ("Select Rows", "Data Table"): (("Matching Data", "matching_data"), ("Data", "data")),
+})
+LINKS.update({
+    ("Corpus", "Data Sampler"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Corpus", "Select Rows"): (("Corpus", "corpus"), ("Data", "data")),
+    ("Corpus", "Extractive Summary"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("Corpus", "Abstractive Summary"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("Data Sampler", "Extractive Summary"): (("Data Sample", "data_sample"), ("Corpus", "data")),
+    ("Data Sampler", "Abstractive Summary"): (("Data Sample", "data_sample"), ("Corpus", "data")),
+    ("Select Rows", "Extractive Summary"): (("Matching Data", "matching_data"), ("Corpus", "data")),
+    ("Select Rows", "Abstractive Summary"): (("Matching Data", "matching_data"), ("Corpus", "data")),
+    ("Select Rows", "Group by"): (("Matching Data", "matching_data"), ("Data", "data")),
+    ("Extractive Summary", "Group by"): (("Corpus with Summaries", "data"), ("Data", "data")),
+    ("Extractive Summary", "Corpus"): (("Corpus with Summaries", "data"), ("Data", "data")),
+    ("Extractive Summary", "Corpus Viewer"): (("Corpus with Summaries", "data"), ("Corpus", "corpus")),
+    ("Abstractive Summary", "Corpus Viewer"): (("Corpus with Summaries", "data"), ("Corpus", "corpus")),
+    ("Group by", "Corpus"): (("Data", "data"), ("Data", "data")),
 })
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
 
@@ -530,6 +549,53 @@ def named_entities():
     return build(nodes, links, [(note, "(820.0, 450.0, 380.0, 260.0)")])
 
 
+def summarization():
+    """Chapter 9: 9A extractive, 9B abstractive, 9C a long text (Dracula chapter 1) in one pass and in stages."""
+    ex = lambda fw: {"selected_framework": fw, "controlAreaVisible": True}
+    nodes = [
+        ("ds", "Datasets", "Datasets: BBC3", (80, 100), {"selected_id": "BBC3.tab"}),
+        ("c", "Corpus", "Corpus: Content only", (240, 100), {"controlAreaVisible": True}),
+        ("sam", "Data Sampler", "Data Sampler: 5 articles", (420, 100),
+         {"sampling_type": 1, "sampleSizeNumber": 5, "use_seed": True, "replacement": False}),
+        ("sumy", "Extractive Summary", "Extractive Summary: Sumy (9A)", (640, 0), ex("Sumy")),
+        ("summa", "Extractive Summary", "Extractive Summary: Summa (9A)", (640, 80), ex("Summa")),
+        ("bart", "Abstractive Summary", "Abstractive Summary: BART (9B)", (640, 160), ex("BART")),
+        ("t5", "Abstractive Summary", "Abstractive Summary: T5 (9B)", (640, 240), ex("T5")),
+        ("flan", "Abstractive Summary", "Abstractive Summary: FLAN-T5 (9B)", (640, 320), ex("FLAN-T5")),
+        ("oll", "Abstractive Summary", "Abstractive Summary: Ollama (9B, not connected)", (640, 400),
+         {**ex("Ollama"), "selected_model": "llama3.1:8b"}),
+        ("v1", "Corpus Viewer", "Corpus Viewer: Sumy", (900, 0), {}),
+        ("v2", "Corpus Viewer", "Corpus Viewer: Summa", (900, 80), {}),
+        ("v3", "Corpus Viewer", "Corpus Viewer: BART", (900, 160), {}),
+        ("v4", "Corpus Viewer", "Corpus Viewer: T5", (900, 240), {}),
+        ("v5", "Corpus Viewer", "Corpus Viewer: FLAN-T5", (900, 320), {}),
+        ("v6", "Corpus Viewer", "Corpus Viewer: Ollama", (900, 400), {}),
+        corpus("dr", "dracula.tab", "Corpus: Dracula (9C)", 640),
+        ("sel", "Select Rows", "Select Rows: Chapter is 1 (9C)", (300, 640), {}),
+        ("g1", "Group by", "Group by Chapter: join paragraphs (9C)", (500, 580), {}),
+        ("c1", "Corpus", "Corpus: whole chapter (9C)", (700, 580), {"controlAreaVisible": True}),
+        ("a1", "Abstractive Summary", "Abstractive Summary: BART, one pass (9C)", (900, 580), ex("BART")),
+        ("v7", "Corpus Viewer", "Corpus Viewer: one pass (9C)", (1120, 580), {}),
+        ("e1", "Extractive Summary", "Extractive Summary: Summa per paragraph (9C)", (500, 700), ex("Summa")),
+        ("g2", "Group by", "Group by Chapter: join summaries (9C)", (700, 700), {}),
+        ("c2", "Corpus", "Corpus: joined summaries (9C)", (900, 700), {"controlAreaVisible": True}),
+        ("e2", "Extractive Summary", "Extractive Summary: Summa on the chapter (9C)", (1100, 700), ex("Summa")),
+        ("c3", "Corpus", "Corpus: second summary (9C)", (1300, 700), {"controlAreaVisible": True}),
+        ("a2", "Abstractive Summary", "Abstractive Summary: BART, in stages (9C)", (1500, 700), ex("BART")),
+        ("v8", "Corpus Viewer", "Corpus Viewer: in stages (9C)", (1700, 700), {}),
+    ]
+    links = [("ds", "c"), ("c", "sam"), ("sam", "sumy"), ("sam", "summa"), ("sam", "bart"), ("sam", "t5"), ("sam", "flan"),
+             ("sumy", "v1"), ("summa", "v2"), ("bart", "v3"), ("t5", "v4"), ("flan", "v5"), ("oll", "v6"),
+             ("dr", "sel"), ("sel", "g1"), ("g1", "c1"), ("c1", "a1"), ("a1", "v7"),
+             ("sel", "e1"), ("e1", "g2"), ("g2", "c2"), ("c2", "e2"), ("e2", "c3"), ("c3", "a2"), ("a2", "v8")]
+    note = ("*Chapter 9. Corpus (BBC3): move Title to Ignored so only Content is used. Each summarizer runs as soon as data "
+            "arrives, and the first run of each model downloads it. Corpus Viewer: tick the summary column under Display Features. "
+            "Ollama needs a running server with llama3.1:8b; connect Data Sampler to it yourself (about 3 minutes). 9C: Select Rows "
+            "Chapter is 1. Group by Chapter: aggregate Paragraph (or the summary column) with Concatenate. In each Corpus widget make the joined "
+            "column the text feature.*")
+    return build(nodes, links, [(note, "(80.0, 200.0, 420.0, 260.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -560,7 +626,8 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "topics-news": (topics_news, "topics-news.ows"),
              "classifier-evaluation": (classifier_evaluation, "classifier-evaluation.ows"),
              "sentiment-reviews": (sentiment_reviews, "sentiment-reviews.ows"),
-             "named-entities": (named_entities, "named-entities.ows")}
+             "named-entities": (named_entities, "named-entities.ows"),
+             "summarization": (summarization, "summarization.ows")}
 
 if __name__ == "__main__":
     import sys
