@@ -1,0 +1,13 @@
+Sentence	Feature
+string	string
+meta include=True title=True	meta
+The dog chased the cat.	plain subject-verb-object
+The cat was chased by the dog.	passive
+I saw the man with the telescope.	ambiguous attachment
+The book that I read was long.	relative clause
+What did the dog chase?	question
+Give the dog a bone.	imperative with two objects
+She did not like the movie.	negation
+Time flies like an arrow.	ambiguous words
+The old man the boats.	garden path
+Mary gave John a book and left.	coordination

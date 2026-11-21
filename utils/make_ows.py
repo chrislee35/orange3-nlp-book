@@ -58,6 +58,10 @@ WIDGETS = {
     "Extractive Summary": ("orangecontrib.nlp.widgets.owextractive_summary.OWExtractiveSummary", "orange3-nlp"),
     "Abstractive Summary": ("orangecontrib.nlp.widgets.owabstractive_summary.OWAbstractiveSummary", "orange3-nlp"),
     "Group by": ("Orange.widgets.data.owgroupby.OWGroupBy", "Orange3"),
+    "POS Tagger": ("orangecontrib.nlp.widgets.owpos_tagger.OWPOSTagger", "orange3-nlp"),
+    "POS Viewer": ("orangecontrib.nlp.widgets.owpos_viewer.OWPOSViewer", "orange3-nlp"),
+    "Rule-based Entity-Relationship Extraction": ("orangecontrib.nlp.widgets.owrule_based_entity_relationship_extraction.OWRuleBasedEntityRelationshipExtraction", "orange3-nlp"),
+    "Python Script": ("Orange.widgets.data.owpythonscript.OWPythonScript", "Orange3"),
     "Distance Matrix": ("Orange.widgets.unsupervised.owdistancematrix.OWDistanceMatrix", "Orange3"),
 }
 # (source name, source id) -> (sink name, sink id) keyed by (source widget, sink widget)
@@ -158,6 +162,14 @@ LINKS.update({
     ("Extractive Summary", "Corpus Viewer"): (("Corpus with Summaries", "data"), ("Corpus", "corpus")),
     ("Abstractive Summary", "Corpus Viewer"): (("Corpus with Summaries", "data"), ("Corpus", "corpus")),
     ("Group by", "Corpus"): (("Data", "data"), ("Data", "data")),
+})
+LINKS.update({
+    ("Corpus", "POS Tagger"): (("Corpus", "corpus"), ("Corpus", "data")),
+    ("POS Tagger", "POS Viewer"): (("Tagged Corpus", "data"), ("Tagged Corpus", "data")),
+    ("POS Tagger", "Python Script"): (("Tagged Corpus", "data"), ("Data", "data")),
+    ("Python Script", "Data Table"): (("Data", "data"), ("Data", "data")),
+    ("Corpus", "Rule-based Entity-Relationship Extraction"): (("Corpus", "corpus"), ("Corpus", "corpus")),
+    ("Rule-based Entity-Relationship Extraction", "Data Table"): (("Relations", "relations"), ("Data", "data")),
 })
 COSINE, ROWS = 4, 0  # Orange.widgets.unsupervised.owdistances
 
@@ -596,6 +608,63 @@ def summarization():
     return build(nodes, links, [(note, "(80.0, 200.0, 420.0, 260.0)")])
 
 
+SVO_SCRIPT = """import json
+from Orange.data import Domain, StringVariable, Table
+
+tags = in_data.domain["POS Tags"]
+sentence = in_data.domain.metas[0]
+rows = []
+for doc in in_data:
+    tokens = json.loads(str(doc[tags]))
+    for i, t in enumerate(tokens):
+        if t["dep"].lower() != "root":
+            continue
+        children = lambda labels: [tokens[j]["text"] for j, u in enumerate(tokens)
+                                   if j + u["head"] == i and j != i and u["dep"] in labels]
+        subject = children(("nsubj", "nsubj:pass", "nsubjpass"))
+        obj = children(("dobj", "obj"))
+        if subject and obj:
+            rows.append([str(doc[sentence]), subject[0], t["text"], obj[0]])
+
+domain = Domain([], metas=[StringVariable(n) for n in ("Sentence", "Subject", "Verb", "Object")])
+out_data = Table.from_list(domain, rows)
+"""
+
+
+def dependency_parsing():
+    """Chapter 10: 10A read trees from three taggers, 10B extract subject-verb-object triples, 10C POS filter."""
+    fw = lambda name: {"selected_framework": name, "controlAreaVisible": True}
+    script = {"__version__": 2, "scriptLibrary": [{"name": "SVO triples", "script": SVO_SCRIPT, "filename": None}],
+              "currentScriptIndex": 0, "scriptText": SVO_SCRIPT}
+    nodes = [
+        corpus("ps", "parse-sentences.tab", "Corpus: parse-sentences (10A)", 100),
+        ("tsp", "POS Tagger", "POS Tagger: spaCy (10A)", (330, 20), fw("spaCy")),
+        ("tud", "POS Tagger", "POS Tagger: UDPipe (10A)", (330, 120), fw("UDPipe")),
+        ("tst", "POS Tagger", "POS Tagger: Stanza (10A)", (330, 220), fw("Stanza")),
+        ("vsp", "POS Viewer", "POS Viewer: spaCy (10A)", (560, 20), {}),
+        ("vud", "POS Viewer", "POS Viewer: UDPipe (10A)", (560, 120), {}),
+        ("vst", "POS Viewer", "POS Viewer: Stanza (10A)", (560, 220), {}),
+        corpus("hk", "huck.tab", "Corpus: huck (10B, 10C)", 480),
+        ("th", "POS Tagger", "POS Tagger: spaCy (10B)", (330, 380), fw("spaCy")),
+        ("py", "Python Script", "Python Script: SVO triples (10B)", (560, 380), script),
+        ("dt", "Data Table", "Data Table: triples (10B)", (780, 380), {}),
+        ("rs", "Rule-based Entity-Relationship Extraction", "Relations: parse-sentences (10B)", (330, 300), {}),
+        ("ds_", "Data Table", "Data Table: relations, sentences (10B)", (560, 300), {}),
+        ("rh", "Rule-based Entity-Relationship Extraction", "Relations: huck (10B)", (330, 460), {}),
+        ("dh", "Data Table", "Data Table: relations, huck (10B)", (560, 460), {}),
+        ("pp", "Preprocess Text", "Preprocess Text: POS filter (10C)", (330, 580), {}),
+        ("wc", "Word Cloud", "Word Cloud (10C)", (560, 580), {}),
+        ("dw", "Data Table", "Data Table: word counts (10C)", (780, 580), {}),
+    ]
+    links = [("ps", "tsp"), ("ps", "tud"), ("ps", "tst"), ("tsp", "vsp"), ("tud", "vud"), ("tst", "vst"),
+             ("ps", "rs"), ("rs", "ds_"), ("hk", "rh"), ("rh", "dh"), ("hk", "th"), ("th", "py"), ("py", "dt"), ("hk", "pp"), ("pp", "wc"), ("wc", "dw")]
+    note = ("*Chapter 10. 10A: each tagger takes a few seconds, Stanza about a minute the first time. 10B: the Python Script "
+            "keeps sentences whose root verb has a subject and an object; change the framework in the POS Tagger and compare. "
+            "10C: in Preprocess Text use the Regexp tokenizer (pattern [\\w\u2019]+, no Lowercase), then the POS Tagger stage "
+            "(Averaged Perceptron), then the POS tags filter, and type the tags to keep (NN,NNS,NNP,NNPS).*")
+    return build(nodes, links, [(note, "(80.0, 680.0, 760.0, 110.0)")])
+
+
 def check(path):
     """Load the .ows with Orange's own reader; print node/link counts and errors."""
     import os
@@ -627,7 +696,8 @@ WORKFLOWS = {"word-embeddings": (word_embeddings, "word-embeddings.ows"),
              "classifier-evaluation": (classifier_evaluation, "classifier-evaluation.ows"),
              "sentiment-reviews": (sentiment_reviews, "sentiment-reviews.ows"),
              "named-entities": (named_entities, "named-entities.ows"),
-             "summarization": (summarization, "summarization.ows")}
+             "summarization": (summarization, "summarization.ows"),
+             "dependency-parsing": (dependency_parsing, "dependency-parsing.ows")}
 
 if __name__ == "__main__":
     import sys

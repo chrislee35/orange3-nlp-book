@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="Corpus: parse-sentences (10A)" position="(100.0, 173.0)" />
+		<node id="1" name="POS Tagger" qualified_name="orangecontrib.nlp.widgets.owpos_tagger.OWPOSTagger" project_name="orange3-nlp" version="" title="POS Tagger: spaCy (10A)" position="(330, 20)" />
+		<node id="2" name="POS Tagger" qualified_name="orangecontrib.nlp.widgets.owpos_tagger.OWPOSTagger" project_name="orange3-nlp" version="" title="POS Tagger: UDPipe (10A)" position="(330, 120)" />
+		<node id="3" name="POS Tagger" qualified_name="orangecontrib.nlp.widgets.owpos_tagger.OWPOSTagger" project_name="orange3-nlp" version="" title="POS Tagger: Stanza (10A)" position="(330, 220)" />
+		<node id="4" name="POS Viewer" qualified_name="orangecontrib.nlp.widgets.owpos_viewer.OWPOSViewer" project_name="orange3-nlp" version="" title="POS Viewer: spaCy (10A)" position="(560, 20)" />
+		<node id="5" name="POS Viewer" qualified_name="orangecontrib.nlp.widgets.owpos_viewer.OWPOSViewer" project_name="orange3-nlp" version="" title="POS Viewer: UDPipe (10A)" position="(560, 120)" />
+		<node id="6" name="POS Viewer" qualified_name="orangecontrib.nlp.widgets.owpos_viewer.OWPOSViewer" project_name="orange3-nlp" version="" title="POS Viewer: Stanza (10A)" position="(560, 220)" />
+		<node id="7" name="Corpus" qualified_name="orangecontrib.text.widgets.owcorpus.OWCorpus" project_name="Orange3-Text" version="" title="Corpus: huck (10B, 10C)" position="(100.0, 510.0)" />
+		<node id="8" name="POS Tagger" qualified_name="orangecontrib.nlp.widgets.owpos_tagger.OWPOSTagger" project_name="orange3-nlp" version="" title="POS Tagger: spaCy (10B)" position="(330.0, 408.0)" />
+		<node id="9" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Python Script: SVO triples (10B)" position="(560.0, 408.0)" />
+		<node id="10" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: triples (10B)" position="(780.0, 408.0)" />
+		<node id="11" name="Rule-based Entity-Relationship Extraction" qualified_name="orangecontrib.nlp.widgets.owrule_based_entity_relationship_extraction.OWRuleBasedEntityRelationshipExtraction" project_name="orange3-nlp" version="" title="Relations: parse-sentences (10B)" position="(330, 300)" />
+		<node id="12" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: relations, sentences (10B)" position="(560, 300)" />
+		<node id="13" name="Rule-based Entity-Relationship Extraction" qualified_name="orangecontrib.nlp.widgets.owrule_based_entity_relationship_extraction.OWRuleBasedEntityRelationshipExtraction" project_name="orange3-nlp" version="" title="Relations: huck (10B)" position="(439.0, 508.0)" />
+		<node id="14" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: relations, huck (10B)" position="(666.0, 509.0)" />
+		<node id="15" name="Preprocess Text" qualified_name="orangecontrib.text.widgets.owpreprocess.OWPreprocess" project_name="Orange3-Text" version="" title="Preprocess Text: POS filter (10C)" position="(331.0, 608.0)" />
+		<node id="16" name="Word Cloud" qualified_name="orangecontrib.text.widgets.owwordcloud.OWWordCloud" project_name="Orange3-Text" version="" title="Word Cloud (10C)" position="(560.0, 609.0)" />
+		<node id="17" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Data Table: word counts (10C)" position="(780.0, 607.0)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="1" source_node_id="0" sink_node_id="2" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="2" source_node_id="0" sink_node_id="3" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="3" source_node_id="1" sink_node_id="4" source_channel="Tagged Corpus" sink_channel="Tagged Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="4" source_node_id="2" sink_node_id="5" source_channel="Tagged Corpus" sink_channel="Tagged Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="5" source_node_id="3" sink_node_id="6" source_channel="Tagged Corpus" sink_channel="Tagged Corpus" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="6" source_node_id="0" sink_node_id="11" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="corpus" />
+		<link id="7" source_node_id="11" sink_node_id="12" source_channel="Relations" sink_channel="Data" enabled="true" source_channel_id="relations" sink_channel_id="data" />
+		<link id="8" source_node_id="7" sink_node_id="13" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="corpus" />
+		<link id="9" source_node_id="13" sink_node_id="14" source_channel="Relations" sink_channel="Data" enabled="true" source_channel_id="relations" sink_channel_id="data" />
+		<link id="10" source_node_id="7" sink_node_id="8" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="data" />
+		<link id="11" source_node_id="8" sink_node_id="9" source_channel="Tagged Corpus" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="12" source_node_id="9" sink_node_id="10" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="13" source_node_id="7" sink_node_id="15" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="corpus" />
+		<link id="14" source_node_id="15" sink_node_id="16" source_channel="Corpus" sink_channel="Corpus" enabled="true" source_channel_id="corpus" sink_channel_id="corpus" />
+		<link id="15" source_node_id="16" sink_node_id="17" source_channel="Word Counts" sink_channel="Data" enabled="true" source_channel_id="word_counts" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/markdown" rect="(80.0, 680.0, 760.0, 110.0)" font-family="Sans Serif" font-size="16">*Chapter 10. 10A: each tagger takes a few seconds, Stanza about a minute the first time. 10B: the Python Script keeps sentences whose root verb has a subject and an object; change the framework in the POS Tagger and compare. 10C: in Preprocess Text use the Regexp tokenizer (pattern [\w’]+, no Lowercase), then the POS Tagger stage (Averaged Perceptron), then the filter Filter by POS tags, and type the tags to keep (NN,NNS,NNP,NNPS).*</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASV3AEAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMRS9o
+b21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvcGFyc2Utc2Vu
+dGVuY2VzLnRhYpRhjBNzYXZlZFdpZGdldEdlb21ldHJ5lENCAdnQywADAAAAAAQrAAAAdQAABeoA
+AAIAAAAEKwAAAJUAAAXqAAACAAAAAAAAAAAAB4AAAAQrAAAAlQAABeoAAAIAlIwLX192ZXJzaW9u
+X1+USwKMEGNvbnRleHRfc2V0dGluZ3OUXZSMFW9yYW5nZXdpZGdldC5zZXR0aW5nc5SMB0NvbnRl
+eHSUk5QpgZR9lCiMBnZhbHVlc5R9lCiMCGxhbmd1YWdllIwCZW6USv7///+GlIwOdGl0bGVfdmFy
+aWFibGWUjAhTZW50ZW5jZZRLZ4aUjAp1c2VkX2F0dHJzlF2UaBVLZ4aUYUr9////hpRoB0sCdYwK
+YXR0cmlidXRlc5R9lIwFbWV0YXOUfZQoaBVLA4wHRmVhdHVyZZRLA3WMDmRvY3VtZW50c19oYXNo
+lIoQNISgSB0yMiiBHGLM4K0oMWgRjAJlbpR1YmF1Lg==
+</properties>
+		<properties node_id="1" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, 'selected_framework': 'spaCy', '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, 'selected_framework': 'UDPipe', '__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, 'selected_framework': 'Stanza', '__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="5" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="6" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="7" format="pickle">gASVxgEAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjAxyZWNlbnRfZmlsZXOUXZSMOi9o
+b21lL2NocmlzL2NvZGUvb3JhbmdlL29yYW5nZTMtbmxwLWJvb2svZGF0YXNldHMvaHVjay50YWKU
+YYwTc2F2ZWRXaWRnZXRHZW9tZXRyeZRDQgHZ0MsAAwAAAAAEKwAAAHUAAAXqAAACAAAABCsAAACV
+AAAF6gAAAgAAAAAAAAAAAAeAAAAEKwAAAJUAAAXqAAACAJSMC19fdmVyc2lvbl9flEsCjBBjb250
+ZXh0X3NldHRpbmdzlF2UjBVvcmFuZ2V3aWRnZXQuc2V0dGluZ3OUjAdDb250ZXh0lJOUKYGUfZQo
+jAZ2YWx1ZXOUfZQojAhsYW5ndWFnZZSMAmVulEr+////hpSMDnRpdGxlX3ZhcmlhYmxllE5K/v//
+/4aUjAp1c2VkX2F0dHJzlF2UjAhTZW50ZW5jZZRLZ4aUYUr9////hpRoB0sCdYwKYXR0cmlidXRl
+c5R9lIwFbWV0YXOUfZRoGEsDc4wOZG9jdW1lbnRzX2hhc2iUihDGbEK5lmUjPCu/gE5SE3E4aBGM
+AmVulHViYXUu
+</properties>
+		<properties node_id="8" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, 'selected_framework': 'spaCy', '__version__': 1}</properties>
+		<properties node_id="9" format="literal">{'controlAreaVisible': True, 'currentScriptIndex': 0, 'savedWidgetGeometry': None, 'scriptLibrary': [{'name': 'SVO triples', 'script': 'import json\nfrom Orange.data import Domain, StringVariable, Table\n\ntags = in_data.domain["POS Tags"]\nsentence = in_data.domain.metas[0]\nrows = []\nfor doc in in_data:\n    tokens = json.loads(str(doc[tags]))\n    for i, t in enumerate(tokens):\n        if t["dep"].lower() != "root":\n            continue\n        children = lambda labels: [tokens[j]["text"] for j, u in enumerate(tokens)\n                                   if j + u["head"] == i and j != i and u["dep"] in labels]\n        subject = children(("nsubj", "nsubj:pass", "nsubjpass"))\n        obj = children(("dobj", "obj"))\n        if subject and obj:\n            rows.append([str(doc[sentence]), subject[0], t["text"], obj[0]])\n\ndomain = Domain([], metas=[StringVariable(n) for n in ("Sentence", "Subject", "Verb", "Object")])\nout_data = Table.from_list(domain, rows)\n', 'filename': None}], 'scriptText': 'import json\nfrom Orange.data import Domain, StringVariable, Table\n\ntags = in_data.domain["POS Tags"]\nsentence = in_data.domain.metas[0]\nrows = []\nfor doc in in_data:\n    tokens = json.loads(str(doc[tags]))\n    for i, t in enumerate(tokens):\n        if t["dep"].lower() != "root":\n            continue\n        children = lambda labels: [tokens[j]["text"] for j, u in enumerate(tokens)\n                                   if j + u["head"] == i and j != i and u["dep"] in labels]\n        subject = children(("nsubj", "nsubj:pass", "nsubjpass"))\n        obj = children(("dobj", "obj"))\n        if subject and obj:\n            rows.append([str(doc[sentence]), subject[0], t["text"], obj[0]])\n\ndomain = Domain([], metas=[StringVariable(n) for n in ("Sentence", "Subject", "Verb", "Object")])\nout_data = Table.from_list(domain, rows)\n', 'splitterState': b'\x00\x00\x00\xff\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\xac\x00\x00\x00h\x01\xff\xff\xff\xff\x01\x00\x00\x00\x02\x00', 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="10" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x0cp\x00\x00\x00\xd9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="11" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="12" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x0cp\x00\x00\x00\xd9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="13" format="literal">{'controlAreaVisible': True, 'savedWidgetGeometry': None, '__version__': 1}</properties>
+		<properties node_id="14" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x0cp\x00\x00\x00\xd9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+		<properties node_id="15" format="pickle">gASV0QMAAAAAAAB9lCiMCmF1dG9jb21taXSUiIwSY29udHJvbEFyZWFWaXNpYmxllIiME3NhdmVk
+V2lkZ2V0R2VvbWV0cnmUQ0IB2dDLAAMAAAAACGkAAACzAAAMhQAAAwsAAAhpAAAAswAADIUAAAML
+AAAAAQAAAAAHgAAACGkAAACzAAAMhQAAAwuUjA5zdG9yZWRzZXR0aW5nc5R9lCiMBG5hbWWUjACU
+jA1wcmVwcm9jZXNzb3JzlF2UKIwUcHJlcHJvY2Vzcy50cmFuc2Zvcm2UfZSMB21ldGhvZHOUXZRz
+hpSME3ByZXByb2Nlc3MudG9rZW5pemWUfZQojAZtZXRob2SUSwOMB3BhdHRlcm6UjAhbXHfigJld
+K5R1hpSMB3RhZy5wb3OUfZSMBm1ldGhvZJRLAHOGlIwRcHJlcHJvY2Vzcy5maWx0ZXKUfZQojAdh
+YnNfZW5klEsKjAlhYnNfc3RhcnSUSwGMCWZyZXFfdHlwZZRLAIwIaW5jbF9udW2UiYwLaW52YWxp
+ZGF0ZWSUiYwIbGFuZ3VhZ2WUjAJlbpSMB2x4X2xpc3SUXZSMB2x4X3BhdGiUTowHbWV0aG9kc5Rd
+lEsHYYwIbl90b2tlbnOUS2SMB3BhdHRlcm6UjFtcLnwsfDp8O3whfFw/fFwofFwpfFx8fFwrfFwn
+fFwifOKAmHzigJl84oCcfOKAnXxcJ3xc4oCZfOKApnxcLXzigJN84oCUfFwkfCZ8XCp8Pnw8fFwv
+fFxbfFxdlIwIcG9zX3RhZ3OUjA9OTixOTlMsTk5QLE5OUFOUjAdyZWxfZW5klEc/8AAAAAAAAIwJ
+cmVsX3N0YXJ0lEc/hHrhR64Ue4wHc3dfbGlzdJRdlCiMHm9yYW5nZXdpZGdldC51dGlscy5maWxl
+ZGlhbG9nc5SMClJlY2VudFBhdGiUk5QpgZR9lCiMB2Fic3BhdGiUjEkvaG9tZS9jaHJpcy8ubG9j
+YWwvc2hhcmUvT3JhbmdlL25sdGtfZGF0YS9jb3Jwb3JhL3dvcmRuZXRfaWMvc3RvcGxpc3QudHh0
+lIwGcHJlZml4lE6MB3JlbHBhdGiUTowFdGl0bGWUaAiMBXNoZWV0lGgIjAtmaWxlX2Zvcm1hdJRO
+dWJoMymBlH2UKGg2jEAvaG9tZS9jaHJpcy8ubG9jYWwvc2hhcmUvT3JhbmdlL25sdGtfZGF0YS9j
+b3Jwb3JhL2Jyb3duL2NhdHMudHh0lGg4Tmg5Tmg6aAhoO2gIaDxOdWJljAdzd19wYXRolE51hpRl
+dYwLX192ZXJzaW9uX1+USwR1Lg==
+</properties>
+		<properties node_id="16" format="pickle">gASVtwAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjBNzYXZlZFdpZGdldEdlb21ldHJ5
+lENCAdnQywADAAAAAAw1AAABIAAADucAAAMTAAAMNQAAASAAAA7nAAADEwAAAAEAAAAAB4AAAAw1
+AAABIAAADucAAAMTlIwOc2VsZWN0ZWRfd29yZHOUj5SMC3dvcmRzX2NvbG9ylIiMCndvcmRzX3Rp
+bHSUSwCMC19fdmVyc2lvbl9flEsBdS4=
+</properties>
+		<properties node_id="17" format="literal">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x0cp\x00\x00\x00\xd9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\x0cp\x00\x00\x00\xf9\x00\x00\r\xe6\x00\x00\x02f', 'select_rows': True, 'show_attribute_labels': True, 'show_distributions': False, 'stored_selection': {'rows': [], 'columns': []}, 'stored_sort': [], '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>
