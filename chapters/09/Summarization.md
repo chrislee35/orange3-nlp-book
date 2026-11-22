@@ -92,7 +92,7 @@ Each stage has to leave the next one a text that **fits**. If the joined summari
 Things to know:
 
 - Both summarizers read the **raw text** of all the corpus's text features. Do **not** put *Preprocess Text* in front of them: it would remove the capitals and punctuation that the sentence splitter needs. If the corpus has two text features (BBC3 has `Title` and `Content`), they are joined, so keep only the one you want.
-- A summarizer **runs as soon as data arrives**, and again whenever you change the backend. The first run of a neural model has to load it (and download it the first time), so be patient.
+- A summarizer **runs as soon as data arrives**, and again whenever you change the backend. To control when it runs, untick **Apply automatically** and press **Apply**. The first run of a neural model has to load it (and download it the first time), so be patient.
 - *Ollama* needs a running Ollama server and a pulled model (we use `llama3.1:8b`). It is slow: three to four minutes for five articles on our machine, against about half a minute for BART.
 
 ![The whole workflow for this chapter](9-workflow-overview.png)
@@ -176,7 +176,7 @@ Things to know:
 3. **In stages.** Connect *Select Rows* to *Extractive Summary* (**Summa**), which summarizes each paragraph. Connect it to a second *Group by* that concatenates the paragraph summaries, then to *Corpus*, and set **`Extractive Summary - Concatenate`** as its text feature. Then connect another *Extractive Summary* (**Summa**) and a *Corpus* again, with the new **`Extractive Summary`** column as its text feature, and then *Abstractive Summary* (**BART**) and *Corpus Viewer*.
 4. Compare the two final summaries with the chapter. Read the chapter's first page and its last page.
 
-> 💡 **Build 9C one widget at a time, from left to right.** A summarizer runs again whenever anything upstream of it changes, and a neural summarizer reloads its model each time (10 to 30 seconds for BART). While you are still setting the text features, open the *Abstractive Summary* widgets last, or delete the link into them until the *Corpus* in front of them shows the right text. The saved `summarization.ows` already has every setting in place.
+> 💡 **Build 9C one widget at a time, from left to right.** A summarizer runs again whenever anything upstream of it changes, and a neural summarizer reloads its model each time (10 to 30 seconds for BART). While you are still setting the text features, untick **Apply automatically** in each summarizer. It then waits until you press **Apply**. Tick the box again once the *Corpus* in front of it shows the right text. The saved `summarization.ows` already has every setting in place.
 
 > ⚠️ **Check the text feature of every *Corpus* widget that follows a *Group by*.** *Group by* names its output columns `Chapter - Concatenate`, `Paragraph - Concatenate`, and so on, and the *Corpus* widget picks the **first** text column by default, which is `Chapter - Concatenate`. That column is only `1 1 1 1 …` (the chapter number, 37 times). The summarizers then see nothing but numbers. Extractive Summary returns `?`, and BART invents a counting sequence such as `1. 1. 1 1 1 2 3 4 5 6 6 7 8 …`. If your summary is a row of numbers, this is the cause. Move `Chapter - Concatenate` (and the other columns) to **Ignored text features** and keep only the joined text.
 
