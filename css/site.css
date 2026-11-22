@@ -33,7 +33,9 @@ body {
 #TOC a { color: var(--ink); text-decoration: none; }
 #TOC a:hover { color: var(--accent); text-decoration: underline; }
 /* Content */
-body > header, body > section, body > p, body > div, body > ul, body > ol, body > table, body > pre, body > h1, body > h2, body > h3, body > hr, body > figure, body > blockquote {
+/* :not(#TOC) also raises specificity above pandoc's inline `div.sourceCode { margin: 1em 0 }`,
+   which otherwise resets the left margin and slides code under the sidebar. */
+body > :not(#TOC):not(script) {
   margin-left: calc(var(--sidebar) + max(2rem, (100vw - var(--sidebar) - 46rem) / 2));
   margin-right: max(2rem, calc((100vw - var(--sidebar) - 46rem) / 2));
 }
