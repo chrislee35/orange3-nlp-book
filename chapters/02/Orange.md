@@ -26,10 +26,9 @@ Orange itself has no text widgets. They come from **add-ons**. Open **Options â†
 | Add-on | What it adds | Used from |
 |--------|--------------|-----------|
 | **Text** (Orange3-Text) | *Corpus*, *Preprocess Text*, *Word Cloud*, *Bag of Words*, *Sentiment Analysis*, *Topic Modelling*, and more | Chapter 2 on |
-| **orange3-nlp** | Embedding, *Question Answering*, *Text Generator*, *Text Chunker*, *Reference Library*, and more | Chapters 11 to 15 |
-| **orange3-ollama** | Widgets that send text to a local language model | Chapters 14 and 15 |
+| **orange3-nlp** | Embedding, *Question Answering*, *Text Generator*, *Text Chunker*, *Reference Library*, *Ollama RAG*, and more | Chapters 11 to 15 |
 
-Install **Text** now. You can install the other two later, when you reach Chapter 11.
+Install **Text** now. You can install **orange3-nlp** later, when you reach Chapter 11.
 
 After the restart, a **Text Mining** section appears in the widget toolbox on the left.
 

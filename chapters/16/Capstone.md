@@ -72,10 +72,10 @@ Decide these five things first and write them down:
 
 | Task | Classical | Modern |
 |------|-----------|--------|
-| Classification | Preprocess, Bag of Words or TF-IDF, Logistic Regression or Naive Bayes, scored with *Test and Score* | Embed documents (*Document Embedding*) and train a simple model on the vectors; or ask an LLM (*Ollama Text Classification*, or *Text Generator* with your own prompt) |
+| Classification | Preprocess, Bag of Words or TF-IDF, Logistic Regression or Naive Bayes, scored with *Test and Score* | Embed documents (*Document Embedding*) and train a simple model on the vectors; or ask an LLM (*Text Generator* with a classification prompt) |
 | Clustering and topics | TF-IDF, distances, *Hierarchical Clustering* or *Topic Modelling* (LDA) | Embeddings with *t-SNE* or clustering on the vectors |
-| Sentiment | VADER (*Sentiment Analysis*) | *Ollama Sentiment Analyzer* |
-| Summarization | Extractive (*Summarization*) | *Abstractive Summary* or *Ollama Summarizer* |
+| Sentiment | VADER (*Sentiment Analysis*) | *Text Generator* with a sentiment prompt |
+| Summarization | Extractive (*Summarization*) | *Abstractive Summary*, or *Text Generator* with a summary prompt |
 | Question answering | Keyword search | *Question Answering* (extractive), or RAG: *Text Chunker*, *Text Embedder*, *Reference Library*, *Ollama RAG* |
 | Entity extraction | *Named Entity Recognition* | A prompt that asks the LLM for entities |
 
@@ -88,7 +88,7 @@ Each of these has an exercise in an earlier chapter. Look back at it for the wor
 The two kinds of method differ greatly in cost, so measure it.
 
 - **Time a small run first.** Run the LLM on 20 rows, note how long it took, and multiply to estimate the full run. Do this before you start the full run, not after.
-- **LLMs run when you press the button.** The Ollama widgets send one request per row and are not repeatable unless you control temperature and seed (the *Text Generator* does; the Ollama task widgets do not). Run the LLM on the test sample only, and say so.
+- **LLMs run when you press the button.** The *Text Generator* sends one request per row, and its answers are repeatable only if you control the temperature and seed (set the temperature to `0`). Run the LLM on the test sample only, and say so.
 - **Keep a log.** Note the model name, the widget settings, the prompt, and the date. The same prompt on a different model, or on the same model on another day, can give different results.
 - **Memory.** `phi4-mini` needs about 2.5 GB. If your computer struggles, use a smaller test sample rather than a smaller model, unless you are comparing models.
 

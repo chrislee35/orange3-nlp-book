@@ -111,7 +111,7 @@ The book follows this pipeline, and then shows where modern models change it:
 - You see every step, and what flows between steps.
 - You change one setting and watch the result change.
 - A saved workflow (an `.ows` file) can be shared and rerun, so another person can repeat your result.
-- Add-ons supply text widgets (*Orange3-Text*) and the newer embedding, question answering, and LLM widgets (*orange3-nlp*, *orange3-ollama*). You install them in Chapter 2 and later.
+- Add-ons supply text widgets (*Orange3-Text*) and the newer embedding, question answering, and LLM widgets (*orange3-nlp*). You install them in Chapter 2 and later.
 
 Orange is not a toy. It can also be scripted in Python when you need more control.
 

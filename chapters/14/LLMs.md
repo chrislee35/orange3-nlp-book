@@ -6,7 +6,7 @@ By the end of this chapter, you will be able to:
 
 - Explain what a large language model (LLM) is and why one model can do many different tasks.
 - Install Ollama, download a model, and connect Orange to it.
-- Run sentiment analysis, classification, summarization, and free-form generation on the same documents, using the Ollama widgets and the *Text Generator*.
+- Run sentiment analysis, classification, summarization, and free-form generation on the same documents, using the *Text Generator* with a different prompt for each task.
 - Read a prompt as the "program" that tells the model what to do, and explain how changing it changes the result.
 - Compare an LLM with a classical NLP method on speed, repeatability, and accuracy, and decide when each is the better tool.
 
@@ -67,33 +67,33 @@ ollama run phi4-mini "Say hello in one sentence."
 
 ## 14.3 The Prompt Is the Program
 
-Each LLM widget is a *prompt template* with your text inserted. The Ollama widgets in this chapter build prompts like these (the wording is in the widgets' source code):
+An LLM has no sentiment button and no classify button. You give it a **prompt**, which is text that says what to do, and the model writes the answer. A **prompt template** is a prompt with a placeholder, such as `{Message}`, that Orange fills in with the text of each document, so the same instruction runs once per row. In 14A you will use these three:
 
-| Widget | Prompt sent for each document |
-|--------|-------------------------------|
-| Ollama Sentiment Analyzer | `Determine the sentiment of the following text as Positive, Negative, or Neutral. Respond with one word only.` + the text |
-| Ollama Text Classification | `Given the following text, classify it as one of the following: <your labels>. Respond with only one word from the list. Do not add anything else.` + the text |
-| Ollama Summarizer | `Please provide a very short summary of the following document:` + the text |
+| Task | Prompt template (the text of each message goes where `{Message}` is) |
+|------|--------------------------------------------------------------------|
+| Sentiment | `Decide whether the customer message is Positive, Negative, or Neutral. Reply with one word only.` + `Message: {Message}` |
+| Classification | `Classify the customer message as one of: shipping, billing, product, account. Reply with one word only.` + `Message: {Message}` |
+| Summary | `Summarize the customer message in one short sentence.` + `Message: {Message}` |
 
-A good prompt states the **task**, the **allowed answers**, and the **format** ("respond with one word only"). The sentiment and classification prompts ask for one word because a program has to read the answer. Asking a model to choose among labels it was never trained on, with no examples, is called **zero-shot classification**. It works because the model was instructed, but it still depends on the model following the instruction, and a model sometimes does not (you will see an example in 14A).
+A good prompt states the **task**, the **allowed answers**, and the **format** ("reply with one word only"). The sentiment and classification prompts ask for one word because a program has to read the answer. Asking a model to choose among labels it was never trained on, with no examples, is called **zero-shot classification**. It works because the model was instructed, but it still depends on the model following the instruction, and a model sometimes does not (you will see an example in 14A).
 
 ---
 
 ## 14.4 The Widgets
 
-| Widget | Package | What it does |
-|--------|---------|--------------|
-| **Ollama Sentiment Analyzer** | orange3-ollama | Adds a `Sentiment` column (Positive, Negative, Neutral). |
-| **Ollama Text Classification** | orange3-ollama | Adds a `Prediction` column using the labels you type in, or free-form labels if you give none. |
-| **Ollama Summarizer** | orange3-ollama | Adds a `Summary` column. |
-| **Text Generator** | orange3-nlp | Runs any prompt template you write, once per document, with temperature, seed, and samples. |
-| **Sentiment Analysis** | Orange3-Text | A classical, lexicon-based method (VADER), used in 14C for comparison. |
+| Widget | What it does |
+|--------|--------------|
+| **Text Generator** (orange3-nlp) | Runs a prompt template you write, once per document, on a local model. It has a temperature, a seed, and a number of samples. It adds the columns `Prompt`, `Generated Text`, and `Sample`. |
+| **Sentiment Analysis** (Orange3-Text) | A classical, lexicon-based method (VADER), used in 14C for comparison. |
+| **Data Table** | Shows the generated text next to the true labels. |
 
 Things to know before you start:
 
-- The Ollama widgets read only **text columns** (string columns), and they add a column named `Sentiment`, `Prediction`, or `Summary`. If your data already has a column with one of those names, rename it first, or the widget fails.
-- They run when you press their button (**Analyze Sentiment**, **Classify Text**, **Summarize Documents**), not automatically, and they have no setting for temperature or seed. The *Text Generator* has both.
-- A model that is still loading or a long document can make a run take a while. Wait for the progress bar to finish before you connect the next widget.
+- The *Text Generator* runs when you press **Generate**, not automatically. Choose the **Ollama** backend and the model `phi4-mini:latest`, and wait for the progress bar to finish before you read the result.
+- It adds **one row for each sample** of each document. With **Samples per prompt** set to 1, the output has one row per document.
+- The model's answer is in the column `Generated Text`. It is free text, so a model can answer `Billing` when you asked for `billing`, or add a word you did not ask for.
+- A *Text Generator* adds the same three column names every time, so you cannot connect one *Text Generator* to another. To run several prompts on the same documents, connect the *Corpus* to one *Text Generator* for each prompt, as in 14A.
+- Set the **temperature** to `0` when you want the same answer each time. A higher temperature lets the model pick less likely words, so the answers vary.
 
 ![The LLM task workflow for exercises 14A–14C](14-workflow-overview.png)
 
@@ -101,26 +101,42 @@ Things to know before you start:
 
 ## Lab Exercise 14A: One Dataset, Three Tasks
 
-**Goal**: Apply sentiment analysis, classification, and summarization to the same messages, and check each against the truth.
+**Goal**: Apply sentiment analysis, classification, and summarization to the same messages with three prompts, and check each answer against the truth.
 
-**Dataset**: `customer-messages.tab` (12 short customer messages). Each message has a true `Topic` (shipping, billing, product, or account) and a true `Tone` (Positive, Negative, or Neutral), so you can score the model. Some messages are tricky on purpose: a sarcastic one, a mixed one, and a neutral question.
+**Dataset**: `customer-messages.tab` (12 short customer messages). Each message has a true `Topic` (shipping, billing, product, or account) and a true `Tone` (Positive, Negative, or Neutral), so you can score the model. Some messages are tricky on purpose: a sarcastic one, a mixed one, and neutral questions.
 
 **Steps**:
 
 1. Load the dataset with *Corpus*. The text feature is `Message`.
-2. Connect *Corpus* to **Ollama Sentiment Analyzer**. Set the model to `phi4-mini:latest` and the text feature to `Message`. Press **Analyze Sentiment** and wait for the progress bar to finish.
-3. Connect its output to **Ollama Text Classification**. Add the labels `shipping`, `billing`, `product`, and `account`, then press **Classify Text**.
-4. Connect that output to **Ollama Summarizer** and press **Summarize Documents**. This step takes the longest.
-5. Connect the summarizer to a *Data Table*. Compare the `Sentiment` and `Prediction` columns with the true `Tone` and `Topic`.
+2. Connect *Corpus* to three *Text Generator* widgets. In each one, choose the **Ollama** backend, the model `phi4-mini:latest`, and **temperature** `0`, with **Samples per prompt** 1. Give them these prompts, from 14.3, and these **Max new tokens**:
+   - the sentiment prompt, with Max new tokens `10`
+   - the classification prompt, with Max new tokens `10`
+   - the summary prompt, with Max new tokens `60`
+3. Press **Generate** in each and wait for the progress bar to finish. Connect each *Text Generator* to its own *Data Table*.
+4. In the first two tables, compare `Generated Text` with the true `Tone` and `Topic`. In the third, read the summaries next to the messages.
 
-![Data Table with the true Tone and Topic next to the LLM's Sentiment, Prediction and Summary columns](14A-table.png)
+![The sentiment table: the true Tone next to the model's Generated Text](14A-sentiment.png)
+
+![The classification table: the true Topic next to the model's Generated Text](14A-topic.png)
+
+![The summary table: each message and its one-sentence summary](14A-summary.png)
+
+**What to expect.** We measured these with `phi4-mini` at temperature 0 (your results may differ a little):
+
+| Task | Result | Time for 12 messages |
+|------|--------|----------------------|
+| Sentiment | 8 of 12 right. It answers only `Positive` or `Negative`, never `Neutral`, so all four neutral messages are wrong | about 15 s |
+| Classification | 11 of 12 right if you ignore capital letters, but only 9 of 12 match your labels exactly: it answers `Billing` and `Shipping` once each, and calls the password message `billing` | about 7 s |
+| Summary | One sentence of 5 to 15 words each | about 25 s |
+
+At temperature 0 the same prompt gave the same answers when we repeated the sentiment and classification runs, and usually the same summaries (in one of our repeats some summaries were different). At temperature 0.7 all 12 summaries differed from the temperature-0 ones.
 
 **Questions**:
 
 - How many sentiments and topics match the truth? Which messages does the model get wrong? Look closely at the sarcastic message, the mixed one, and the neutral questions.
-- Look at the `Prediction` column. Does every answer come from your list of labels? What does that tell you about how reliably a model follows "respond with only one word from the list"?
-- Remove the labels and classify again. What kinds of labels does the model invent? Why is that a problem if you want to count messages by topic?
-- Run the summarizer a second time. Are the summaries identical? Do they keep the key facts?
+- Look at the classification answers. Does every answer come from your list, written exactly as you wrote it? What does that tell you about how reliably a model follows "reply with one word only"? What would happen to a count of messages by topic?
+- Change the classification prompt to `Classify the customer message by topic. Reply with one word only.` (no list of labels) and generate again. What kinds of labels does the model invent? Why is that a problem if you want to count messages by topic?
+- Generate the summaries again at temperature `0.7`. Are they identical? Do they keep the key facts?
 
 ---
 
@@ -168,9 +184,11 @@ Things to know before you start:
 
 1. Connect *Corpus* to **Sentiment Analysis** (Orange3-Text) and choose the **VADER** method. View the result in a *Data Table*.
 2. VADER gives a score from -1 (very negative) to +1 (very positive). Turn each score into a label: Positive above `0.05`, Negative below `-0.05`, Neutral otherwise.
-3. Compare the VADER labels with the true `Tone` and with the LLM's `Sentiment` column from 14A.
+3. Compare the VADER labels with the true `Tone` and with the sentiment `Generated Text` from 14A.
 
 ![Data Table of VADER's positive, negative, neutral and compound scores next to the true Tone](14C-vader.png)
+
+**What to expect.** VADER (compound at or above 0.05 is positive, at or below -0.05 is negative) gets 6 of the 12 tones right, against 8 for the model in 14A. VADER calls the sarcastic delivery message positive (compound 0.69), and also the double-charge message (0.13) and three of the four neutral ones. It gets only the invoice message right among the neutral ones, with a compound of exactly 0. The model, which does read sarcasm, gets the delayed-delivery message right but calls every neutral message positive or negative.
 
 **Questions**:
 
