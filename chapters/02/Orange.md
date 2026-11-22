@@ -47,8 +47,7 @@ Orange is built around **workflows**. A workflow is a set of **widgets**, each d
 
 - **Canvas.** The large empty area where you build the workflow. Drag a widget onto it, or click a widget in the toolbox.
 - **Widget toolbox.** The panel on the left. Widgets are grouped as *Data*, *Transform*, *Visualize*, *Model*, *Evaluate*, *Unsupervised*, and (after you install the add-on) *Text Mining*. The **Filter** box at the top searches by name, which is the fastest way to find a widget.
-- **Help panel.** The area below the toolbox. Click any widget and it shows a short description. The figure labels this area "Right Panel".
-- **Connections.** A line between two widgets. It is labeled with what it carries, such as *Data* or *Corpus*.
+- **Help panel.** The area below the toolbox. Click any widget and it shows a short description.- **Connections.** A line between two widgets. It is labeled with what it carries, such as *Data* or *Corpus*.
 - **Top bar.** The menus for saving, loading, and arranging workflows.
 
 To change a widget's settings, **double-click** it. Its window opens, and it updates the result as you change settings. Closing the window does not close the widget, which stays on the canvas.
