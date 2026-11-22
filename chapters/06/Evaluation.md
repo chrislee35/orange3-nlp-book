@@ -46,10 +46,10 @@ The opposite problem is **underfitting**: the model is too simple (or too restri
 
 A single random split depends on luck. Running 10 random 66% / 34% splits of the headlines gives these accuracies:
 
-- Naive Bayes: from **0.823** to **0.915** (mean 0.874)
-- Logistic Regression: from **0.794** to **0.901** (mean 0.846)
+- Naive Bayes: from **0.818** to **0.883** (mean 0.858)
+- Logistic Regression: from **0.812** to **0.868** (mean 0.843)
 
-If you reported only the best or worst split, you would be off by several points. Cross-validation averages over the whole set, so it is more stable. It is also why a difference of one point between two models, measured once, should not impress you.
+If you reported only the best or worst split, you would be off by several points (the spread here is about 6 points). Cross-validation averages over the whole set, so it is more stable. It is also why a difference of one point between two models, measured once, should not impress you.
 
 ### How many folds?
 
